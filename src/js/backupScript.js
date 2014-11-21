@@ -14,38 +14,38 @@
     });
     var ClientsCollection = Backbone.Collection.extend({
         model: Client,
-        url:'/rest/Session',
+        localStorage: new Store("LoginStore"),
+        //url:'/rest/Session',
         initialize: function () {
             console.log("initialize clients collection");
-            //this.bind("add", function (model) { console.log("Add", model.get('id'), model); });
-            //this.bind("remove", function (el) { console.log("Remove", el.get('id'), el); });
+            this.bind("add", function (model) { console.log("Add", model.get('id'), model); });
+            this.bind("remove", function (el) { console.log("Remove", el.get('id'), el); });
             console.log("initialized");
         }
     });
+    var listeClients = new ClientsCollection;
+    var listClients = new ClientsCollection;
+    var storeVar = localStorage["LoginStore-7ee7d1e3-bbb7-b3e4-1fe8-124f76c2b64d"];
+    console.log(storeVar);
     var ClientView = Backbone.View.extend({
+        el: 'body', 
+        initialize: function () {
+            var that = this;
+            listeClients.bind("add", function (model) {
+                that.addClientToList(model);
+            });
+            listClients.bind("add", function (model) {
+                that.addLoginToList(model);
+            });
+             console.log("event 1");
+        },
+       
         events: {
             'click #cmdAddClient': 'cmdAddClient_Click',
             'click #login': 'login'
         },
-        
-        initialize: function () {
-            var that = this;
-            this.listeClients = new ClientsCollection();
-            this.listClients = new ClientsCollection();
-            this.listeClients.bind("add", function (model) {
-                that.addClientToList(model);
-            });
-            this.listClients.bind("add", function (model) {
-                that.addLoginToList(model);
-            });
-             console.log("view initialize complete");
-             //console.log($el);
-            // console.log(el);
-        },
-       
-        
         cmdAddClient_Click: function () {
-        	 console.log("Register button clicked");
+        	 console.log("event 2");
             var tmpClient = new Client({
                 name: $("#txtIdClient").val(),
                 pwd: $("#txtNomClient").val(),
@@ -55,7 +55,7 @@
             console.log('addClientToList 3');
         },
         login: function () {
-        	 console.log("Login Button clicked");
+        	 console.log("event 3");
             var tmplogin = new Client({
                 name: $("#txtIdClient").val(),
                 pwd: $("#txtNomClient").val(),
@@ -91,7 +91,6 @@
             }
         }
     });
-    var clientView = new ClientView({ el: $("#divClient") });
-    //clientView.render();
+    var clientView = new ClientView();
     Backbone.history.start();
 })(jQuery);
