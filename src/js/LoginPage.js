@@ -14,7 +14,7 @@
     });
     var ClientsCollection = Backbone.Collection.extend({
         model: Client,
-        url:'/rest/Session',
+        localStorage: new Store("store-name"),
         initialize: function () {
             console.log("initialize clients collection");
             //this.bind("add", function (model) { console.log("Add", model.get('id'), model); });
@@ -39,8 +39,6 @@
                 that.addLoginToList(model);
             });
              console.log("view initialize complete");
-             //console.log($el);
-            // console.log(el);
         },
        
         
