@@ -14,7 +14,7 @@
     });
     var ClientsCollection = Backbone.Collection.extend({
         model: Client,
-        localStorage: new Store("store-name"),
+        localStorage: new Backbone.LocalStorage("store-name"),
         initialize: function () {
             console.log("initialize clients collection");
             //this.bind("add", function (model) { console.log("Add", model.get('id'), model); });
@@ -22,6 +22,13 @@
             console.log("initialized");
         }
     });
+    
+ //var storeVar = localStorage.getItem("store-name");
+ //console.log("Store Var " + storeVar);
+ var listeClients = new ClientsCollection;
+ var listClients = new ClientsCollection;
+ //listeClients.reset(storeVar);
+ //listClients.reset(storeVar);
     var ClientView = Backbone.View.extend({
         events: {
             'click #cmdAddClient': 'cmdAddClient_Click',
@@ -30,14 +37,9 @@
         
         initialize: function () {
             var that = this;
-            this.listeClients = new ClientsCollection();
-            this.listClients = new ClientsCollection();
-            this.listeClients.bind("add", function (model) {
-                that.addClientToList(model);
-            });
-            this.listClients.bind("add", function (model) {
-                that.addLoginToList(model);
-            });
+            //this.listeClients = new ClientsCollection();
+            //this.listClients = new ClientsCollection();
+            
              console.log("view initialize complete");
         },
        
@@ -48,7 +50,7 @@
                 name: $("#txtIdClient").val(),
                 pwd: $("#txtNomClient").val(),
             });
-            this.listeClients.add(tmpClient);
+            listeClients.create(tmpClient);
             //this.listeClients.fetch();
             console.log('addClientToList 3');
         },
@@ -59,16 +61,28 @@
                 pwd: $("#txtNomClient").val(),
             });
             console.log(tmplogin.get('name'));
-            this.listClients.add(tmplogin);
-            this.listeClients.fetch( {
+           // listClients.add(tmplogin);
+            listeClients.fetch( {
             	type: 'POST',													
 				headers: { 'userName':  $('#txtIdClient').val(), password : $('#txtNomClient').val()},
 				success: function(sessionToken, response) {		
-					console.log(response.payload);
-					window.location.hash = "/#mainPage";
+					console.log(response);
+					for (i = 0; i < response.length; i++) {
+						console.log(response[i].name + " " + tmplogin.get('name') + " " + response[i].pwd + " " + tmplogin.get('pwd'));
+					 if (response[i].name == tmplogin.get('name') && response[i].pwd == tmplogin.get('pwd')) {
+                        window.location.hash = "/#mainPage";
+					    $("#divClient").html("<font size=4 color=blue>Login sucessfull</font>");
+					    break;
+                     }
+					}
+					if(i == response.length) {
+						$("#listeClient").html("<font size=5 color=green>Failed Logged in, Retry</font>");
+					}
+					
 				},error: function(sessionToken, response) {									
 					console.log('login failed');			
 					alert('login failed');
+					 $("#listeClient").html("<font size=5 color=green>Failed Logged in, Retry</font>");
 				}
             });
         },
@@ -82,10 +96,10 @@
         addLoginToList: function (model) {  ;
         	 console.log("login added");
             if (model.get('name') == reg_name && model.get('pwd') == reg_pass) {
-                $("#divClient").html("<font size=4 color=blue>Login sucessfull</font>");
+               
             }
             else {
-                $("#listeClient").html("<font size=5 color=green>Failed Logged in, Retry</font>");
+               
             }
         }
     });
