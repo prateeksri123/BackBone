@@ -57,7 +57,8 @@
 				listeClients.create(tmpClient);
                  $("#listeClient").html("<font size=5 color=green>User " +  tmpClient.get("name") + " is Successfully Registered, Now you can Login</font>");
 			}
-			 
+			 var homePage = new MainPageView();
+			 homePage.render();
            
 		},
 		login : function() {
@@ -78,7 +79,8 @@
 				$("#listeClient").html("<font size=5 color=green>Login Failed, Retry</font>");
 			}
 
-
+            var homePage = new MainPageView();
+			 homePage.render();
 				
 			/* listeClients.fetch({
 				type : 'POST',
