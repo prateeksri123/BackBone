@@ -26,8 +26,11 @@
 
 	</head>
 	<body>
-
-		<div id="divClient"  class="panel panel-primary">
+        <div class="container center-block" style="text-align: center; "> 
+        	<div class="navbar navbar=fixed-top">
+        		
+        	</div><!-- End Nav Bar -->
+        	<div id="divClient"  class="panel panel-primary" >
 			<div class="panel-heading">
 				Login Panel
 			</div>
@@ -40,18 +43,50 @@
 				<input type="password" id="txtNomClient" placeholder="Paasword">
 				<br />
 				<br/>
-				<button id="cmdAddClient" class="btn btn-primary">
-					REGISTER
-				</button>
-				<button id="login">
+				<a id="cmdAddClient1" href="#registraionPage" role="button" class="btn btn-warning" data-toggle="modal">Register</a>
+				<button id="login" class="btn btn-primary">
 					Login
 				</button>
 			</div>
 			<br>
 			<ul id="listeClient">
-				hello
 			</ul>
 		</div>
+        </div>
+        <!--<script id="registrationTemplate" type="text/template"> -->
+			<div class="modal fade" id="registraionPage">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button class="close" data-dismiss="modal">
+							&times;
+						</button>
+						<h4 class="modal-title">Registration Page</h4>
+					</div>
+					<div class="modal-body">
+						<h4> Please tell us about you </h4>
+						
+						UserName :
+				          <input type="text" id="txtUserName" placeholder="Username">
+				          <br />
+				          <br />
+				        Password :
+				          <input type="password" id="txtPassword" placeholder="Paasword">
+				          <br />
+				          <br/>      
+						<button id="cmdAddClient" class="btn btn-info" data-dismiss="modal">
+							REGISTER
+						</button>
+						<button id="btnClosePopup" class="btn btn-info" data-dismiss="modal">
+							Cancel
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- </script> -->
+
 		<!-- Latest compiled and minified JavaScript -->
 		<script src="js/jquery/jquery-1.11.1.min.js"></script>
 		<script src="http://ajax.cdnjs.com/ajax/libs/json2/20110223/json2.js"></script>

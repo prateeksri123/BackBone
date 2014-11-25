@@ -28,19 +28,29 @@
 			'click #login' : 'login'
 		},
 
+
 		initialize : function() {
 			// Initialized View.
 			var that = this;
 		},
+		render: function() {
+			
+		},
+
 
 		cmdAddClient_Click : function() {
-            console.log("Register Clicked");
+			console.log("Register Clicked");
+            
 			var tmpClient = new Client({
-				name : $("#txtIdClient").val(),
-				pwd : $("#txtNomClient").val(),
+				name : $("#txtUserName").val(),
+				pwd : $("#txtPassword").val(),
 			});
-			listeClients.create(tmpClient);
-            $("#listeClient").html("<font size=5 color=green>User " +  tmpClient.get("name") + " is Successfully Registered, Now you can Login</font>");
+			if(tmpClient.get('name') != "" && tmpClient.get('pwd') != "" ){
+				listeClients.create(tmpClient);
+                 $("#listeClient").html("<font size=5 color=green>User " +  tmpClient.get("name") + " is Successfully Registered, Now you can Login</font>");
+			}
+			 
+           
 		},
 		login : function() {
 			console.log("Login Button clicked");
@@ -85,7 +95,7 @@
 		},
 	});
 	var clientView = new ClientView({
-		el : $("#divClient")
+		el : 'body'
 	});
 
 	Backbone.history.start();
