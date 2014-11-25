@@ -3,10 +3,14 @@
  */
 (function($) {
 	var reg_name, reg_pass;
+	
 	var Client = Backbone.Model.extend({
 		defaults : {
 			name : null,
-			pwd : null
+			pwd : null,
+			firstName : "",
+			lastName : "",
+			email : ""
 		},
 		initialize : function() {
 			// Initialized Model
@@ -21,6 +25,7 @@
 	});
 
 	var listeClients = new ClientsCollection;
+	var loggedInUser = new Client;
 	var listClients = new ClientsCollection;
 	var ClientView = Backbone.View.extend({
 		events : {
@@ -44,6 +49,9 @@
 			var tmpClient = new Client({
 				name : $("#txtUserName").val(),
 				pwd : $("#txtPassword").val(),
+				firstName : $("#txtFirstName").val(),
+			    lastName : $("#txtLastName").val(),
+			    email : $("#txtEmail").val()
 			});
 			if(tmpClient.get('name') != "" && tmpClient.get('pwd') != "" ){
 				listeClients.create(tmpClient);
@@ -71,7 +79,8 @@
 					for ( i = 0; i < response.length; i++) {
 						if (response[i].name == tmplogin.get('name') && response[i].pwd == tmplogin.get('pwd')) {
 							window.location.hash = "/#mainPage";
-							$("#divClient").html("<font size=4 color=blue>Login sucessfull</font>");
+							loggedInUser = response[i];
+							$("#divClient").html("<font size=4 color=blue>Login sucessfull, Welcome " +  loggedInUser.firstName + " " + loggedInUser.lastName + "!!</font>");
 							break;
 						}
 					}
