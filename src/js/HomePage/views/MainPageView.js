@@ -1,6 +1,7 @@
 MainPageView = Backbone.View.extend({
 
     //template: templates.SubmissionItemViewTemplate,
+    
     template : '#mainPageTemplate',
     // wrap the view with `tr` instead of `div`
     tagName : 'div',
@@ -17,5 +18,10 @@ MainPageView = Backbone.View.extend({
         } else {
             ums.App.vent.trigger('openSubmission', this.model);
         }
+    },
+    
+     render: function(){
+     	var html= _.template($('#mainPageTemplate'));
+      $(this.el).append(html);
     }
 }); 
