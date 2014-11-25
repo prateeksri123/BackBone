@@ -66,14 +66,23 @@
 				name : $("#txtIdClient").val(),
 				pwd : $("#txtNomClient").val(),
 			});
+			
 			console.log(tmplogin.get('name'));
+			var ls = new Backbone.LocalStorage("store-name");
+			result = ls.findByNameAndPassword(tmplogin);
+			if (result != undefined) {
+				loggedInUser = result;
+				$("#divClient").html("<font size=4 color=blue>Login sucessfull, Welcome " + loggedInUser.firstName + " " + loggedInUser.lastName + "!!</font>");
 
-			listeClients.fetch({
+			} else {
+				$("#listeClient").html("<font size=5 color=green>Login Failed, Retry</font>");
+			}
+
+
+				
+			/* listeClients.fetch({
 				type : 'POST',
-				headers : {
-					'userName' : $('#txtIdClient').val(),
-					password : $('#txtNomClient').val()
-				},
+				model : tmplogin,
 				success : function(sessionToken, response) {
 					console.log(response);
 					for ( i = 0; i < response.length; i++) {
@@ -94,7 +103,7 @@
 					alert('No user exist, Please register and then login');
 					$("#listeClient").html("<font size=5 color=green>Failed Logged in, Retry</font>");
 				}
-			});
+			});*/
 		},
 		addClientToList : function(model) {
 			console.log('addClientToList');
