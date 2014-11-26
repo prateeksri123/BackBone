@@ -22,39 +22,43 @@
 		<!-- Include Modernizr in the head, before any other Javascript -->
 		<script src="js/modernizr-2.6.2.min.js"></script>
 
-		
-
 	</head>
 	<body>
-        <div class="container center-block" style="text-align: center; "> 
-        	<div class="navbar navbar=fixed-top">
-        		
-        	</div><!-- End Nav Bar -->
-        	<div id="divClient"  class="panel panel-primary" >
-			<div class="panel-heading">
-				Login Panel
+		<script id="main-Page-Template" type="text/template">
+			<div class="row" >
+
+			<<div class="navbar navbar=fixed-top">
+               <h3>My Home Page</h3>
+			</div><!-- End Nav Bar -->
+
 			</div>
-			<div id="loginPanel" class="panel-body">
-				UserName :
-				<input type="text" id="txtIdClient" placeholder="Username">
-				<br />
-				<br />
-				Password :
-				<input type="password" id="txtNomClient" placeholder="Paasword">
-				<br />
-				<br/>
-				<a id="cmdAddClient1" href="#registraionPage" role="button" class="btn btn-warning" data-toggle="modal">Register</a>
-				<button id="login" class="btn btn-primary">
-					Login
-				</button>
+		</script>
+		<div class="container center-block" style="text-align: center; ">
+			
+			<div id="divClient"  class="panel panel-primary" >
+				<div class="panel-heading">
+					Login Panel
+				</div>
+				<div id="loginPanel" class="panel-body">
+					UserName :
+					<input type="text" id="txtIdClient" placeholder="Username">
+					<br />
+					<br />
+					Password :
+					<input type="password" id="txtNomClient" placeholder="Paasword">
+					<br />
+					<br/>
+					<a id="cmdAddClient1" href="#registraionPage" role="button" class="btn btn-warning" data-toggle="modal">Register</a>
+					<button id="login" class="btn btn-primary">
+						Login
+					</button>
+				</div>
+				<br>
+				<ul id="listeClient"></ul>
 			</div>
-			<br>
-			<ul id="listeClient">
-			</ul>
 		</div>
-        </div>
-        <!--<script id="registrationTemplate" type="text/template"> -->
-			<div class="modal fade" id="registraionPage">
+		<!--<script id="registrationTemplate" type="text/template"> -->
+		<div class="modal fade" id="registraionPage">
 			<div class="modal-dialog">
 				<div class="modal-content">
 					<div class="modal-header">
@@ -65,27 +69,27 @@
 					</div>
 					<div class="modal-body">
 						<h4> Please tell us about you </h4>
-						
+
 						UserName :
-				          <input type="text" id="txtUserName" placeholder="Username">
-				          <br />
-				          <br />
-				        Password :
-				          <input type="password" id="txtPassword" placeholder="Paasword">
-				          <br />
-				          <br/>
-				          First Name :
-				          <input type="text" id="txtFirstName" placeholder="First Name">
-				          <br />
-				          <br/>
-				          Last Name :
-				          <input type="text" id="txtLastName" placeholder="Last Name">
-				          <br />
-				          <br/>
-				          Password :
-				          <input type="email" id="txtEmail" placeholder="abc@xyz.com">
-				          <br />
-				          <br/>      
+						<input type="text" id="txtUserName" placeholder="Username">
+						<br />
+						<br />
+						Password :
+						<input type="password" id="txtPassword" placeholder="Paasword">
+						<br />
+						<br/>
+						First Name :
+						<input type="text" id="txtFirstName" placeholder="First Name">
+						<br />
+						<br/>
+						Last Name :
+						<input type="text" id="txtLastName" placeholder="Last Name">
+						<br />
+						<br/>
+						Password :
+						<input type="email" id="txtEmail" placeholder="abc@xyz.com">
+						<br />
+						<br/>
 						<button id="cmdAddClient" class="btn btn-info" data-dismiss="modal">
 							REGISTER
 						</button>

@@ -2,9 +2,9 @@ MainPageView = Backbone.View.extend({
 
     //template: templates.SubmissionItemViewTemplate,
     
-    template : '#mainPageTemplate',
+    template : '#main-Page-Template',
     // wrap the view with `tr` instead of `div`
-    tagName : 'div',
+    tagname : 'div',
 
     events : {
         "click a" : "handleRouting"
@@ -21,7 +21,16 @@ MainPageView = Backbone.View.extend({
     },
     
      render: function(){
-     	var html= _.template($('#mainPageTemplate'));
-      $(this.el).append(html);
+     	
+     	//Make This working.
+       // $.get("js/HomePage/Template/MainPage.html", function (template) {
+        // //template = _.template(data, {});
+        // console.log('XXX -> ' +  template);
+        // $(this.el).append(template); 
+    // });    
+         //console.log("HTML ->> "+ html.responseText );
+     	console.log(this.template);
+     	var html= $(this.template).html();
+        $(this.el).html(html);
     }
 }); 

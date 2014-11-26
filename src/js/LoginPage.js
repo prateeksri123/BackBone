@@ -79,7 +79,7 @@
 				$("#listeClient").html("<font size=5 color=green>Login Failed, Retry</font>");
 			}
 
-            var homePage = new MainPageView({el:'body'});
+            var homePage = new MainPageView({el:$("#divClient")});
 			 homePage.render();
 				
 			/* listeClients.fetch({
