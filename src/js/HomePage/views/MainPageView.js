@@ -30,7 +30,8 @@ MainPageView = Backbone.View.extend({
     // });    
          //console.log("HTML ->> "+ html.responseText );
      	console.log(this.template);
-     	var html= $(this.template).html();
-        $(this.el).html(html);
+     	this.template = _.template($(this.template).html());
+     	//var html= ;
+        $(this.el).html(this.template);
     }
 }); 
