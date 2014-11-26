@@ -57,8 +57,7 @@
 				listeClients.create(tmpClient);
                  $("#listeClient").html("<font size=5 color=green>User " +  tmpClient.get("name") + " is Successfully Registered, Now you can Login</font>");
 			}
-			 var homePage = new MainPageView();
-			 homePage.render(loggedInUser);
+			
            
 		},
 		login : function() {
@@ -79,16 +78,17 @@
 			} else {
 				$("#listeClient").html("<font size=5 color=green>Login Failed, Retry</font>");
 			}
-
-            
-				
+            console.log(loggedInUser.firstName + " " + loggedInUser.lastName);
+            if(loggedInUser.firstName == undefined) {
+            	loggedInUser.firstName = "Guest";
+            }
+			
+			if(loggedInUser.lastName == undefined) {
+            	loggedInUser.lastName = "User";
+            }	
 			 listeClients.fetch({
 				type : 'POST',
 				model : tmplogin,
-				success : function(sessionToken, response) {
-					console.log(response);
-				
-				},
 				error : function(sessionToken, response) {
 					console.log('login failed');
 					alert('No user exist, Please register and then login');

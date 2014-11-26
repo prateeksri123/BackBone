@@ -1,9 +1,5 @@
 MainPageView = Backbone.View.extend({
-
-    //template: templates.SubmissionItemViewTemplate,
-    
     template : '#main-Page-Template',
-    // wrap the view with `tr` instead of `div`
     tagname : 'div',
     
     events : {
