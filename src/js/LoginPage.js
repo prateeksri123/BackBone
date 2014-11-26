@@ -58,7 +58,7 @@
                  $("#listeClient").html("<font size=5 color=green>User " +  tmpClient.get("name") + " is Successfully Registered, Now you can Login</font>");
 			}
 			 var homePage = new MainPageView();
-			 homePage.render();
+			 homePage.render(loggedInUser);
            
 		},
 		login : function() {
@@ -70,6 +70,7 @@
 			
 			console.log(tmplogin.get('name'));
 			var ls = new Backbone.LocalStorage("store-name");
+			
 			result = ls.findByNameAndPassword(tmplogin);
 			if (result != undefined) {
 				loggedInUser = result;
@@ -79,33 +80,23 @@
 				$("#listeClient").html("<font size=5 color=green>Login Failed, Retry</font>");
 			}
 
-            var homePage = new MainPageView({el:$("#divClient")});
-			 homePage.render();
+            
 				
-			/* listeClients.fetch({
+			 listeClients.fetch({
 				type : 'POST',
 				model : tmplogin,
 				success : function(sessionToken, response) {
 					console.log(response);
-					for ( i = 0; i < response.length; i++) {
-						if (response[i].name == tmplogin.get('name') && response[i].pwd == tmplogin.get('pwd')) {
-							window.location.hash = "/#mainPage";
-							loggedInUser = response[i];
-							$("#divClient").html("<font size=4 color=blue>Login sucessfull, Welcome " +  loggedInUser.firstName + " " + loggedInUser.lastName + "!!</font>");
-							break;
-						}
-					}
-					if (i == response.length) {
-						$("#listeClient").html("<font size=5 color=green>Login Failed, Retry</font>");
-					}
-
+				
 				},
 				error : function(sessionToken, response) {
 					console.log('login failed');
 					alert('No user exist, Please register and then login');
 					$("#listeClient").html("<font size=5 color=green>Failed Logged in, Retry</font>");
 				}
-			});*/
+			});
+		var homePage = new MainPageView({el:$("#divClient")});
+			 homePage.render(loggedInUser);
 		},
 		addClientToList : function(model) {
 			console.log('addClientToList');
