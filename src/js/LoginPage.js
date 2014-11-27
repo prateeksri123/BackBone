@@ -71,21 +71,28 @@
 			var ls = new Backbone.LocalStorage("store-name");
 			
 			result = ls.findByNameAndPassword(tmplogin);
+			
 			if (result != undefined) {
 				loggedInUser = result;
-				//$("#divClient").html("<font size=4 color=blue>Login sucessfull, Welcome " + loggedInUser.firstName + " " + loggedInUser.lastName + "!!</font>");
+				//$("#pageDiv").html("<font size=4 color=blue>Login sucessfull, Welcome " + loggedInUser.firstName + " " + loggedInUser.lastName + "!!</font>");
+				console.log(loggedInUser.firstName + " " + loggedInUser.lastName);
+				if (loggedInUser.firstName == undefined) {
+					loggedInUser.firstName = "Guest";
+				}
+
+				if (loggedInUser.lastName == undefined) {
+					loggedInUser.lastName = "User";
+				}
+				var homePage = new MainPageView({
+					el : $("#pageDiv")
+				});
+				homePage.render(loggedInUser);
 
 			} else {
 				$("#listeClient").html("<font size=5 color=green>Login Failed, Retry</font>");
 			}
-            console.log(loggedInUser.firstName + " " + loggedInUser.lastName);
-            if(loggedInUser.firstName == undefined) {
-            	loggedInUser.firstName = "Guest";
-            }
-			
-			if(loggedInUser.lastName == undefined) {
-            	loggedInUser.lastName = "User";
-            }	
+
+            
 			 listeClients.fetch({
 				type : 'POST',
 				model : tmplogin,
@@ -95,8 +102,7 @@
 					$("#listeClient").html("<font size=5 color=green>Failed Logged in, Retry</font>");
 				}
 			});
-		var homePage = new MainPageView({el:$("#divClient")});
-			 homePage.render(loggedInUser);
+		
 		},
 		addClientToList : function(model) {
 			console.log('addClientToList');

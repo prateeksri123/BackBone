@@ -1,5 +1,5 @@
 MainPageView = Backbone.View.extend({
-    template : '#main-Page-Template',
+    
     tagname : 'div',
     
     events : {
@@ -12,16 +12,10 @@ MainPageView = Backbone.View.extend({
   
      render: function(model){
      	this.model = model;
-     	//Make This working.
-        $.get("js/HomePage/Template/MainPage.html", function (template) {
-         //template = _.template(data, {});
-         console.log('XXX -> ' +  template);
-         $(this.el).html(template); 
-     });    
-         //console.log("HTML ->> "+ html.responseText );
-     	console.log(this.template);
-     	this.template = _.template($(this.template).html());
-     	//var html= ;
-        $(this.el).html(this.template(model));
+         $.get("js/HomePage/Template/MainPage.html", function (data) {
+         	template = _.template(data, model);
+	         $('#pageDiv').html(template);
+	     });    
+	         
     }
 }); 
