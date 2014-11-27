@@ -73,7 +73,7 @@
 			result = ls.findByNameAndPassword(tmplogin);
 			if (result != undefined) {
 				loggedInUser = result;
-				$("#divClient").html("<font size=4 color=blue>Login sucessfull, Welcome " + loggedInUser.firstName + " " + loggedInUser.lastName + "!!</font>");
+				//$("#divClient").html("<font size=4 color=blue>Login sucessfull, Welcome " + loggedInUser.firstName + " " + loggedInUser.lastName + "!!</font>");
 
 			} else {
 				$("#listeClient").html("<font size=5 color=green>Login Failed, Retry</font>");
