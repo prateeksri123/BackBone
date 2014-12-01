@@ -1,4 +1,4 @@
-MainPageView = Backbone.View.extend({
+UserView = Backbone.View.extend({
     
     tagname : 'div',
     
@@ -12,15 +12,12 @@ MainPageView = Backbone.View.extend({
   
      render: function(model){
      	this.model = model;
-         $.get("js/HomePage/Template/MainPage.html", function (data) {
+         $.get("js/UserDetail/template/UserDetailsTemplate.html", function (data) {
          	template = _.template(data, model);
 	         $('#pageDiv').html(template);
-	         var homePage = new HomePageRouter;
+	        // var homePage = new HomePageRouter;
 	        // window.href = "/displayUser";
-	     });            
-    },
-    
-    test: function(){
-    	alert('test');
+	     });    
+	         
     }
 }); 
