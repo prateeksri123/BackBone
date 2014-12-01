@@ -14,7 +14,7 @@ UserView = Backbone.View.extend({
      	this.model = model;
          $.get("js/UserDetail/template/UserDetailsTemplate.html", function (data) {
          	template = _.template(data, model);
-	         $('#pageDiv').html(template);
+	         $('#homePageContent').html(template);
 	        // var homePage = new HomePageRouter;
 	        // window.href = "/displayUser";
 	     });    

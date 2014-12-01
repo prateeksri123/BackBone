@@ -15,7 +15,7 @@
 						<li class="dropdown">
 					     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Hi! <%= firstName %> <%= lastName %> <span class="caret"></span></a>
 							<ul class="dropdown-menu" role="menu">
-							<li><a  onclick="test()">View Account</a></li>
+							<li><a href="#" onclick="displayUser()">View Account</a></li>
 							<li><a href="#">Edit Account</a></li>
 							<li><a href="#">Change Password</a></li>
 							<li class="divider"></li>
@@ -29,6 +29,12 @@
 			
 			</nav>
 			  <h3>My Home Page</h3>
+			  <div id="homePageContent"></div>
 			</div><!-- End Nav Bar -->
-             
+             <script>
+			function displayUser(){
+	         	var userDetails = new UserView;
+	         	userDetails.render();
+           }
+		</script>
 			</div>
