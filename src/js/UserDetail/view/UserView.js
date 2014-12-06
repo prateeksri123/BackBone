@@ -2,24 +2,42 @@ UserView = Backbone.View.extend({
     
     tagname : 'div',
     
-    events : {
-        "click #cmdAddClient_1" : "handleRouting"
+    
+    
+    initialize: function (event) {
+      
+    },
+    
+     callback: function(eventType) {
+        console.log("event type was " + eventType);
     },
 
     handleRouting : function(e) {
     	alert('handleRouting');
         //console.log(this.model);
     },
+    
+    registerCustomEvents : function() {
+    	$('#cmdAddClient_1').click(userDetails.jqueryClicked);
+    },
   
-     render: function(model){
-     	this.model = model;
-         $.get("js/UserDetail/template/UserDetailsTemplate.html", function (data) {
-         	template = _.template(data, model);
-	         $('#homePageContent').html(template);
-	        var userDetails1 = new UserView;
-	         	userDetails1.handleRouting();
-	         $('#cmdAddClient_1').on("click", userDetails1.handleRouting1);
+    jqueryClicked: function(event) {
+        console.log("jQuery handler for " + this.outerHTML);
+    },
+     render: function(){
+     	//this.model = model;
+         $.get("js/UserDetail/template/UserDetailsTemplate.html", function (template) {
+         	html = _.template(template);
+	         $('#homePageContent').html(html);
+	         userDetails.handleRouting(); 
+	         
+	         userDetails.registerCustomEvents();
 	     });    
 	         
-    }
-}); 
+    },
+    
+    events : {
+        "click input[type=button]" : "handleRouting"
+    },
+});
+var userDetails = new UserView; 
