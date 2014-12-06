@@ -3,11 +3,12 @@ UserView = Backbone.View.extend({
     tagname : 'div',
     
     events : {
-        "click a" : "handleRouting"
+        "click #cmdAddClient_1" : "handleRouting"
     },
 
     handleRouting : function(e) {
-        console.log(this.model);
+    	alert('handleRouting');
+        //console.log(this.model);
     },
   
      render: function(model){
@@ -15,8 +16,9 @@ UserView = Backbone.View.extend({
          $.get("js/UserDetail/template/UserDetailsTemplate.html", function (data) {
          	template = _.template(data, model);
 	         $('#homePageContent').html(template);
-	        // var homePage = new HomePageRouter;
-	        // window.href = "/displayUser";
+	        var userDetails1 = new UserView;
+	         	userDetails1.handleRouting();
+	         $('#cmdAddClient_1').on("click", userDetails1.handleRouting1);
 	     });    
 	         
     }
