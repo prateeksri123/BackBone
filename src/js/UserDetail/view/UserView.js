@@ -18,20 +18,20 @@ UserView = Backbone.View.extend({
     },
     
     registerCustomEvents : function() {
-    	$('#okBtn').click(userDetails.jqueryClicked);
+    	$('#okBtn').click(userDetails.closeMe);
+    	$('#crossBtn').click(userDetails.closeMe);
     },
   
-    jqueryClicked: function(event) {
+    closeMe: function(event) {
         //console.log("jQuery handler for " + this.outerHTML);
         $('#homePageContent').html('');
     },
-     render: function(){
-     	//this.model = model;
+    
+     render: function(model){
+     	this.model = model;
          $.get("js/UserDetail/template/UserDetailsTemplate.html", function (template) {
-         	html = _.template(template);
+         	html = _.template(template,{'model' : model, 'displayPassword' : 'none', 'editAccount' : false});
 	         $('#homePageContent').html(html);
-	         userDetails.handleRouting(); 
-	         
 	         userDetails.registerCustomEvents();
 	     });    
 	         
