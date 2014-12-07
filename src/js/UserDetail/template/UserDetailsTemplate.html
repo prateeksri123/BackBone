@@ -44,9 +44,13 @@
 				<div class="form-group">
 					<label class="control-label col-sm-4" for="username">Last Name:</label>
 					<div class="col-sm-3">
-						<p class="form-control-static">
+						<% if (!editAccount) { %>
+						<p class="'form-control-static">
 							<%= model.lastName %>
 						</p>
+						<% } else { %>
+						<input type="text" class="form-control" placeholder="Username" value="<%= model.lastName %>"/>
+						<% } %>
 					</div>
 				</div>
 			</form>
