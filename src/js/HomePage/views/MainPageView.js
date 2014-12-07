@@ -24,12 +24,17 @@ MainPageView = Backbone.View.extend({
     registerCustomEvents : function() {
     	console.log('Main Page Registered');
     	$('#viewAccount').click(mainPage.displayUser);
+    	$('#signOut').click(mainPage.logoutUser);
     },
     
     displayUser: function(){
     	console.log('Display User');
 	     var userDetails = new UserView;
 	     userDetails.render(loggedInUser);
+    },
+    
+    logoutUser: function(){
+    	$('#pageDiv').html('');
     },
     
     test: function(){
