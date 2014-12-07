@@ -18,11 +18,12 @@ UserView = Backbone.View.extend({
     },
     
     registerCustomEvents : function() {
-    	$('#cmdAddClient_1').click(userDetails.jqueryClicked);
+    	$('#okBtn').click(userDetails.jqueryClicked);
     },
   
     jqueryClicked: function(event) {
-        console.log("jQuery handler for " + this.outerHTML);
+        //console.log("jQuery handler for " + this.outerHTML);
+        $('#homePageContent').html('');
     },
      render: function(){
      	//this.model = model;
@@ -36,8 +37,8 @@ UserView = Backbone.View.extend({
 	         
     },
     
-    events : {
-        "click input[type=button]" : "handleRouting"
-    },
+    
 });
-var userDetails = new UserView; 
+var userDetails = new UserView;
+var homePage = new HomePageRouter;
+Backbone.history.start();
