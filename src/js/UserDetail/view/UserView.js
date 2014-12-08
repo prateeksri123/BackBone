@@ -19,6 +19,8 @@ UserView = Backbone.View.extend({
     
     registerCustomEvents : function() {
     	$('#okBtn').click(userDetails.closeMe);
+    	$('#updateBtn').click(userDetails.updateDetails);
+    	$('#cancelBtn').click(userDetails.closeMe);
     	$('#crossBtn').click(userDetails.closeMe);
     },
   
@@ -27,8 +29,16 @@ UserView = Backbone.View.extend({
         $('#homePageContent').html('');
     },
     
+    updateDetails: function(event) {
+    	console.log("call update " + loggedInUser.id);
+    	loggedInUser.firstName = $('#txtUpdatedFirstName').val();
+    	loggedInUser.lastName = $('#txtUpdatedLastName').val();
+    	loginPage.updateUser(loggedInUser);
+        $('#homePageContent').html('');
+    },
+    
      render: function(model, editUser){
-     	this.model = model;
+     	loggedInUser = model;
          $.get("js/UserDetail/template/UserDetailsTemplate.html", function (template) {
          	html = _.template(template,{'model' : model, 'displayPassword' : 'none', 'editAccount' : editUser});
 	         $('#homePageContent').html(html);
@@ -39,6 +49,8 @@ UserView = Backbone.View.extend({
     
     
 });
+var loggedInUser =  new Object;
 var userDetails = new UserView;
+var loginPage = new ClientView;
 var homePage = new HomePageRouter;
 Backbone.history.start();

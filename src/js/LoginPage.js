@@ -27,7 +27,7 @@
 	var listeClients = new ClientsCollection;
 	var loggedInUser = new Client;
 	var listClients = new ClientsCollection;
-	var ClientView = Backbone.View.extend({
+	ClientView = Backbone.View.extend({
 		events : {
 			'click #cmdAddClient' : 'cmdAddClient_Click',
 			'click #login' : 'login'
@@ -110,6 +110,10 @@
 			reg_pass = model.get('pwd');
 			
 		},
+		updateUser: function(updatedUser) {
+			var ls = new Backbone.LocalStorage("store-name");
+			ls.update(updatedUser);
+		}
 	});
 	var clientView = new ClientView({
 		el : 'body'

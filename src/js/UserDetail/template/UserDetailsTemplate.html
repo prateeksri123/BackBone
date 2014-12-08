@@ -41,7 +41,7 @@
 							<%= model.firstName %>
 						</p>
 						<% } else { %>
-						<input type="text" class="form-control" placeholder="First Name" value="<%= model.firstName %>"/>
+						<input id="txtUpdatedFirstName" type="text" class="form-control" placeholder="First Name" value="<%= model.firstName %>"/>
 						<% } %>
 					</div>
 				</div>
@@ -53,15 +53,25 @@
 							<%= model.lastName %>
 						</p>
 						<% } else { %>
-						<input type="text" class="form-control" placeholder="Last Name" value="<%= model.lastName %>"/>
+						<input id="txtUpdatedLastName" type="text" class="form-control" placeholder="Last Name" value="<%= model.lastName %>"/>
 						<% } %>
 					</div>
 				</div>
 			</form>
-
-			<button id="okBtn" type="submit" class="btn btn-default" data-dismiss="modal" >
-				OK
+			<% if (!editAccount) { %>
+			<p class="'form-control-static">
+				<button id="okBtn" type="submit" class="btn btn-default" data-dismiss="modal" >
+					OK
+				</button>
+			</p>
+			<% } else { %>
+			<button id="updateBtn" type="submit" class="btn btn-default" data-dismiss="modal" >
+				Update
 			</button>
+			<button id="cancelBtn" type="submit" class="btn btn-default" data-dismiss="modal" >
+				CANCEL
+			</button>
+			<% } %>
 
 		</div>
 	</div>
