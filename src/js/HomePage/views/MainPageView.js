@@ -11,7 +11,7 @@ MainPageView = Backbone.View.extend({
     },
     
      render: function(model){
-     	loggedInUser = model;
+     	window.loggedInUser = model;
          $.get("js/HomePage/Template/MainPage.html", function (data) {
          	template = _.template(data, model);
 	         $('#pageDiv').html(template);
@@ -26,18 +26,19 @@ MainPageView = Backbone.View.extend({
     	$('#viewAccount').click(mainPage.displayUser);
     	$('#editAccount').click(mainPage.editUser);
     	$('#signOut').click(mainPage.logoutUser);
+    	
     },
     
     displayUser: function(){
     	console.log('Display User');
 	     var userDetails = new UserView;
-	     userDetails.render(loggedInUser, false);
+	     userDetails.render(window.loggedInUser, false);
     },
     
     editUser: function(){
     	console.log('Edit User');
 	     var userDetails = new UserView;
-	     userDetails.render(loggedInUser,true);
+	     userDetails.render(window.loggedInUser,true);
     },
     
     logoutUser: function(){
@@ -49,4 +50,3 @@ MainPageView = Backbone.View.extend({
     }
 });
 var mainPage = new MainPageView();
-var loggedInUser = new Object;

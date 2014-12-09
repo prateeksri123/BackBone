@@ -25,7 +25,7 @@
 	});
 
 	var listeClients = new ClientsCollection;
-	var loggedInUser = new Client;
+	
 	var listClients = new ClientsCollection;
 	ClientView = Backbone.View.extend({
 		events : {
@@ -73,20 +73,20 @@
 			result = ls.findByNameAndPassword(tmplogin);
 			
 			if (result != undefined) {
-				loggedInUser = result;
-				//$("#pageDiv").html("<font size=4 color=blue>Login sucessfull, Welcome " + loggedInUser.firstName + " " + loggedInUser.lastName + "!!</font>");
-				console.log(loggedInUser.firstName + " " + loggedInUser.lastName);
-				if (loggedInUser.firstName == undefined) {
-					loggedInUser.firstName = "Guest";
+				window.loggedInUser = result;
+				//$("#pageDiv").html("<font size=4 color=blue>Login sucessfull, Welcome " + window.loggedInUser.firstName + " " + window.loggedInUser.lastName + "!!</font>");
+				console.log(window.loggedInUser.firstName + " " + window.loggedInUser.lastName);
+				if (window.loggedInUser.firstName == undefined) {
+					window.loggedInUser.firstName = "Guest";
 				}
 
-				if (loggedInUser.lastName == undefined) {
-					loggedInUser.lastName = "User";
+				if (window.loggedInUser.lastName == undefined) {
+					window.loggedInUser.lastName = "User";
 				}
 				var homePage = new MainPageView({
 					el : $("#pageDiv")
 				});
-				homePage.render(loggedInUser);
+				homePage.render(window.loggedInUser);
 
 			} else {
 				$("#listeClient").html("<font size=5 color=green>Login Failed, Retry</font>");
