@@ -25,6 +25,7 @@ MainPageView = Backbone.View.extend({
     	console.log('Main Page Registered');
     	$('#viewAccount').click(mainPage.displayUser);
     	$('#editAccount').click(mainPage.editUser);
+    	$('#addWishListItemBtn').click(mainPage.displayWishList);
     	$('#signOut').click(mainPage.logoutUser);
     	
     },
@@ -33,6 +34,12 @@ MainPageView = Backbone.View.extend({
     	console.log('Display User');
 	     var userDetails = new UserView;
 	     userDetails.render(window.loggedInUser, false);
+    },
+    
+    displayWishList: function(){
+    	console.log('Display WishList');
+	     var wishList = new WishListView;
+	     wishList.render(window.loggedInUser);
     },
     
     editUser: function(){

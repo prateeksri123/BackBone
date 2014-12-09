@@ -49,8 +49,6 @@ UserView = Backbone.View.extend({
     
     
 });
-window.loggedInUser =  new Object;
 var userDetails = new UserView;
 var loginPage = new ClientView;
 var homePage = new HomePageRouter;
-Backbone.history.start();

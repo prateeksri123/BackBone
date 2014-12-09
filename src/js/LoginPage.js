@@ -3,30 +3,8 @@
  */
 (function($) {
 	var reg_name, reg_pass;
-	
-	var Client = Backbone.Model.extend({
-		defaults : {
-			name : null,
-			pwd : null,
-			firstName : "",
-			lastName : "",
-			email : ""
-		},
-		initialize : function() {
-			// Initialized Model
-		}
-	});
-	var ClientsCollection = Backbone.Collection.extend({
-		model : Client,
-		localStorage : new Backbone.LocalStorage("store-name"),
-		initialize : function() {
-			// Initialized Model Collection
-		}
-	});
-
-	var listeClients = new ClientsCollection;
-	
-	var listClients = new ClientsCollection;
+	var listeClients = new UserDetailsCollection;
+	var listClients = new UserDetailsCollection;
 	ClientView = Backbone.View.extend({
 		events : {
 			'click #cmdAddClient' : 'cmdAddClient_Click',
@@ -46,7 +24,7 @@
 		cmdAddClient_Click : function() {
 			console.log("Register Clicked");
             
-			var tmpClient = new Client({
+			var tmpClient = new UserDetail({
 				name : $("#txtUserName").val(),
 				pwd : $("#txtPassword").val(),
 				firstName : $("#txtFirstName").val(),
@@ -62,7 +40,7 @@
 		},
 		login : function() {
 			console.log("Login Button clicked");
-			var tmplogin = new Client({
+			var tmplogin = new UserDetail({
 				name : $("#txtIdClient").val(),
 				pwd : $("#txtNomClient").val(),
 			});
