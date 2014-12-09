@@ -1,38 +1,85 @@
 <div class="row" >
 
-			<div class="navbar navbar-fixed-top">
-			<nav class="navbar navbar-default" role="navigation">
+	<div class="navbar navbar-fixed-top">
+		<nav class="navbar navbar-default" role="navigation">
 			<div class="container-fluid">
-			<!-- Brand and toggle get grouped for better mobile display -->
-			<div class="navbar-header">
-			<a class="navbar-brand" href="#">BackBone Tutorial</a>
-			</div>
+				<!-- Brand and toggle get grouped for better mobile display -->
+				<div class="navbar-header">
+					<a class="navbar-brand" href="#">BackBone Tutorial</a>
+				</div>
 
-			<!-- Collect the nav links, forms, and other content for toggling -->
-			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-				<ul class="nav navbar-nav navbar-right">
-					<li><a href="#">About Us</a></li>
+				<!-- Collect the nav links, forms, and other content for toggling -->
+				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+					<ul class="nav navbar-nav navbar-right">
+						<li>
+							<a href="#">About Us</a>
+						</li>
 						<li class="dropdown">
-					     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Hi! <%= firstName %> <%= lastName %> <span class="caret"></span></a>
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Hi! <%= firstName %> <%= lastName %> <span class="caret"></span></a>
 							<ul class="dropdown-menu" role="menu">
-							<li><a id="viewAccount">View Account</a></li>
-							<li><a id="editAccount">Edit Account</a></li>
-							<li><a href="#">Change Password</a></li>
-							<li class="divider"></li>
-							<li><a id="signOut">Sign Out</a></li>
+								<li>
+									<a id="viewAccount">View Account</a>
+								</li>
+								<li>
+									<a id="editAccount">Edit Account</a>
+								</li>
+								<li>
+									<a href="#">Change Password</a>
+								</li>
+								<li class="divider"></li>
+								<li>
+									<a href="">Sign Out</a>
+								</li>
 							</ul>
 						</li>
-				</ul>
-			</div><!-- /.navbar-collapse -->
-			
+					</ul>
+				</div><!-- /.navbar-collapse -->
+
 			</div><!-- /.container-fluid -->
-			
-			</nav>
-			  <div class="container center-block text-center">
-			  	<h3>My Home Page</h3>
-			  	<div id="homePageContent"></div>
-			  </div>
-			  
-			  
-			</div><!-- End Nav Bar -->
+
+		</nav>
+		<div class="container-fluid center-block text-center">
+			<div class="row">
+
+				<div id="homePageContent"class="col-sm-9 col-md-10  main">
+					<h3>My Home Page</h3>
+				</div>
+				<div class="col-sm-3 col-sm-offset-9 col-md-2 col-md-offset-10 sidebar pull-left">
+					<ul class="nav nav-sidebar">
+						<li class="active">
+							<a href="#">Nav Menu1 <span class="sr-only">(current)</span></a>
+						</li>
+						<li>
+							<a href="#">Menu1.1</a>
+						</li>
+						<li>
+							<a href="#">Menu1.2</a>
+						</li>
+						<li>
+							<a href="#">Menu1.3</a>
+						</li>
+					</ul>
+					<ul class="nav nav-sidebar">
+						<li>
+							<a href="#">Nav item2</a>
+						</li>
+						<li>
+							<a href="#">Menu2.1</a>
+						</li>
+						<li>
+							<a href="#">Menu2.2</a>
+						</li>
+						<li>
+							<a href="#">Menu2.3</a>
+						</li>
+						<li>
+							<a href="#">Menu2.4</a>
+						</li>
+					</ul>
+					
+				</div>
 			</div>
+		</div>
+
+	</div><!-- End Nav Bar -->
+</div>
