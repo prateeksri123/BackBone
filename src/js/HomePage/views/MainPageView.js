@@ -27,7 +27,10 @@ MainPageView = Backbone.View.extend({
     	$('#editAccount').click(mainPage.editUser);
     	$('#addWishListItemBtn').click(mainPage.displayWishList);
     	$('#signOut').click(mainPage.logoutUser);
-    	
+        $('label.tree-toggler').click(function () {
+	    	$(this).parent().children('ul.tree').toggle(300);
+     	});
+
     },
     
     displayUser: function(){
