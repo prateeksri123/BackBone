@@ -17,8 +17,18 @@ MainPageView = Backbone.View.extend({
 	         $('#pageDiv').html(template);
 	         
 	         mainPage.registerCustomEvents();
+	         mainPage.getProductCategoryList();
 	        // window.href = "/displayUser";
 	     });            
+    },
+    
+    getProductCategoryList : function() {
+    	   var headerObject = {};
+    	   
+    	    $.get("js/HomePage/data/ProductCategory.json", function (data) {
+         	console.log(data);
+	        // window.href = "/displayUser";
+	     });  
     },
     
     registerCustomEvents : function() {
