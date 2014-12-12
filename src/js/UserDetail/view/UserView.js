@@ -39,7 +39,7 @@ UserView = Backbone.View.extend({
     
      render: function(model, editUser){
      	window.loggedInUser = model;
-         $.get("js/UserDetail/template/UserDetailsTemplate.html", function (template) {
+         $.get("src/js/UserDetail/template/UserDetailsTemplate.html", function (template) {
          	html = _.template(template,{'model' : model, 'displayPassword' : 'none', 'editAccount' : editUser});
 	         $('#homePageContent').html(html);
 	         userDetails.registerCustomEvents();

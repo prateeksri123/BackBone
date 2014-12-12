@@ -12,7 +12,7 @@ MainPageView = Backbone.View.extend({
     
      render: function(model){
      	window.loggedInUser = model;
-         $.get("js/HomePage/Template/MainPage.html", function (data) {
+         $.get("src/js/HomePage/Template/MainPage.html", function (data) {
          	template = _.template(data, model);
 	         $('#pageDiv').html(template);
 	         mainPage.getProductCategoryList();
@@ -21,7 +21,7 @@ MainPageView = Backbone.View.extend({
     
     loadRightSideMenuBar:function() {
     	collection = productCategoryList.toJSON();
-    	$.get("js/HomePage/Template/RightSideNavigation.html", function (data) {
+    	$.get("src/js/HomePage/Template/RightSideNavigation.html", function (data) {
          	template = _.template(data, {'collection' : collection});
 	         $('#rightHandSideMenu').html(template);
 	         
@@ -32,7 +32,7 @@ MainPageView = Backbone.View.extend({
     
     getProductCategoryList : function() {
     	   var headerObject = {};
-    	    $.get("js/HomePage/data/ProductCategory.json", function (data) {
+    	    $.get("src/js/HomePage/data/ProductCategory.json", function (data) {
          	console.log(data.apiGroups);
          	
          	$.each(eval(data.apiGroups.affiliate.apiListings), function(i, item) {

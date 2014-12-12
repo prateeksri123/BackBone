@@ -16,7 +16,7 @@ WishListView = Backbone.View.extend({
     },
      render: function(model, editUser){
      	window.loggedInUser = model;
-         $.get("js/wishList/template/WishListTemplate.html", function (template) {
+         $.get("src/js/wishList/template/WishListTemplate.html", function (template) {
          	html = _.template(template,model);
 	         $('#homePageContent').append(html);
 	         console.log("WishListTemplate Loaded");
