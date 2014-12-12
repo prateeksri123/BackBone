@@ -16,19 +16,45 @@ MainPageView = Backbone.View.extend({
          	template = _.template(data, model);
 	         $('#pageDiv').html(template);
 	         
-	         mainPage.registerCustomEvents();
-	         mainPage.getProductCategoryList();
+	        // mainPage.registerCustomEvents();
+	        // mainPage.getProductCategoryList();
+	         mainPage.displayRightSideMenuBar();
 	        // window.href = "/displayUser";
 	     });            
     },
     
+    displayRightSideMenuBar:function() {
+    	$.get("js/HomePage/Template/RightSideNavigation.html", function (data) {
+         	template = _.template(data);
+	         $('#rightHandSideMenu').html(template);
+	         
+	         mainPage.registerCustomEvents();
+	         mainPage.getProductCategoryList();
+	         //mainPage.displayRightSideMenuBar();
+	        // window.href = "/displayUser";
+	     }); 
+    },
+    
     getProductCategoryList : function() {
     	   var headerObject = {};
-    	   
     	    $.get("js/HomePage/data/ProductCategory.json", function (data) {
          	console.log(data);
-	        // window.href = "/displayUser";
-	     });  
+	         });  
+    	   /*var request = $.ajax({
+             type: 'GET',
+             url: 'https://affiliate-api.flipkart.net/affiliate/api/mywishlis.json',
+             dataType: "json",
+             headers : {
+             	   'Fk-Affiliate-Id': 'mywishlis',
+                   'Fk-Affiliate-Token': '22ba4f9fe89f4007ab51f45a777d4c7a',
+                   'Access-Control-Allow-Origin' :  '*',
+                   "Access-Control-Allow-Headers" : "Origin, X-Requested-With, Content-Type, Accept"
+                   
+             },
+             success: function(data){
+              console.log(data);
+                }});*/
+    	   
     },
     
     registerCustomEvents : function() {
