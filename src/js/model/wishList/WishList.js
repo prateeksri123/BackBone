@@ -15,7 +15,7 @@ WishListItem = Backbone.Model.extend({
 	});
 WishList = Backbone.Collection.extend({
 		model : WishListItem,
-		localStorage : new Backbone.LocalStorage("WishList"),
+		localStorage : new Backbone.LocalStorage("store-WishList"),
 		initialize : function() {
 			// Initialized Model Collection
 		}

@@ -15,30 +15,38 @@ MainPageView = Backbone.View.extend({
          $.get("js/HomePage/Template/MainPage.html", function (data) {
          	template = _.template(data, model);
 	         $('#pageDiv').html(template);
-	         
-	        // mainPage.registerCustomEvents();
-	        // mainPage.getProductCategoryList();
-	         mainPage.displayRightSideMenuBar();
-	        // window.href = "/displayUser";
+	         mainPage.getProductCategoryList();
 	     });            
     },
     
-    displayRightSideMenuBar:function() {
+    loadRightSideMenuBar:function() {
+    	collection = productCategoryList.toJSON();
     	$.get("js/HomePage/Template/RightSideNavigation.html", function (data) {
-         	template = _.template(data);
+         	template = _.template(data, {'collection' : collection});
 	         $('#rightHandSideMenu').html(template);
 	         
 	         mainPage.registerCustomEvents();
-	         mainPage.getProductCategoryList();
-	         //mainPage.displayRightSideMenuBar();
-	        // window.href = "/displayUser";
+	         
 	     }); 
     },
     
     getProductCategoryList : function() {
     	   var headerObject = {};
     	    $.get("js/HomePage/data/ProductCategory.json", function (data) {
-         	console.log(data);
+         	console.log(data.apiGroups);
+         	
+         	$.each(eval(data.apiGroups.affiliate.apiListings), function(i, item) {
+                 //console.log(item.availableVariants['v0.1.0'].get);
+                 //console.log(item.apiName);
+                 var res = item.apiName.replace("_", " ");
+                 var tmpCategory = new ProductCategory({
+				   category_name : res,
+				   url: item.availableVariants['v0.1.0'].get,
+				   id : item.apiName
+			      });
+		          productCategoryList.create(tmpCategory);
+               });
+               mainPage.loadRightSideMenuBar();
 	         });  
     	   /*var request = $.ajax({
              type: 'GET',
@@ -96,3 +104,4 @@ MainPageView = Backbone.View.extend({
     }
 });
 var mainPage = new MainPageView();
+var productCategoryList = new ProductCategorysCollection;

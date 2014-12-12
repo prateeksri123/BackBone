@@ -1,36 +1,39 @@
 <div class="well" style="width:300px; padding: 8px 0;">
-				<ul class="nav nav-list">
-					<li>
-						<label class="tree-toggler nav-header">Header 1</label>
-						<ul class="nav nav-list tree" id="productCategoryList">
-							<li>
-								<a id="addWishListItemBtn">Add wishlist item</a>
-							</li>
-							<li>
-								<a href="#">Link</a>
-							</li>
-							<li>
-								<label class="tree-toggler nav-header">Header 1.1</label>
-								<ul class="nav nav-list tree">
-									<li>
-										<a href="#">Link</a>
-									</li>
-									<li>
-										<a href="#">Link</a>
-									</li>
-									<li>
-										<label class="tree-toggler nav-header">Header 1.1.1</label>
-										<ul class="nav nav-list tree">
-											<li>
-												<a href="#">Link</a>
-											</li>
-											<li>
-												<a href="#">Link</a>
-											</li>
-										</ul>
-									</li>
-								</ul>
-							</li>
-						</ul>
-					</li>
-			</div>
+	<ul class="nav nav-list">
+		<li>
+			<label class="tree-toggler nav-header">Header 1</label>
+			<ul class="nav nav-list tree" id="productCategoryList">
+				<li>
+					<a id="addWishListItemBtn">Add wishlist item</a>
+				</li>
+				<% _.each(collection, function(model) { %>
+				<li>
+					<a href="#"><%= model.category_name %> </a>
+				</li>
+				<% }); %>
+				<li>
+					<label class="tree-toggler nav-header">Header 1.1</label>
+					<ul class="nav nav-list tree">
+
+						<li>
+							<a href="#">Link</a>
+						</li>
+						<li>
+							<a href="#">Link</a>
+						</li>
+						<li>
+							<label class="tree-toggler nav-header">Header 1.1.1</label>
+							<ul class="nav nav-list tree">
+								<li>
+									<a href="#">Link</a>
+								</li>
+								<li>
+									<a href="#">Link</a>
+								</li>
+							</ul>
+						</li>
+					</ul>
+				</li>
+			</ul>
+		</li>
+</div>
