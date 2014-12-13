@@ -3,8 +3,8 @@
  */
 Product = Backbone.Model.extend({
 		defaults : {
-			title : null,
-			productDescription : null,
+			productTitle : "",
+			productDescription : "",
 			imageUrls : "",
 			maximumRetailPrice : "",
 			sellingPrice : "",

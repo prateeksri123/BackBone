@@ -107,16 +107,16 @@ MainPageView = Backbone.View.extend({
     
     onCategoryClicked: function(url) {
     	$.get("src/js/HomePage/data/ProductList.json", function (data) {
-         	console.log(data);
+         	
          	$.each(eval(data.productInfoList), function(i, item) {
          		//console.log(item.productBaseInfo);
          		var tmpProduct = new Product({
 				   id : item.productBaseInfo.productIdentifier.productId,
-				   title : item.productBaseInfo.productAttributes.title, 
+				   productTitle : item.productBaseInfo.productAttributes.title, 
 				   productDescription : item.productBaseInfo.productAttributes.productDescription,
 				   imageUrls : item.productBaseInfo.productAttributes.imageUrls
 			      });
-			      productInfo = tmpProduct;
+			      //productInfo = tmpProduct;
 		         productList.create(tmpProduct);
                  //console.log(i);
          		});
@@ -126,8 +126,11 @@ MainPageView = Backbone.View.extend({
     
     loadProductList: function() {
     	console.log('Display Product');
+    	var lsProduct = new Backbone.LocalStorage("store-product");
+			productList = lsProduct.findAll();
+			
 	     var productCardView = new ProductCardView;
-	     productCardView.render(productInfo);
+	     productCardView.render(productList);
     }
 });
 var mainPage = new MainPageView();

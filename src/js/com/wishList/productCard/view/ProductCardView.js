@@ -15,12 +15,15 @@ ProductCardView = Backbone.View.extend({
 	registerCustomEvents : function() {
 	},
 
-	render : function(model) {
-		console.log(" test " + model.get('title'));
-		;
-		$.get("src/js/com/wishList/productCard/template/ProductCardTemplate.html", function(data) {
-			template = _.template(data, {'model' : model});
-			$('#homePageContent').html(template);
+	render : function(collection) {
+		console.log(" test ");
+		$.get("src/js/com/wishList/productCard/template/ProductCardTemplate.html", function(template) {
+			console.log("template -> " + template);
+			/*$.each(collection.models, function(i, item) {
+				console.log(i + "  " + item.get('productTitle'));
+			});*/
+			html = _.template(template, {'collection' : collection});
+			$('#homePageContent').html(html);
 		});
 	},
 });

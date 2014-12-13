@@ -1,9 +1,14 @@
 <div>
 	<div class="form-group">
-					<div class="col-sm-3">
-						<p class="form-control-static">
-						<%= model.get('title') %> <%= model.get('productDescription') %>
-						</p>
-					</div>
-				</div>
+		<div class="col-sm-3">
+			<p class="form-control-static">
+				<% _.each(collection, function(model) { %>
+				<li>
+				  <%= model.productTitle %> xxx
+				</li>
+				<% }); %>
+				
+			</p>
+		</div>
+	</div>
 </div>
