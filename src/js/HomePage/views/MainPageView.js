@@ -3,7 +3,7 @@ MainPageView = Backbone.View.extend({
     tagname : 'div',
     
     events : {
-        "click a" : "handleRouting"
+        "click a#category" : "handleRouting"
     },
     
     handleRouting : function(e) {
@@ -116,12 +116,21 @@ MainPageView = Backbone.View.extend({
 				   productDescription : item.productBaseInfo.productAttributes.productDescription,
 				   imageUrls : item.productBaseInfo.productAttributes.imageUrls
 			      });
+			      productInfo = tmpProduct;
 		         productList.create(tmpProduct);
-                 console.log(i);
+                 //console.log(i);
          		});
+         		mainPage.loadProductList();
        });
+    },
+    
+    loadProductList: function() {
+    	console.log('Display Product');
+	     var productCardView = new ProductCardView;
+	     productCardView.render(productInfo);
     }
 });
 var mainPage = new MainPageView();
 var productCategoryList = new ProductCategorysCollection;
 var productList = new ProductsCollection;
+var productInfo = new Product;

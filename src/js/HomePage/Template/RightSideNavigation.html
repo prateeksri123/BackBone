@@ -8,7 +8,7 @@
 				</li>
 				<% _.each(collection, function(model) { %>
 				<li>
-					<a data-url="<%= model.url %>" target="_"><%= model.category_name %> </a>
+					<a id="category" data-url="<%= model.url %>" target="_"><%= model.category_name %> </a>
 				</li>
 				<% }); %>
 				<li>
