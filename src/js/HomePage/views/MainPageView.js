@@ -5,9 +5,10 @@ MainPageView = Backbone.View.extend({
     events : {
         "click a" : "handleRouting"
     },
-
+    
     handleRouting : function(e) {
-        console.log(this.model);
+      console.log($(e.currentTarget).data('url'));
+      mainPage.onCategoryClicked($(e.currentTarget).data('url'));
     },
     
      render: function(model){
@@ -20,11 +21,12 @@ MainPageView = Backbone.View.extend({
     },
     
     loadRightSideMenuBar:function() {
-    	collection = productCategoryList.toJSON();
+    	collection = productCategoryList;
     	$.get("src/js/HomePage/Template/RightSideNavigation.html", function (data) {
          	template = _.template(data, {'collection' : collection});
 	         $('#rightHandSideMenu').html(template);
-	         
+	         console.log($(window).height());
+	         $('#rightHandSideMenu').height($(window).height() - $('#footer').height() - 60);
 	         mainPage.registerCustomEvents();
 	         
 	     }); 
@@ -32,7 +34,11 @@ MainPageView = Backbone.View.extend({
     
     getProductCategoryList : function() {
     	   var headerObject = {};
-    	    $.get("src/js/HomePage/data/ProductCategory.json", function (data) {
+    	   var ls = new Backbone.LocalStorage("store-product-Category");
+			
+			productCategoryList = ls.findAll();
+			mainPage.loadRightSideMenuBar();
+    	    /*$.get("src/js/HomePage/data/ProductCategory.json", function (data) {
          	console.log(data.apiGroups);
          	
          	$.each(eval(data.apiGroups.affiliate.apiListings), function(i, item) {
@@ -44,11 +50,11 @@ MainPageView = Backbone.View.extend({
 				   url: item.availableVariants['v0.1.0'].get,
 				   id : item.apiName
 			      });
-		          productCategoryList.create(tmpCategory);
+		          //productCategoryList.create(tmpCategory);
                });
                mainPage.loadRightSideMenuBar();
 	         });  
-    	   /*var request = $.ajax({
+    	   var request = $.ajax({
              type: 'GET',
              url: 'https://affiliate-api.flipkart.net/affiliate/api/mywishlis.json',
              dataType: "json",
@@ -99,9 +105,23 @@ MainPageView = Backbone.View.extend({
     	$('#pageDiv').html('');
     },
     
-    test: function(){
-    	alert('test');
+    onCategoryClicked: function(url) {
+    	$.get("src/js/HomePage/data/ProductList.json", function (data) {
+         	console.log(data);
+         	$.each(eval(data.productInfoList), function(i, item) {
+         		//console.log(item.productBaseInfo);
+         		var tmpProduct = new Product({
+				   id : item.productBaseInfo.productIdentifier.productId,
+				   title : item.productBaseInfo.productAttributes.title, 
+				   productDescription : item.productBaseInfo.productAttributes.productDescription,
+				   imageUrls : item.productBaseInfo.productAttributes.imageUrls
+			      });
+		         productList.create(tmpProduct);
+                 console.log(i);
+         		});
+       });
     }
 });
 var mainPage = new MainPageView();
 var productCategoryList = new ProductCategorysCollection;
+var productList = new ProductsCollection;

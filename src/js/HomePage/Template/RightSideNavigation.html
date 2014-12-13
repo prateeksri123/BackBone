@@ -1,4 +1,4 @@
-<div class="well" style="width:300px; padding: 8px 0;">
+<div class="well" style="height: 100%;overflow:auto;">
 	<ul class="nav nav-list">
 		<li>
 			<label class="tree-toggler nav-header">Header 1</label>
@@ -8,7 +8,7 @@
 				</li>
 				<% _.each(collection, function(model) { %>
 				<li>
-					<a href="#"><%= model.category_name %> </a>
+					<a data-url="<%= model.url %>" target="_"><%= model.category_name %> </a>
 				</li>
 				<% }); %>
 				<li>

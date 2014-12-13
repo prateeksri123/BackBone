@@ -94,16 +94,22 @@ textarea {
    ========================================================================== */
 
 
-.footer {
-    height: 250px;
-    width: 100%;
-    z-index: 100;
-    bottom: 0;
-    left:0;
-    right:0;
-    position: fixed;
-}
-
+@media (max-width: 767px) {
+        #footer {
+          margin-left: -20px;
+          margin-right: -20px;
+          padding-left: 20px;
+          padding-right: 20px;
+        }
+      }
+      
+      #wrap {
+        min-height: 100%;
+        height: auto !important;
+        height: 100%;
+        /* Negative indent footer by it's height */
+        margin: 0 auto -60px;
+      }
 
 
 

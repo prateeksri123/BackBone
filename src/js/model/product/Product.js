@@ -3,11 +3,24 @@
  */
 Product = Backbone.Model.extend({
 		defaults : {
-			name : null,
-			pwd : null,
-			firstName : "",
-			lastName : "",
-			email : ""
+			title : null,
+			productDescription : null,
+			imageUrls : "",
+			maximumRetailPrice : "",
+			sellingPrice : "",
+			productUrl : "",
+			productBrand : "",
+			inStock : false,
+			codAvailable : false,
+			emiAvailable : false,
+			discountPercentage : 0,
+			cashBack : null,
+			size : "",
+			color : "",
+			sizeUnit : "",
+			sizeVariants: [],
+			colorVariants: [],
+			id: ""
 		},
 		initialize : function() {
 			// Initialized Model
