@@ -109,7 +109,7 @@ MainPageView = Backbone.View.extend({
     onCategoryClicked: function(url) {
     	$.get("src/js/HomePage/data/ProductList.json", function (data) {
          	
-         	$.each(eval(data.productInfoList), function(i, item) {
+         	/*$.each(eval(data.productInfoList), function(i, item) {
          		
          		var tmpProduct = new Product({
 				   id : item.productBaseInfo.productIdentifier.productId,
@@ -119,7 +119,7 @@ MainPageView = Backbone.View.extend({
 			      });
 		         productList.create(tmpProduct);
                  //console.log(i);
-         		});
+         		});*/
          		mainPage.loadProductList();
        });
     },

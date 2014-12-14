@@ -111,6 +111,10 @@ textarea {
         margin: 0 auto -60px;
       }
 
+.classWithPad { 
+	
+	padding:10px; 
+	}
 
 
 

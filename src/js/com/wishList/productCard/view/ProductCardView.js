@@ -18,12 +18,18 @@ ProductCardView = Backbone.View.extend({
 	render : function(collection) {
 		console.log(" test ");
 		$.get("src/js/com/wishList/productCard/template/ProductCardTemplate.html", function(template) {
-			
-			html = _.template(template, {'collection' : collection, 'i' : 1});
-			
+
+			html = _.template(template, {
+				'collection' : collection,
+				'i' : 1
+			});
+
 			$('#homePageContent').html(html);
-			
+			$('.pull-down').each(function() {
+				$(this).css('margin-top', '0px');
+			});
+
 		});
 	},
 });
-var productCardView = new ProductCardView(); 
+var productCardView = new ProductCardView();

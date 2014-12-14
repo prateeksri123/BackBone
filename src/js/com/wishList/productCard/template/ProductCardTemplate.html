@@ -1,34 +1,57 @@
 <div class="container-fluid">
 	<div class="form-group">
-		
-			<p class="form-control-static">
 
-				<div class="row">
-					<% _.each(collection, function(model) { %>
-					<% if (i==1) { i=2;%>
-					<div class="col-md-4" style="height: 150px">
-						<img src="<%= model.imageUrls['100x100'] %>" />
-						<br />
-						<%= model.productTitle %>
-					</div>
-					<% } else if(i == 2) { i=3 %>
-					<div class="col-md-4" style="height: 150px">
-						<img src="<%= model.imageUrls['100x100'] %>" />
-						<br />
-						<%= model.productTitle %>
-					</div>
-					<% } else { i=1%>
-					<div class="col-md-4" style="height: 150px">
-						<img src="<%= model.imageUrls['100x100'] %>" />
-						<br />
-						<%= model.productTitle %>
-					</div>
-					<% } %>
+		<p class="form-control-static">
 
-					<% }); %>
+			<div class="row">
+				<% _.each(collection, function(model) { %>
+				<% if (i==1) { i=2;%>
+				<div class="col-md-4" style="height: 170px; max-height: 170px">
+					<div id="thumbnail" class="thumbnail" style="height: 100%">
+						<img id="productImage" src="<%= model.imageUrls['100x100'] %>"  onerrorupdate="imgError(this)"/>
+						<div class="caption pull-down">
+							<p>
+								<%= model.productTitle.trim() %>
+							</p>
+						</div>
+					</div>
 				</div>
+				<% } else if(i == 2) { i=3 %>
+				<div class="col-md-4" style="height: 170px; max-height: 170px">
+					<div id="thumbnail" class="thumbnail" style="height: 100%">
+						<img id="productImage" src="<%= model.imageUrls['100x100'] %>" onerror="imgError(this)"/>
+						<div class="caption pull-down">
+							<p>
+								<%= model.productTitle.trim() %>
+							</p>
+						</div>
+					</div>
+				</div>
+				<% } else { i=1%>
+				<div class="col-md-4" style="height: 170px; max-height: 170px">
+					<div id="thumbnail" class="thumbnail" style="height: 100%">
+						<img id="productImage" src="<%= model.imageUrls['100x100'] %>" onerror="imgError(this)"/>
+						<div class="caption pull-down">
+							<p>
+								<%= model.productTitle.trim() %>
+							</p>
+						</div>
+					</div>
+				</div>
+				<% } %>
 
-			</p>
-		
+				<% }); %>
+			</div>
+
+		</p>
+
 	</div>
+	<script>
+		function imgError(image) {
+			alert("test");
+    image.onerror = "";
+    image.src = "/images/noimage.gif";
+    return true;
+}
+	</script>
 </div>
