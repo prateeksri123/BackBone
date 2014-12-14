@@ -27,6 +27,7 @@ MainPageView = Backbone.View.extend({
 	         $('#rightHandSideMenu').html(template);
 	         console.log($(window).height());
 	         $('#rightHandSideMenu').height($(window).height() - $('#footer').height() - 60);
+	         $('#homePageContent').height($(window).height() - $('#footer').height() - 60);
 	         mainPage.registerCustomEvents();
 	         
 	     }); 
@@ -109,14 +110,13 @@ MainPageView = Backbone.View.extend({
     	$.get("src/js/HomePage/data/ProductList.json", function (data) {
          	
          	$.each(eval(data.productInfoList), function(i, item) {
-         		//console.log(item.productBaseInfo);
+         		
          		var tmpProduct = new Product({
 				   id : item.productBaseInfo.productIdentifier.productId,
 				   productTitle : item.productBaseInfo.productAttributes.title, 
 				   productDescription : item.productBaseInfo.productAttributes.productDescription,
 				   imageUrls : item.productBaseInfo.productAttributes.imageUrls
 			      });
-			      //productInfo = tmpProduct;
 		         productList.create(tmpProduct);
                  //console.log(i);
          		});
