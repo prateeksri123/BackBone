@@ -105,6 +105,10 @@
 			find : function(model) {
 				return this.serializer.deserialize(this.localStorage().getItem(this._itemName(model.id)));
 			},
+			// Return the item by id.
+			findById: function(id) {
+				return this.serializer.deserialize(this.localStorage().getItem(this._itemName(id)));
+			},
 			// Return the array of all models currently in storage.
 			findAll : function() {
 				var result = [];
@@ -189,6 +193,9 @@
 					break;
 				case "findByNameAndPassword":
 					resp = model.name != undefined && model.pwd != undefined? store.findByNameAndPassword(model) : store.findAll();
+					break;
+				case "findById":
+					resp = model != undefined? store.findById(model) : store.findAll();
 					break;
 				}
 			} catch(error) {

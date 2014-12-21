@@ -13,7 +13,8 @@ MainPageView = Backbone.View.extend({
     },
     
     addToWishList: function(e) {
-		alert($(e.currentTarget).data('productid'));
+		console.log($(e.currentTarget).data('productid'));
+		
 		var wishListItem = new WishListItem({
 				   productId : $(e.currentTarget).data('productid'),
 			       userId : window.loggedInUser.id
@@ -23,6 +24,8 @@ MainPageView = Backbone.View.extend({
 	    }
 		wishListCollection.create(wishListItem);
 	},
+	
+	
     
      render: function(model){
      	window.loggedInUser = model;
@@ -102,13 +105,32 @@ MainPageView = Backbone.View.extend({
     	console.log('Display User');
 	     var userDetails = new UserView;
 	     userDetails.render(window.loggedInUser, false);
+	     
     },
     
     displayWishList: function(){
     	console.log('Display WishList');
 	     var wishList = new WishListView;
 	     wishList.render(window.loggedInUser);
+	     mainPage.getUserWishList();
     },
+    
+    getUserWishList: function() {
+		var ls = new Backbone.LocalStorage("store-WishList");
+		var lsProduct = new Backbone.LocalStorage("store-product");
+	    tmpWishListCollection = ls.findAll();
+	    var tmpProductList = new Array();
+	    $.each(eval(tmpWishListCollection), function(i, item) {
+	    	if(window.loggedInUser.id == item.userId){
+	    		console.log(item);
+	    		var product = lsProduct.findById(item.productId);
+	    		tmpProductList.push(product);
+	    	}
+	    	
+	    });
+	    mainPage.loadProductList(tmpProductList);
+	    
+	},
     
     editUser: function(){
     	console.log('Edit User');
@@ -136,17 +158,19 @@ MainPageView = Backbone.View.extend({
 		         productList.create(tmpProduct);
                  //console.log(i);
          		});*/
-         		mainPage.loadProductList();
+         		var lsProduct = new Backbone.LocalStorage("store-product");
+			    productList = lsProduct.findAll();
+			    mainPage.loadProductList(productList);
+         		
        });
     },
     
-    loadProductList: function() {
+    loadProductList: function(tmpProductList) {
     	console.log('Display Product');
-    	var lsProduct = new Backbone.LocalStorage("store-product");
-			productList = lsProduct.findAll();
+    	
 			
 	     var productCardView = new ProductCardView;
-	     productCardView.render(productList);
+	     productCardView.render(tmpProductList);
     }
 });
 var mainPage = new MainPageView();
