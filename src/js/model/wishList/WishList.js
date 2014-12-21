@@ -3,10 +3,7 @@
  */
 WishListItem = Backbone.Model.extend({
 		defaults : {
-			itemName : "",
-			Brand : "",
-			modelName : "",
-			expectedPrice : 0,
+			productId : 0,
 			userId : 0
 		},
 		initialize : function() {

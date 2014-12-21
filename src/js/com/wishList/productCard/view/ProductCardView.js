@@ -8,11 +8,20 @@ ProductCardView = Backbone.View.extend({
 	initialize : function(event) {
 
 	},
+	
+	events : {
+        "click a#addWishList" : "handleRouting"
+    },
 
 	handleRouting : function(e) {
+		alert("added");
 	},
 
 	registerCustomEvents : function() {
+		$('#addWishList').click(productCardView.addToWishList);
+		$("#thumbnail").on("click", ".addWishList", function (e) {
+         alert("a");
+         });
 	},
 
 	render : function(collection) {
@@ -25,11 +34,19 @@ ProductCardView = Backbone.View.extend({
 			});
 
 			$('#homePageContent').html(html);
+			productCardView.registerCustomEvents();
 			$('.pull-down').each(function() {
 				$(this).css('margin-top', '0px');
 			});
 
 		});
 	},
+	
+	
+	
+	addToWishList: function(e) {
+		alert(' added 1');
+		alert($(e.currentTarget).data('url'));
+	}
 });
 var productCardView = new ProductCardView();

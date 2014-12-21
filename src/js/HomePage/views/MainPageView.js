@@ -3,13 +3,19 @@ MainPageView = Backbone.View.extend({
     tagname : 'div',
     
     events : {
-        "click a#category" : "handleRouting"
+        "click a#category" : "handleRouting",
+         "click a#addWishList" : "addToWishList"
     },
     
     handleRouting : function(e) {
       console.log($(e.currentTarget).data('url'));
       mainPage.onCategoryClicked($(e.currentTarget).data('url'));
     },
+    
+    addToWishList: function(e) {
+		alert(' added 1');
+		alert($(e.currentTarget).data('productid'));
+	},
     
      render: function(model){
      	window.loggedInUser = model;
@@ -77,6 +83,7 @@ MainPageView = Backbone.View.extend({
     	$('#viewAccount').click(mainPage.displayUser);
     	$('#editAccount').click(mainPage.editUser);
     	$('#addWishListItemBtn').click(mainPage.displayWishList);
+    	
     	$('#signOut').click(mainPage.logoutUser);
         $('label.tree-toggler').click(function () {
 	    	$(this).parent().children('ul.tree').toggle(300);
