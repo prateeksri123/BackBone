@@ -4,7 +4,8 @@ MainPageView = Backbone.View.extend({
     
     events : {
         "click a#category" : "handleRouting",
-         "click a#addWishList" : "addToWishList"
+        "click a#addWishList" : "addToWishList",
+        "click a#removeWishList" : "removeFromToWishList"
     },
     
     handleRouting : function(e) {
@@ -23,8 +24,24 @@ MainPageView = Backbone.View.extend({
 	    	wishListCollection = new WishList();
 	    }
 		wishListCollection.create(wishListItem);
+		$('#successMessage').show();
 	},
 	
+	removeFromToWishList: function(e) {
+		console.log($(e.currentTarget).data('productid'));
+		var lsProduct = new Backbone.LocalStorage("store-WishList");
+	    var tmpWishListCollection = lsProduct.findAll();
+	    var productId = $(e.currentTarget).data('productid');
+	    $.each(eval(tmpWishListCollection), function(i, item) {
+	    	if(window.loggedInUser.id == item.userId && productId == item.productId){
+	    		lsProduct.destroy(item);
+	    	}
+	    	
+	    });
+		mainPage.displayWishList();
+		$('#alertLabel').value = "Item removed from Wishlist";
+		$('#successMessage').show();
+	},
 	
     
      render: function(model){
@@ -95,10 +112,15 @@ MainPageView = Backbone.View.extend({
     	$('#addWishListItemBtn').click(mainPage.displayWishList);
     	
     	$('#signOut').click(mainPage.logoutUser);
+    	$('#hideSuccessMessage').click(mainPage.removeAlertMessage);
         $('label.tree-toggler').click(function () {
 	    	$(this).parent().children('ul.tree').toggle(300);
      	});
 
+    },
+    
+    removeAlertMessage: function(){
+    	$('#successMessage').hide();
     },
     
     displayUser: function(){
@@ -128,7 +150,7 @@ MainPageView = Backbone.View.extend({
 	    	}
 	    	
 	    });
-	    mainPage.loadProductList(tmpProductList);
+	    mainPage.loadProductList(tmpProductList,true);
 	    
 	},
     
@@ -160,17 +182,17 @@ MainPageView = Backbone.View.extend({
          		});*/
          		var lsProduct = new Backbone.LocalStorage("store-product");
 			    productList = lsProduct.findAll();
-			    mainPage.loadProductList(productList);
+			    mainPage.loadProductList(productList,false);
          		
        });
     },
     
-    loadProductList: function(tmpProductList) {
+    loadProductList: function(tmpProductList,displayWishlist) {
     	console.log('Display Product');
     	
 			
 	     var productCardView = new ProductCardView;
-	     productCardView.render(tmpProductList);
+	     productCardView.render(tmpProductList,displayWishlist);
     }
 });
 var mainPage = new MainPageView();
