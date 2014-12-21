@@ -115,7 +115,9 @@ MainPageView = Backbone.View.extend({
 				   id : item.productBaseInfo.productIdentifier.productId,
 				   productTitle : item.productBaseInfo.productAttributes.title, 
 				   productDescription : item.productBaseInfo.productAttributes.productDescription,
-				   imageUrls : item.productBaseInfo.productAttributes.imageUrls
+				   imageUrls : item.productBaseInfo.productAttributes.imageUrls,
+				   productUrl : item.productBaseInfo.productAttributes.productUrl,
+				   inStock : item.productBaseInfo.productAttributes.inStock
 			      });
 		         productList.create(tmpProduct);
                  //console.log(i);
