@@ -13,8 +13,15 @@ MainPageView = Backbone.View.extend({
     },
     
     addToWishList: function(e) {
-		alert(' added 1');
 		alert($(e.currentTarget).data('productid'));
+		var wishListItem = new WishListItem({
+				   productId : $(e.currentTarget).data('productid'),
+			       userId : window.loggedInUser.id
+			      });
+	    if(wishListCollection == undefined) {
+	    	wishListCollection = new WishList();
+	    }
+		wishListCollection.create(wishListItem);
 	},
     
      render: function(model){
@@ -144,5 +151,6 @@ MainPageView = Backbone.View.extend({
 });
 var mainPage = new MainPageView();
 var productCategoryList = new ProductCategorysCollection;
+var wishListCollection = new WishList();
 var productList = new ProductsCollection;
 var productInfo = new Product;
