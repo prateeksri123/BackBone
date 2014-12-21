@@ -2,12 +2,14 @@
 
 	<% _.each(collection, function(model) { %>
 
-	<div  style="height: 170px; max-height: 170px;float: left; width: 180px">
+	<div  style="height: 270px; max-height: 270px;float: left; width: 180px">
 		<div id="thumbnail" class="thumbnail" style="height: 100%">
 			<img id="productImage" src="<%= model.imageUrls['100x100'] %>"  onerrorupdate="imgError(this)"/>
 			<div class="caption pull-down">
+				<h3> <%= model.productTitle.trim() %> </h3>
 				<p>
-					<%= model.productTitle.trim() %>
+					<a href="<%= model.productUrl %>" class="btn btn-primary" role="button">Buy Now!</a>
+					<a href="#" class="btn btn-default" role="button">Add To Wishlist</a>
 				</p>
 			</div>
 		</div>
