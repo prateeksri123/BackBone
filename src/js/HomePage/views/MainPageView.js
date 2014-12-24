@@ -189,10 +189,8 @@ MainPageView = Backbone.View.extend({
     
     loadProductList: function(tmpProductList,displayWishlist) {
     	console.log('Display Product');
-    	
-			
-	     var productCardView = new ProductCardView;
-	     productCardView.render(tmpProductList,displayWishlist);
+    	var productCardView = new ProductCardView;
+	    productCardView.render(tmpProductList,displayWishlist);
     }
 });
 var mainPage = new MainPageView();
