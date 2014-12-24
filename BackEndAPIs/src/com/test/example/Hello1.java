@@ -23,14 +23,14 @@ public class Hello1 {
   @GET
   @Produces(MediaType.TEXT_PLAIN)
   public String sayPlainTextHello() {
-    return "Hello REST API Call Started";
+    return "Hello REST API Call Started And it is ready for checkin plain text maneesh";
   }
 
   // This method is called if XML is request
   @GET
   @Produces(MediaType.TEXT_XML)
   public String sayXMLHello() {
-    return "<?xml version=\"1.0\"?>" + "<hello> Hello REST API Call Started" + "</hello>";
+    return "<?xml version=\"1.0\"?>" + "<hello> Hello REST API Call Started And it is ready for checkin XML text" + "</hello>";
   }
 
   // This method is called if HTML is request
@@ -38,7 +38,7 @@ public class Hello1 {
   @Produces(MediaType.TEXT_HTML)
   public String sayHtmlHello() {
     return "<html> " + "<title>" + "Hello Jersey" + "</title>"
-        + "<body><h1>" + "Hello REST API Call Started And it is ready for checkin" + "</body></h1>" + "</html> ";
+        + "<body><h1>" + "Hello REST API Call Started And it is ready for checkin HTML" + "</body></h1>" + "</html> ";
   }
 
 }
