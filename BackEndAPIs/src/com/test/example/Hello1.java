@@ -24,6 +24,8 @@ import org.codehaus.jettison.json.JSONObject;
 
 //Sets the path to base URL + /hello1
 // http://www.vogella.com/tutorials/REST/article.html
+
+// Category Listing is available in https://affiliate-api.flipkart.net/affiliate/api/mywishlis.json
 @Path("/hello1")
 public class Hello1 {
 

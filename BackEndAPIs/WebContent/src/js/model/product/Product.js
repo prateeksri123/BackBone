@@ -28,7 +28,7 @@ Product = Backbone.Model.extend({
 	});
 ProductsCollection = Backbone.Collection.extend({
 		model : Product,
-		localStorage : new Backbone.LocalStorage("store-product"),
+		//localStorage : new Backbone.LocalStorage("store-product"),
 		initialize : function() {
 			// Initialized Model Collection
 		}

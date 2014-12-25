@@ -1,12 +1,20 @@
+(function($) {
+	
 MainPageView = Backbone.View.extend({
 
     tagname : 'div',
+    
 
     events : {
         "click a#category" : "handleRouting",
         "click a#addWishList" : "addToWishList",
         "click a#removeWishList" : "removeFromToWishList"
     },
+    
+    initialize: function () {
+    this.productList = new ProductsCollection();
+    
+  },
 
     handleRouting : function(e) {
       console.log($(e.currentTarget).data('url'));
@@ -26,6 +34,7 @@ MainPageView = Backbone.View.extend({
 		wishListCollection.create(wishListItem);
 		$('#successMessage').show();
 	},
+
 
 	removeFromToWishList: function(e) {
 		console.log($(e.currentTarget).data('productid'));
@@ -56,7 +65,7 @@ MainPageView = Backbone.View.extend({
     loadRightSideMenuBar:function() {
     	collection = productCategoryList;
     	$.get("src/js/HomePage/Template/RightSideNavigation.html", function (data) {
-         	template = _.template(data, {'collection' : collection});
+         	template = _.template(data, {'collection' : collection.toJSON()});
 	         $('#rightHandSideMenu').html(template);
 	         console.log($(window).height());
 	         $('#rightHandSideMenu').height($(window).height() - $('#footer').height() - 60);
@@ -68,11 +77,11 @@ MainPageView = Backbone.View.extend({
 
     getProductCategoryList : function() {
     	   var headerObject = {};
-    	   var ls = new Backbone.LocalStorage("store-product-Category");
+    	  // var ls = new Backbone.LocalStorage("store-product-Category");
 
-			productCategoryList = ls.findAll();
-			mainPage.loadRightSideMenuBar();
-    	    /*$.get("src/js/HomePage/data/ProductCategory.json", function (data) {
+			//productCategoryList = ls.findAll();
+			//mainPage.loadRightSideMenuBar();
+    	    $.get("http://localhost:8080/JavaRESTExample/rest/hello", function (data) {
          	//console.log(data);
             data = JSON.parse(data);
             console.log(data.apiGroups.affiliate.apiListings);
@@ -88,11 +97,15 @@ MainPageView = Backbone.View.extend({
 				   url: item.availableVariants['v0.1.0'].get,
 				   id : item.apiName
 			      });
-		          productCategoryList.create(tmpCategory);
+                 if(productCategoryList == undefined) {
+                	 productCategoryList = new ProductCategorysCollection();
+          		}
+                 productCategoryList.add(tmpCategory);
+		          
                });
                mainPage.loadRightSideMenuBar();
 	         });
-    	  var request = $.ajax({
+    	  /*var request = $.ajax({
              type: 'GET',
              url: 'https://affiliate-api.flipkart.net/affiliate/api/mywishlis.json',
              dataType: "json",
@@ -169,7 +182,7 @@ MainPageView = Backbone.View.extend({
     },
 
     onCategoryClicked: function(url) {
-    	/*$.get("http://localhost:8080/JavaRESTExample/rest/hello1", function (data) {
+    	$.get("http://localhost:8080/JavaRESTExample/rest/hello1", function (data) {
              console.log('xxxxxxxxxxxxxx');
              data  = $.parseJSON(data);
          	$.each(eval(data.productInfoList), function(i, item) {
@@ -185,12 +198,14 @@ MainPageView = Backbone.View.extend({
          		if(productList == undefined) {
          			productList = new ProductsCollection();
          		}
-		         productList.create(tmpProduct);
+		         productList.add(tmpProduct);
                  //console.log(i);
-         		});*/
-         		var lsProduct = new Backbone.LocalStorage("store-product");
-			    productList = lsProduct.findAll();
-			    mainPage.loadProductList(productList,false);
+         		});
+         		mainPage.loadProductList(productList,false);
+        });
+         		//var lsProduct = new Backbone.LocalStorage("store-product");
+			    //productList = lsProduct.findAll();
+			    
 			   //$('#homePageContent').html(data);
 
        
@@ -205,5 +220,6 @@ MainPageView = Backbone.View.extend({
 var mainPage = new MainPageView();
 var productCategoryList = new ProductCategorysCollection;
 var wishListCollection = new WishList();
-var productList = new ProductsCollection;
-var productInfo = new Product;
+var productList = new ProductsCollection();
+var productInfo = new Product();
+})(jQuery); 
