@@ -57,7 +57,7 @@ public class Hello1 {
     return "<html> " + "<title>" + "Hello Jersey" + "</title>"
         + "<body><h1>" + "Hello REST API Call Started And it is ready for checkin HTML" + "</body></h1>" + "</html> ";
   }
-  
+  private final String USER_AGENT = "Mozilla/5.0";
   private String getProductList(String productUrl) {
 		String url = productUrl;
 		/*headers : {
@@ -72,12 +72,11 @@ public class Hello1 {
 			HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 
 			// optional default is GET
-			con.setRequestMethod("GET");
-
-			// add request header
-			//con.setRequestProperty("User-Agent", USER_AGENT);
-			con.setRequestProperty("Fk-Affiliate-Id", "mywishlis");
-			con.setRequestProperty("Fk-Affiliate-Token","22ba4f9fe89f4007ab51f45a777d4c7a");
+			//HttpURLConnection con = (HttpURLConnection) url.openConnection();
+            con.setRequestMethod("GET");
+            con.setRequestProperty("User-Agent", USER_AGENT);
+            con.setRequestProperty("Fk-Affiliate-Token","22ba4f9fe89f4007ab51f45a777d4c7a" );
+            con.setRequestProperty("Fk-Affiliate-Id", "mywishlis");
 
 			int responseCode = con.getResponseCode();
 			System.out.println("\nSending 'GET' request to URL : " + url);
