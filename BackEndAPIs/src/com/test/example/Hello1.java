@@ -5,10 +5,14 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 
 import org.codehaus.jettison.json.JSONObject;
@@ -32,59 +36,72 @@ public class Hello1 {
   // This method is called if TEXT_PLAIN is request
   @GET
   @Produces(MediaType.TEXT_PLAIN)
-  public String sayPlainTextHello() {
-	  JSONObject jsonObject = new JSONObject();
-	  String s ="";
-	  System.out.println("PLAIN");
-	  try {
-		InputStream crunchifyInputStream = new FileInputStream(
-		"C:\\Important\\wishlist\\BackEndAPIs\\src\\com\\test\\example\\ProductList.json");
-		 InputStreamReader crunchifyReader = new InputStreamReader(crunchifyInputStream);
-         BufferedReader br = new BufferedReader(crunchifyReader);
-         String line;
-         while ((line = br.readLine()) != null) {
-             s += line + "\n";
-         }
-         jsonObject = new JSONObject(s);
-         System.out.println("PLain ->" + jsonObject);
-	} catch (Exception e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	}
-    return jsonObject.toString();
+  public String sayPlainTextHello(@QueryParam("url") String url) {
+	System.out.println(url);
+    return getProductList(url);
   }
 
   // This method is called if XML is request
   @GET
   @Produces(MediaType.APPLICATION_JSON)
-  public String sayXMLHello() {
-	  JSONObject jsonObject = new JSONObject();
-	  String s="";
-	  System.out.println("XML");
-	  try {
-		InputStream crunchifyInputStream = new FileInputStream(
-		  "C:\\Important\\wishlist\\BackEndAPIs\\src\\com\\test\\example\\ProductList.json");
-		 InputStreamReader crunchifyReader = new InputStreamReader(crunchifyInputStream);
-         BufferedReader br = new BufferedReader(crunchifyReader);
-         String line;
-         while ((line = br.readLine()) != null) {
-             s += line + "\n";
-         }
-         jsonObject = new JSONObject(s);
-         System.out.println(jsonObject);
-	} catch (Exception e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	}
-    return jsonObject.toString();
+  public String sayXMLHello(@QueryParam("url") String url) {
+	System.out.println(url);
+    return getProductList(url);
   }
 
   // This method is called if HTML is request
   @GET
   @Produces(MediaType.TEXT_HTML)
-  public String sayHtmlHello() {
+  public String sayHtmlHello(@QueryParam("url") String url) {
+	  System.out.println(url);
     return "<html> " + "<title>" + "Hello Jersey" + "</title>"
         + "<body><h1>" + "Hello REST API Call Started And it is ready for checkin HTML" + "</body></h1>" + "</html> ";
   }
+  
+  private String getProductList(String productUrl) {
+		String url = productUrl;
+		/*headers : {
+      	   'Fk-Affiliate-Id': 'mywishlis',
+            'Fk-Affiliate-Token': '22ba4f9fe89f4007ab51f45a777d4c7a',*/
+		StringBuffer response = new StringBuffer();
+		URL obj;
+		try {
+			obj = new URL(url);
+
+			
+			HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+
+			// optional default is GET
+			con.setRequestMethod("GET");
+
+			// add request header
+			//con.setRequestProperty("User-Agent", USER_AGENT);
+			con.setRequestProperty("Fk-Affiliate-Id", "mywishlis");
+			con.setRequestProperty("Fk-Affiliate-Token","22ba4f9fe89f4007ab51f45a777d4c7a");
+
+			int responseCode = con.getResponseCode();
+			System.out.println("\nSending 'GET' request to URL : " + url);
+			System.out.println("Response Code : " + responseCode);
+
+			BufferedReader in = new BufferedReader(new InputStreamReader(con
+					.getInputStream()));
+			String inputLine;
+			
+
+			while ((inputLine = in.readLine()) != null) {
+				response.append(inputLine);
+			}
+			in.close();
+
+			// print result
+			System.out.println(response.toString());
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return response.toString();
+
+	}
+
 
 }

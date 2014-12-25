@@ -84,13 +84,11 @@ MainPageView = Backbone.View.extend({
     	    $.get("http://localhost:8080/JavaRESTExample/rest/hello", function (data) {
          	//console.log(data);
             data = JSON.parse(data);
-            console.log(data.apiGroups.affiliate.apiListings);
             var catergoryArray = [];
             categorysArray = data.apiGroups.affiliate.apiListings;
          	$.each(categorysArray, function(i, item) {
                  //console.log(item.availableVariants['v0.1.0'].get);
                  //console.log(item.apiName);
-         		  console.log(i);
                  var res = item.apiName.replace("_", " ");
                  var tmpCategory = new ProductCategory({
 				   category_name : res,
@@ -182,7 +180,7 @@ MainPageView = Backbone.View.extend({
     },
 
     onCategoryClicked: function(url) {
-    	$.get("http://localhost:8080/JavaRESTExample/rest/hello1", function (data) {
+    	$.get("http://localhost:8080/JavaRESTExample/rest/hello1?url="+url, function (data) {
              console.log('xxxxxxxxxxxxxx');
              data  = $.parseJSON(data);
          	$.each(eval(data.productInfoList), function(i, item) {

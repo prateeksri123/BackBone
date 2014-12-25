@@ -34,14 +34,7 @@ public class Hello {
 
 	private final String USER_AGENT = "Mozilla/5.0";
 
-	// This method is called if XML is request
-	@GET
-	@Produces(MediaType.APPLICATION_JSON)
-	public String sayXMLHello() {
-				System.out.println("Get Product list JSON");
-				
-		return getProductList();
-	}
+	
 	
 	private String getProductList() {
 		String url = "https://affiliate-api.flipkart.net/affiliate/api/mywishlis.json";
@@ -87,7 +80,7 @@ public class Hello {
 	@Produces(MediaType.TEXT_HTML)
 	public String sayHtmlHello() {
 		return "<html> " + "<title>" + "Hello Jersey" + "</title>"
-				+ "<body><h1>" + "Hello Jersey" + "</body></h1>" + "</html> ";
+				+ "<body><h1>" + "Hello Jersey" + getProductList() + "</body></h1>" + "</html> ";
 	}
 
 }
