@@ -27,13 +27,13 @@ ProductCardView = Backbone.View.extend({
 	render : function(collection,displayingWishList) {
 		console.log(" test ");
 		$.get("src/js/com/wishList/productCard/template/ProductCardTemplate.html", function(template) {
-
+			console.log(template);
 			html = _.template(template, {
 				'collection' : collection,
 				'i' : 1,
 				'displayingWishList' : displayingWishList
 			});
-
+			 console.log(html);
 			$('#homePageContent').html(html);
 			$('#mainContentPage').height($(window).height() - $('#footer').height() - 60);
 			productCardView.registerCustomEvents();

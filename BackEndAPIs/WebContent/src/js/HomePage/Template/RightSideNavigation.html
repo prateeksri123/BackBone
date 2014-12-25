@@ -3,6 +3,9 @@
 		<li>
 			<label class="tree-toggler nav-header">Products Category</label>
 			<ul class="nav nav-list tree" id="productCategoryList">
+			<li>
+					<a id="category" data-url="model.url" target="_">test </a>
+				</li>
 				<% _.each(collection, function(model) { %>
 				<li>
 					<a id="category" data-url="<%= model.url %>" target="_"><%= model.category_name %> </a>

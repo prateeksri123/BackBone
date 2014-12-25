@@ -1,9 +1,17 @@
 package com.test.example;
 
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+
+import org.codehaus.jettison.json.JSONObject;
 
 // Plain old Java Object it does not extend as class or implements
 // an interface
@@ -23,14 +31,50 @@ public class Hello1 {
   @GET
   @Produces(MediaType.TEXT_PLAIN)
   public String sayPlainTextHello() {
-    return "Hello REST API Call Started And it is ready for checkin plain text maneesh";
+	  JSONObject jsonObject = new JSONObject();
+	  String s ="";
+	  System.out.println("PLAIN");
+	  try {
+		InputStream crunchifyInputStream = new FileInputStream(
+		"C:\\Important\\wishlist\\BackEndAPIs\\src\\com\\test\\example\\ProductList.json");
+		 InputStreamReader crunchifyReader = new InputStreamReader(crunchifyInputStream);
+         BufferedReader br = new BufferedReader(crunchifyReader);
+         String line;
+         while ((line = br.readLine()) != null) {
+             s += line + "\n";
+         }
+         jsonObject = new JSONObject(s);
+         System.out.println("PLain ->" + jsonObject);
+	} catch (Exception e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+    return jsonObject.toString();
   }
 
   // This method is called if XML is request
   @GET
-  @Produces(MediaType.TEXT_XML)
+  @Produces(MediaType.APPLICATION_JSON)
   public String sayXMLHello() {
-    return "<?xml version=\"1.0\"?>" + "<hello> Hello REST API Call Started And it is ready for checkin XML text" + "</hello>";
+	  JSONObject jsonObject = new JSONObject();
+	  String s="";
+	  System.out.println("XML");
+	  try {
+		InputStream crunchifyInputStream = new FileInputStream(
+		  "C:\\Important\\wishlist\\BackEndAPIs\\src\\com\\test\\example\\ProductList.json");
+		 InputStreamReader crunchifyReader = new InputStreamReader(crunchifyInputStream);
+         BufferedReader br = new BufferedReader(crunchifyReader);
+         String line;
+         while ((line = br.readLine()) != null) {
+             s += line + "\n";
+         }
+         jsonObject = new JSONObject(s);
+         System.out.println(jsonObject);
+	} catch (Exception e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+    return jsonObject.toString();
   }
 
   // This method is called if HTML is request

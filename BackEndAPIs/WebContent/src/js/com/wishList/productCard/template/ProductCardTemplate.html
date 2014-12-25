@@ -1,7 +1,7 @@
 <div class="container-fluid" style="height: 100%;overflow:auto;">
-
+    
 	<% _.each(collection, function(model) { %>
-	<% if (model.inStock) { %>
+	
 	<div  style="height: 270px; max-height: 270px;float: left; width: 280px">
 		<div id="thumbnail" class="thumbnail" style="height: 100%">
 			<img id="productImage" src="<%= model.imageUrls['100x100'] %>"  onerrorupdate="imgError(this)"/>
@@ -21,7 +21,7 @@
 			</div>
 		</div>
 	</div>
-	<% } %>
+	
 	<% }); %>
 
 	<script>

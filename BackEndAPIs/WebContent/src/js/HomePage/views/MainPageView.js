@@ -169,9 +169,10 @@ MainPageView = Backbone.View.extend({
     },
 
     onCategoryClicked: function(url) {
-    	$.get("http://localhost:8020/JavaRESTExample/rest/hello1", function (data) {
-
-         	/*$.each(eval(data.productInfoList), function(i, item) {
+    	/*$.get("http://localhost:8080/JavaRESTExample/rest/hello1", function (data) {
+             console.log('xxxxxxxxxxxxxx');
+             data  = $.parseJSON(data);
+         	$.each(eval(data.productInfoList), function(i, item) {
 
          		var tmpProduct = new Product({
 				   id : item.productBaseInfo.productIdentifier.productId,
@@ -181,15 +182,18 @@ MainPageView = Backbone.View.extend({
 				   productUrl : item.productBaseInfo.productAttributes.productUrl,
 				   inStock : item.productBaseInfo.productAttributes.inStock
 			      });
+         		if(productList == undefined) {
+         			productList = new ProductsCollection();
+         		}
 		         productList.create(tmpProduct);
                  //console.log(i);
-         		});
+         		});*/
          		var lsProduct = new Backbone.LocalStorage("store-product");
 			    productList = lsProduct.findAll();
-			    mainPage.loadProductList(productList,false);*/
-			   $('#homePageContent').html(data);
+			    mainPage.loadProductList(productList,false);
+			   //$('#homePageContent').html(data);
 
-       });
+       
     },
 
     loadProductList: function(tmpProductList,displayWishlist) {
