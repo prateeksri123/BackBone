@@ -186,6 +186,7 @@ MainPageView = Backbone.View.extend({
              console.log('xxxxxxxxxxxxxx');
              data  = $.parseJSON(data);
              productList = new ProductsCollection();
+             productList.comparator = 'sellingPrice';
          	$.each(eval(data.productInfoList), function(i, item) {
 
          		var tmpProduct = new Product({
@@ -194,14 +195,14 @@ MainPageView = Backbone.View.extend({
 				   productDescription : item.productBaseInfo.productAttributes.productDescription,
 				   imageUrls : item.productBaseInfo.productAttributes.imageUrls,
 				   productUrl : item.productBaseInfo.productAttributes.productUrl,
-				   inStock : item.productBaseInfo.productAttributes.inStock
+				   inStock : item.productBaseInfo.productAttributes.inStock,
+				   sellingPrice : item.productBaseInfo.productAttributes.sellingPrice.amount
 			      });
-         		if(productList == undefined) {
-         			productList = new ProductsCollection();
-         		}
+
 		         productList.add(tmpProduct);
                  //console.log(i);
          		});
+         	    productList.sort();
          		mainPage.loadProductList(productList,false);
         });
          		//var lsProduct = new Backbone.LocalStorage("store-product");

@@ -1,12 +1,13 @@
 <div class="container-fluid" style="height: 100%;overflow:auto;">
-    
+
 	<% _.each(collection, function(model) { %>
-	
+    <% if(model.inStock) { %>
 	<div  style="height: 270px; max-height: 270px;float: left; width: 280px">
 		<div id="thumbnail" class="thumbnail" style="height: 100%">
 			<img id="productImage" src="<%= model.imageUrls['100x100'] %>"  onerrorupdate="imgError(this)"/>
 			<div class="caption pull-down">
 				<h3> <%= model.productTitle.trim() %></h3>
+				<h1> <%= model.sellingPrice %></h1>
 				<p>
 					<a href="<%= model.productUrl %>" class="btn btn-primary" role="button" target="_">Buy Now!</a>
 					<% if (!displayingWishList) { %>
@@ -21,7 +22,7 @@
 			</div>
 		</div>
 	</div>
-	
+    <% } %>
 	<% }); %>
 
 	<script>

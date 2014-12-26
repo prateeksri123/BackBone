@@ -7,7 +7,7 @@ Product = Backbone.Model.extend({
 			productDescription : "",
 			imageUrls : "",
 			maximumRetailPrice : "",
-			sellingPrice : "",
+			sellingPrice : 0,
 			productUrl : "",
 			productBrand : "",
 			inStock : false,
