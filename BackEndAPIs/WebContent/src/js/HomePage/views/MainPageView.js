@@ -186,7 +186,10 @@ MainPageView = Backbone.View.extend({
              console.log('xxxxxxxxxxxxxx');
              data  = $.parseJSON(data);
              productList = new ProductsCollection();
-             productList.comparator = 'sellingPrice';
+
+             productList.comparator =function(productList) {
+            	  return -productList.get('sellingPrice'); // Note the minus!
+             }; ;
          	$.each(eval(data.productInfoList), function(i, item) {
 
          		var tmpProduct = new Product({
