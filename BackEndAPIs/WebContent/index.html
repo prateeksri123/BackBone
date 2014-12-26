@@ -31,6 +31,7 @@
 				<div class="panel-heading">
 					Login Panel
 				</div>
+
 				<div id="loginPanel" class="panel-body" >
 					UserName :
 					<input type="text" id="txtIdClient" placeholder="USERNAME">
@@ -41,7 +42,7 @@
 					<br />
 					<br/>
 					<a id="cmdAddClient1" href="#registraionPage" role="button" class="btn btn-warning" data-toggle="modal">Register</a>
-					<button id="login" class="btn btn-primary">
+					<button id="login" href="#loadingBar" class="btn btn-primary" data-toggle="modal">
 						Login
 					</button>
 				</div>
@@ -52,6 +53,9 @@
 		<!--<script id="registrationTemplate" type="text/template"> -->
 			</div>
 
+        <div class="modal fade" id="loadingBar">
+        	<div class="loader" >Loading...</div>
+        </div>
 		<div class="modal fade" id="registraionPage">
 			<div class="modal-dialog">
 				<div class="modal-content">

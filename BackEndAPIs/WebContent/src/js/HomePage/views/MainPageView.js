@@ -71,7 +71,7 @@ MainPageView = Backbone.View.extend({
 	         $('#rightHandSideMenu').height($(window).height() - $('#footer').height() - 60);
 	         $('#homePageContent').height($(window).height() - $('#footer').height() - 60);
 	         mainPage.registerCustomEvents();
-
+	         $('#loadingBar').modal('hide');
 	     });
     },
 
@@ -181,6 +181,7 @@ MainPageView = Backbone.View.extend({
 
     onCategoryClicked: function(url) {
     	url = url.replace("&", "~~");
+    	 $('#loadingBar').modal('show');
     	$.get("http://localhost:8020/JavaRESTExample/rest/hello1?url="+url, function (data) {
              console.log('xxxxxxxxxxxxxx');
              data  = $.parseJSON(data);
