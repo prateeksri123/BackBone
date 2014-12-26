@@ -1,19 +1,19 @@
 (function($) {
-	
+
 MainPageView = Backbone.View.extend({
 
     tagname : 'div',
-    
+
 
     events : {
         "click a#category" : "handleRouting",
         "click a#addWishList" : "addToWishList",
         "click a#removeWishList" : "removeFromToWishList"
     },
-    
+
     initialize: function () {
     this.productList = new ProductsCollection();
-    
+
   },
 
     handleRouting : function(e) {
@@ -81,7 +81,7 @@ MainPageView = Backbone.View.extend({
 
 			//productCategoryList = ls.findAll();
 			//mainPage.loadRightSideMenuBar();
-    	    $.get("http://localhost:8080/JavaRESTExample/rest/hello", function (data) {
+    	    $.get("http://localhost:8020/JavaRESTExample/rest/hello", function (data) {
          	//console.log(data);
             data = JSON.parse(data);
             var catergoryArray = [];
@@ -99,7 +99,7 @@ MainPageView = Backbone.View.extend({
                 	 productCategoryList = new ProductCategorysCollection();
           		}
                  productCategoryList.add(tmpCategory);
-		          
+
                });
                mainPage.loadRightSideMenuBar();
 	         });
@@ -180,9 +180,11 @@ MainPageView = Backbone.View.extend({
     },
 
     onCategoryClicked: function(url) {
-    	$.get("http://localhost:8080/JavaRESTExample/rest/hello1?url="+url, function (data) {
+    	url = url.replace("&", "~~");
+    	$.get("http://localhost:8020/JavaRESTExample/rest/hello1?url="+url, function (data) {
              console.log('xxxxxxxxxxxxxx');
              data  = $.parseJSON(data);
+             productList = new ProductsCollection();
          	$.each(eval(data.productInfoList), function(i, item) {
 
          		var tmpProduct = new Product({
@@ -203,10 +205,10 @@ MainPageView = Backbone.View.extend({
         });
          		//var lsProduct = new Backbone.LocalStorage("store-product");
 			    //productList = lsProduct.findAll();
-			    
+
 			   //$('#homePageContent').html(data);
 
-       
+
     },
 
     loadProductList: function(tmpProductList,displayWishlist) {
@@ -220,4 +222,4 @@ var productCategoryList = new ProductCategorysCollection;
 var wishListCollection = new WishList();
 var productList = new ProductsCollection();
 var productInfo = new Product();
-})(jQuery); 
+})(jQuery);

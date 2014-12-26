@@ -59,7 +59,7 @@ public class Hello1 {
   }
   private final String USER_AGENT = "Mozilla/5.0";
   private String getProductList(String productUrl) {
-		String url = productUrl;
+		String url = productUrl.replaceAll("~~", "&");
 		/*headers : {
       	   'Fk-Affiliate-Id': 'mywishlis',
             'Fk-Affiliate-Token': '22ba4f9fe89f4007ab51f45a777d4c7a',*/
@@ -68,7 +68,7 @@ public class Hello1 {
 		try {
 			obj = new URL(url);
 
-			
+
 			HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 
 			// optional default is GET
@@ -85,7 +85,7 @@ public class Hello1 {
 			BufferedReader in = new BufferedReader(new InputStreamReader(con
 					.getInputStream()));
 			String inputLine;
-			
+
 
 			while ((inputLine = in.readLine()) != null) {
 				response.append(inputLine);
