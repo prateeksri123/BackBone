@@ -9,6 +9,8 @@ import java.sql.Statement;
 import java.util.Date;*/
 import java.sql.*;
 
+import com.wishlist.model.User;
+
 public class DataBaseConnection {
   private Connection connect = null;
   private Statement statement = null;
@@ -30,19 +32,21 @@ public class DataBaseConnection {
 
   }
   
-  public void getUserDetails() throws Exception{
+  public User getUserDetails(String userName,String passWord) throws Exception{
 	  try{
 	      // statements allow to issue SQL queries to the database
 	      statement = connect.createStatement();
 	      // resultSet gets the result of the SQL query
 	      resultSet = statement
-	          .executeQuery("select * from WishList.users where UserName='pra' and Password='pra'");
-	      writeResultSet(resultSet);	      
+	          .executeQuery("select * from WishList.users where UserName='" + userName + "' and Password='" + passWord + "'");
+	      return writeUserData(resultSet);	      
 	    } catch (Exception e) {
 	      throw e;
 	    } finally {
 	      close();
 	    }
+	    
+	    
 	  
   }
 
@@ -99,6 +103,25 @@ public class DataBaseConnection {
       System.out.println("Column " +i  + " "+ resultSet.getMetaData().getColumnName(i));
     }
   }
+  
+  private User writeUserData(ResultSet resultSet) throws SQLException {
+	    // resultSet is initialised before the first data set
+	  User user = new User(); 
+	    while (resultSet.next()) {
+	      // it is possible to get the columns via name
+	      // also possible to get the columns via the column number
+	      // which starts at 1
+	      // e.g., resultSet.getSTring(2);
+	      user.setUserName(resultSet.getString("UserName"));
+	      user.setUserId(resultSet.getInt("userId"));
+	      user.setFirstName(resultSet.getString("FirstName"));
+	      user.setLastName(resultSet.getString("LastName"));
+	      user.setEmail(resultSet.getString("email"));
+	      System.out.println("User: " + user.toString());
+	     
+	    }
+	    return user;
+	  }
 
   private void writeResultSet(ResultSet resultSet) throws SQLException {
     // resultSet is initialised before the first data set
@@ -107,11 +130,11 @@ public class DataBaseConnection {
       // also possible to get the columns via the column number
       // which starts at 1
       // e.g., resultSet.getSTring(2);
-      String user = resultSet.getString("myuser");
-      String website = resultSet.getString("webpage");
-      String summary = resultSet.getString("summary");
-      Date date = resultSet.getDate("datum");
-      String comment = resultSet.getString("comments");
+      String user = resultSet.getString("UserName");
+      String website = resultSet.getString("userId");
+      String summary = resultSet.getString("FirstName");
+      String date = resultSet.getString("LastName");
+      String comment = resultSet.getString("email");
       System.out.println("User: " + user);
       System.out.println("Website: " + website);
       System.out.println("Summary: " + summary);

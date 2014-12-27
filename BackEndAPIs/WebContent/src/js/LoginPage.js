@@ -40,46 +40,101 @@
 		},
 		login : function() {
 			console.log("Login Button clicked");
+			
+			/*$.get("http://localhost:8080/JavaRESTExample/rest/user", function (data) {
+				console.log("Login Response" +data);
+				if (data == "true") {
+					window.loggedInUser = result;
+					//$("#pageDiv").html("<font size=4 color=blue>Login sucessfull, Welcome " + window.loggedInUser.firstName + " " + window.loggedInUser.lastName + "!!</font>");
+					console.log(window.loggedInUser.firstName + " " + window.loggedInUser.lastName);
+					if (window.loggedInUser.firstName == undefined) {
+						window.loggedInUser.firstName = "Guest";
+					}
+
+					if (window.loggedInUser.lastName == undefined) {
+						window.loggedInUser.lastName = "User";
+					}
+					var homePage = new MainPageView({
+						el : $("#pageDiv")
+					});
+					homePage.render(window.loggedInUser);
+
+				} else {
+					$("#listeClient").html("<font size=5 color=green>Login Failed, Retry</font>");
+				}
+			});*/
+			
 			var tmplogin = new UserDetail({
 				name : $("#txtIdClient").val(),
 				pwd : $("#txtNomClient").val()
 			});
-			$.get("http://localhost:8080/JavaRESTExample/rest/login", function (data) {
-				console.log("Login Response" +data);
-			});
-			console.log(tmplogin.get('name'));
-			var ls = new Backbone.LocalStorage("store-name");
-			
-			result = ls.findByNameAndPassword(tmplogin);
-			
-			if (result != undefined) {
-				window.loggedInUser = result;
-				//$("#pageDiv").html("<font size=4 color=blue>Login sucessfull, Welcome " + window.loggedInUser.firstName + " " + window.loggedInUser.lastName + "!!</font>");
-				console.log(window.loggedInUser.firstName + " " + window.loggedInUser.lastName);
-				if (window.loggedInUser.firstName == undefined) {
-					window.loggedInUser.firstName = "Guest";
-				}
+			tmplogin.fetch({
+				success : function (collection, response) {
+				console.log("Login Response" +response);
+				if (response != undefined) {
+					window.loggedInUser = response;
+					//$("#pageDiv").html("<font size=4 color=blue>Login sucessfull, Welcome " + window.loggedInUser.firstName + " " + window.loggedInUser.lastName + "!!</font>");
+					console.log(window.loggedInUser.firstName + " " + window.loggedInUser.lastName);
+					if (window.loggedInUser.firstName == undefined) {
+						window.loggedInUser.firstName = "Guest";
+					}
 
-				if (window.loggedInUser.lastName == undefined) {
-					window.loggedInUser.lastName = "User";
-				}
-				var homePage = new MainPageView({
-					el : $("#pageDiv")
-				});
-				homePage.render(window.loggedInUser);
+					if (window.loggedInUser.lastName == undefined) {
+						window.loggedInUser.lastName = "User";
+					}
+					var homePage = new MainPageView({
+						el : $("#pageDiv")
+					});
+					homePage.render(window.loggedInUser);
 
-			} else {
+				} else {
+					$("#listeClient").html("<font size=5 color=green>Login Failed, Retry</font>");
+					 $('#loadingBar').modal('hide');
+				}
+			},
+			error : function (collection, response) {
+				console.log("login failed");
 				$("#listeClient").html("<font size=5 color=green>Login Failed, Retry</font>");
+				 $('#loadingBar').modal('hide');
 			}
 
+			});
+			console.log(tmplogin.get('name'));
+			//var ls = new Backbone.LocalStorage("store-name");
+			
+			//result = ls.findByNameAndPassword(tmplogin);
+			
+
+    
             
 			 listeClients.fetch({
-				type : 'POST',
-				model : tmplogin,
-				error : function(sessionToken, response) {
-					console.log('login failed');
-					alert('No user exist, Please register and then login');
-					$("#listeClient").html("<font size=5 color=green>Failed Logged in, Retry</font>");
+				success : function (collection, response) {
+					console.log("Login Response" +response);
+					if (response != undefined) {
+						window.loggedInUser = response;
+						//$("#pageDiv").html("<font size=4 color=blue>Login sucessfull, Welcome " + window.loggedInUser.firstName + " " + window.loggedInUser.lastName + "!!</font>");
+						console.log(window.loggedInUser.firstName + " " + window.loggedInUser.lastName);
+						if (window.loggedInUser.firstName == undefined) {
+							window.loggedInUser.firstName = "Guest";
+						}
+
+						if (window.loggedInUser.lastName == undefined) {
+							window.loggedInUser.lastName = "User";
+						}
+						var homePage = new MainPageView({
+							el : $("#pageDiv")
+						});
+						homePage.render(window.loggedInUser);
+
+					} else {
+						$("#listeClient").html("<font size=5 color=green>Login Failed, Retry</font>");
+						 $('#loadingBar').modal('hide');
+					}
+				},
+				error : function (collection, response) {
+					console.log("login failed");
+					$("#listeClient").html("<font size=5 color=green>Login Failed, Retry</font>");
+					 $('#loadingBar').modal('hide');
 				}
 			});
 		

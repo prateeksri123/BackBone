@@ -46,4 +46,10 @@ public class User {
 	public String getUserName() {
 		return userName;
 	}
+	
+	public String toString() {
+		return    "{'UserName':'" + getUserName()+ "', 'FirstName':'" + getFirstName() + "'}"; 
+	}
+	
+	
 }

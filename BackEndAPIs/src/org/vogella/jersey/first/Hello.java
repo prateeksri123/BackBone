@@ -41,14 +41,7 @@ public class Hello {
 	private String getProductList() {
 		String url = "https://affiliate-api.flipkart.net/affiliate/api/mywishlis.json";
 		StringBuffer response = new StringBuffer();
-		DataBaseConnection dao = new DataBaseConnection();
 		
-	    try {
-			dao.readDataBase();
-		} catch (Exception e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
 		URL obj;
 		try {
 			obj = new URL(url);
