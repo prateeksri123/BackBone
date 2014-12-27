@@ -42,9 +42,11 @@
 			console.log("Login Button clicked");
 			var tmplogin = new UserDetail({
 				name : $("#txtIdClient").val(),
-				pwd : $("#txtNomClient").val(),
+				pwd : $("#txtNomClient").val()
 			});
-			
+			$.get("http://localhost:8080/JavaRESTExample/rest/login", function (data) {
+				console.log("Login Response" +data);
+			});
 			console.log(tmplogin.get('name'));
 			var ls = new Backbone.LocalStorage("store-name");
 			

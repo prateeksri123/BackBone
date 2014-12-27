@@ -14,17 +14,40 @@ public class DataBaseConnection {
   private Statement statement = null;
   private PreparedStatement preparedStatement = null;
   private ResultSet resultSet = null;
+  
+  public DataBaseConnection() {
+	  try {
+	      // this will load the MySQL driver, each DB has its own driver
+	    	//Driver a;
+	      Class.forName("com.mysql.jdbc.Driver");
+	      // setup the connection with the DB.
+	      connect = DriverManager
+	          .getConnection("jdbc:mysql://localhost/WishList?"
+	              + "user=root");
+	  }catch (Exception e) {
+		// TODO: handle exception
+	}
+
+  }
+  
+  public void getUserDetails() throws Exception{
+	  try{
+	      // statements allow to issue SQL queries to the database
+	      statement = connect.createStatement();
+	      // resultSet gets the result of the SQL query
+	      resultSet = statement
+	          .executeQuery("select * from WishList.users where UserName='pra' and Password='pra'");
+	      writeResultSet(resultSet);	      
+	    } catch (Exception e) {
+	      throw e;
+	    } finally {
+	      close();
+	    }
+	  
+  }
 
   public void readDataBase() throws Exception {
-    try {
-      // this will load the MySQL driver, each DB has its own driver
-    	//Driver a;
-      Class.forName("com.mysql.jdbc.Driver");
-      // setup the connection with the DB.
-      connect = DriverManager
-          .getConnection("jdbc:mysql://localhost/WishList?"
-              + "user=root");
-
+    try{
       // statements allow to issue SQL queries to the database
       statement = connect.createStatement();
       // resultSet gets the result of the SQL query
