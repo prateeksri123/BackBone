@@ -3,13 +3,15 @@ package org.vogella.jersey.first;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
+import java.sql.Driver;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+
+import com.test.database.DataBaseConnection;
 
 // Plain old Java Object it does not extend as class or implements
 // an interface
@@ -39,6 +41,14 @@ public class Hello {
 	private String getProductList() {
 		String url = "https://affiliate-api.flipkart.net/affiliate/api/mywishlis.json";
 		StringBuffer response = new StringBuffer();
+		DataBaseConnection dao = new DataBaseConnection();
+		
+	    try {
+			dao.readDataBase();
+		} catch (Exception e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		URL obj;
 		try {
 			obj = new URL(url);
@@ -79,8 +89,7 @@ public class Hello {
 	@GET
 	@Produces(MediaType.TEXT_HTML)
 	public String sayHtmlHello() {
-		return "<html> " + "<title>" + "Hello Jersey" + "</title>"
-				+ "<body><h1>" + "Hello Jersey" + getProductList() + "</body></h1>" + "</html> ";
+		return getProductList();
 	}
 
 }

@@ -9,11 +9,23 @@
       <param-value>com.vogella.jersey.first</param-value>
     </init-param>
     <init-param>
+      <param-name>com.mysql.jdbc.Driver</param-name>
+      <param-value>com.mysql.jdbc.Driver</param-value>
+    </init-param>
+    <init-param>
 	        <param-name>com.sun.jersey.api.json.POJOMappingFeature</param-name>
 	        <param-value>true</param-value>
     </init-param>
     <load-on-startup>1</load-on-startup>
   </servlet>
+  <dependencies>
+		<!-- MySQL Driver -->
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector</artifactId>
+			
+		</dependency>
+		</dependencies>
   <servlet-mapping>
     <servlet-name>Jersey REST Service</servlet-name>
     <url-pattern>/rest/*</url-pattern>
