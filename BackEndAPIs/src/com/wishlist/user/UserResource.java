@@ -5,6 +5,7 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 
 import com.test.database.DataBaseConnection;
@@ -15,11 +16,13 @@ public class UserResource {
 	
 	private String userString;
 	
-	@GET
 	@Produces(MediaType.TEXT_PLAIN)
-	public String getUser() {
-		System.out.println("check user Get method 2");     
-		return getUserDetails("pra","pra").toString();
+	@GET
+	public String getUser(@QueryParam("userName") String userName,
+			              @QueryParam("pwd") String pwd) {
+		System.out.println("check user Get method 2");
+		User user = getUserDetails(userName, pwd);
+		return user != null ? user.toString() : "false";
 	}
 	
 	@POST

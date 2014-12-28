@@ -48,7 +48,7 @@ public class User {
 	}
 	
 	public String toString() {
-		return    "{'UserName':'" + getUserName()+ "', 'FirstName':'" + getFirstName() + "'}"; 
+		return    "{\"UserName\":\"" + getUserName()+ "\", \"FirstName\":\"" + getFirstName() + "\"}"; 
 	}
 	
 	

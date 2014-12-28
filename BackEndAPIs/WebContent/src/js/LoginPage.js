@@ -41,10 +41,17 @@
 		login : function() {
 			console.log("Login Button clicked");
 			
-			/*$.get("http://localhost:8080/JavaRESTExample/rest/user", function (data) {
+			var userName = $("#txtIdClient").val();
+			var pwd  = $("#txtNomClient").val();
+			$.get("http://localhost:8080/JavaRESTExample/rest/user?userName=" + userName + "&pwd=" + pwd, function (data) {
 				console.log("Login Response" +data);
-				if (data == "true") {
-					window.loggedInUser = result;
+				if (data != "false") {
+					var user = jQuery.parseJSON(data);
+					var tmplogin = new UserDetail({
+				     name : user.UserName,
+				     firstName : user.FirstName
+			          });
+					window.loggedInUser = tmplogin;
 					//$("#pageDiv").html("<font size=4 color=blue>Login sucessfull, Welcome " + window.loggedInUser.firstName + " " + window.loggedInUser.lastName + "!!</font>");
 					console.log(window.loggedInUser.firstName + " " + window.loggedInUser.lastName);
 					if (window.loggedInUser.firstName == undefined) {
@@ -61,14 +68,12 @@
 
 				} else {
 					$("#listeClient").html("<font size=5 color=green>Login Failed, Retry</font>");
+					 $('#loadingBar').modal('hide');
 				}
-			});*/
-			
-			var tmplogin = new UserDetail({
-				name : $("#txtIdClient").val(),
-				pwd : $("#txtNomClient").val()
 			});
-			tmplogin.fetch({
+			
+			
+			/*tmplogin.fetch({
 				success : function (collection, response) {
 				console.log("Login Response" +response);
 				if (response != undefined) {
@@ -98,7 +103,7 @@
 				 $('#loadingBar').modal('hide');
 			}
 
-			});
+			},"json");
 			console.log(tmplogin.get('name'));
 			//var ls = new Backbone.LocalStorage("store-name");
 			
@@ -136,7 +141,7 @@
 					$("#listeClient").html("<font size=5 color=green>Login Failed, Retry</font>");
 					 $('#loadingBar').modal('hide');
 				}
-			});
+			});*/
 		
 		},
 		addClientToList : function(model) {

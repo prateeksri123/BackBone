@@ -106,12 +106,13 @@ public class DataBaseConnection {
   
   private User writeUserData(ResultSet resultSet) throws SQLException {
 	    // resultSet is initialised before the first data set
-	  User user = new User(); 
+	  User user = null; 
 	    while (resultSet.next()) {
 	      // it is possible to get the columns via name
 	      // also possible to get the columns via the column number
 	      // which starts at 1
 	      // e.g., resultSet.getSTring(2);
+	    	user = new User();
 	      user.setUserName(resultSet.getString("UserName"));
 	      user.setUserId(resultSet.getInt("userId"));
 	      user.setFirstName(resultSet.getString("FirstName"));
