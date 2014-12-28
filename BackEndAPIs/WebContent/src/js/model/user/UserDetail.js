@@ -5,8 +5,8 @@
 UserDetail = Backbone.Model.extend({
 	    url : "http://localhost:8080/JavaRESTExample/rest/user",
 		defaults : {
-			name : null,
-			pwd : null,
+	        userName : null,
+	        password : null,
 			firstName : "",
 			lastName : "",
 			email : ""

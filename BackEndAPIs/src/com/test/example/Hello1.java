@@ -41,22 +41,7 @@ public class Hello1 {
     return getProductList(url);
   }
 
-  // This method is called if XML is request
-  @GET
-  @Produces(MediaType.APPLICATION_JSON)
-  public String sayXMLHello(@QueryParam("url") String url) {
-	System.out.println(url);
-    return getProductList(url);
-  }
-
-  // This method is called if HTML is request
-  @GET
-  @Produces(MediaType.TEXT_HTML)
-  public String sayHtmlHello(@QueryParam("url") String url) {
-	  System.out.println(url);
-    return "<html> " + "<title>" + "Hello Jersey" + "</title>"
-        + "<body><h1>" + "Hello REST API Call Started And it is ready for checkin HTML" + "</body></h1>" + "</html> ";
-  }
+  
   private final String USER_AGENT = "Mozilla/5.0";
   private String getProductList(String productUrl) {
 		String url = productUrl.replaceAll("~~", "&");

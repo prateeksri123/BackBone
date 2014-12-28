@@ -44,10 +44,47 @@ public class DataBaseConnection {
 	      throw e;
 	    } finally {
 	      close();
-	    }
-	    
-	    
+	    }	  
+  }
+  
+  public User updateUser(User user) throws Exception {
+	  preparedStatement = connect
+	  /* VARCHAR(255) NOT NULL,
+	  `Password` VARCHAR(45) NOT NULL,
+	  `userId` INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
+	  `FirstName` VARCHAR(255) NOT NULL,
+	  `LastName` VARCHAR(255) NOT NULL,
+	  `email` VARCHAR(255) NOT NULL,*/
+      .prepareStatement("update WishList.users set FirstName=?,LastName=?,email=? where userId=?");
+
+         
+         preparedStatement.setString(1,user.getFirstName());
+         preparedStatement.setString(2,user.getLastName());
+         preparedStatement.setString(3,user.getEmail());
+         preparedStatement.setInt(4,user.getUserId());
+         preparedStatement.executeUpdate();
+         
+         return user;
+  }
+  
+  public User createUser(User user) throws Exception {
+	  preparedStatement = connect
+	  /* VARCHAR(255) NOT NULL,
+	  `Password` VARCHAR(45) NOT NULL,
+	  `userId` INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
+	  `FirstName` VARCHAR(255) NOT NULL,
+	  `LastName` VARCHAR(255) NOT NULL,
+	  `email` VARCHAR(255) NOT NULL,*/
+      .prepareStatement("insert into  WishList.users(UserName,Password,FirstName,LastName,email) values (?, ?, ? , ?, ?)");
+
+         preparedStatement.setString(1, user.getUserName());
+         preparedStatement.setString(2, user.getPassword());
+         preparedStatement.setString(3,user.getFirstName());
+         preparedStatement.setString(4,user.getLastName());
+         preparedStatement.setString(5,user.getEmail());
+         preparedStatement.executeUpdate();
 	  
+	  return user;
   }
 
   public void readDataBase() throws Exception {

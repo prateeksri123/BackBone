@@ -23,18 +23,29 @@
 
 		cmdAddClient_Click : function() {
 			console.log("Register Clicked");
-            
-			var tmpClient = new UserDetail({
-				name : $("#txtUserName").val(),
-				pwd : $("#txtPassword").val(),
+            var tmpUser = new UserDetail();
+            tmpUser.set({
+            	userName : $("#txtUserName").val(),
+            	password : $("#txtPassword").val(),
 				firstName : $("#txtFirstName").val(),
 			    lastName : $("#txtLastName").val(),
 			    email : $("#txtEmail").val()
 			});
-			if(tmpClient.get('name') != "" && tmpClient.get('pwd') != "" ){
-				listeClients.create(tmpClient);
-                 $("#listeClient").html("<font size=5 color=green>User " +  tmpClient.get("name") + " is Successfully Registered, Now you can Login</font>");
+			
+			if (tmpUser.isNew()) {
+				var self = this;
+				listeClients.create(tmpUser, {
+					success: function() {
+						app.navigate('wines/'+self.model.id, false);
+					}
+				});
+			} else {
+				tmpUser.save();
 			}
+			//if(tmpClient.get('name') != "" && tmpClient.get('pwd') != "" ){
+				//listeClients.create(tmpClient);
+                // $("#listeClient").html("<font size=5 color=green>User " +  tmpClient.get("name") + " is Successfully Registered, Now you can Login</font>");
+			//}
 			
            
 		},
@@ -45,13 +56,10 @@
 			var pwd  = $("#txtNomClient").val();
 			$.get("http://localhost:8080/JavaRESTExample/rest/user?userName=" + userName + "&pwd=" + pwd, function (data) {
 				console.log("Login Response" +data);
-				if (data != "false") {
-					var user = jQuery.parseJSON(data);
-					var tmplogin = new UserDetail({
-				     name : user.UserName,
-				     firstName : user.FirstName
-			          });
-					window.loggedInUser = tmplogin;
+				if (data != undefined) {
+					
+					var tmplogin = new UserDetail();
+					window.loggedInUser = data;
 					//$("#pageDiv").html("<font size=4 color=blue>Login sucessfull, Welcome " + window.loggedInUser.firstName + " " + window.loggedInUser.lastName + "!!</font>");
 					console.log(window.loggedInUser.firstName + " " + window.loggedInUser.lastName);
 					if (window.loggedInUser.firstName == undefined) {
@@ -151,8 +159,16 @@
 			
 		},
 		updateUser: function(updatedUser) {
-			var ls = new Backbone.LocalStorage("store-name");
-			ls.update(updatedUser);
+			var tmpUserUpdation = new UserDetail();
+			tmpUserUpdation.set({
+            	userName : updatedUser.userName,
+            	password : updatedUser.password,
+				firstName :updatedUser.firstName,
+			    lastName : updatedUser.lastName,
+			    email : updatedUser.email,
+			    userId : updatedUser.userId
+			});
+			tmpUserUpdation.save();
 		}
 	});
 	var clientView = new ClientView({

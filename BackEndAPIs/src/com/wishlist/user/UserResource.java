@@ -1,5 +1,6 @@
 package com.wishlist.user;
 
+import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -16,28 +17,31 @@ public class UserResource {
 	
 	private String userString;
 	
-	@Produces(MediaType.TEXT_PLAIN)
+	@Produces(MediaType.APPLICATION_JSON)
 	@GET
-	public String getUser(@QueryParam("userName") String userName,
+	public User getUser(@QueryParam("userName") String userName,
 			              @QueryParam("pwd") String pwd) {
 		System.out.println("check user Get method 2");
 		User user = getUserDetails(userName, pwd);
-		return user != null ? user.toString() : "false";
+		return user;
 	}
 	
 	@POST
-	@Produces(MediaType.TEXT_PLAIN)
-	public String authenticateUser(String userString, String password) {
-		this.userString = userString;
-		System.out.println("check user post method 3");
+	@Consumes({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
+	public User create(User user) {
+		//this.userString = userString;
+		System.out.println("register user post method 3");
+		
+			manageUser(user);
+		
         
-		return getUserDetails("pra1","pra").toString();
+		return user;
 	}
 	
 	private User getUserDetails(String userName, String passWord){
 		User user = new User();
        DataBaseConnection dao = new DataBaseConnection();
-		
 	    try {
 			user = dao.getUserDetails(userName,passWord);
 		} catch (Exception e1) {
@@ -45,6 +49,22 @@ public class UserResource {
 			e1.printStackTrace();
 		}
 		return user;
+	}
+	
+	private User manageUser(User user) {
+		 DataBaseConnection dao = new DataBaseConnection();
+		    try {
+		    	if(user.getUserId() == 0) {
+		    		user = dao.createUser(user);
+		    	} else {
+		    		user = dao.updateUser(user);
+		    	}
+				
+			} catch (Exception e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			return user;
 	}
 
 }
