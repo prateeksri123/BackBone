@@ -81,7 +81,7 @@ MainPageView = Backbone.View.extend({
 
 			//productCategoryList = ls.findAll();
 			//mainPage.loadRightSideMenuBar();
-    	    $.get("http://localhost:8080/JavaRESTExample/rest/hello", function (data) {
+    	    $.get("./rest/hello", function (data) {
          	//console.log(data);
             data = JSON.parse(data);
             var catergoryArray = [];
@@ -182,7 +182,7 @@ MainPageView = Backbone.View.extend({
     onCategoryClicked: function(url) {
     	url = url.replace("&", "~~");
     	 $('#loadingBar').modal('show');
-    	$.get("http://localhost:8080/JavaRESTExample/rest/hello1?url="+url, function (data) {
+    	$.get("./rest/hello1?url="+url, function (data) {
              console.log('xxxxxxxxxxxxxx');
              data  = $.parseJSON(data);
              productList = new ProductsCollection();

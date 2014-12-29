@@ -1,14 +1,26 @@
 package com.wishlist.model;
 
+import javax.ws.rs.QueryParam;
+
 public class User {
-	
+
+	@QueryParam("userName")
 	private String userName;
+
+	@QueryParam("password")
 	private String password;
+
+	@QueryParam("firstName")
 	private String firstName;
+
+	@QueryParam("lastName")
 	private String lastName;
+
+	@QueryParam("userId")
 	private int userId;
+	@QueryParam("email")
 	private String email;
-	
+
 	public String getPassword() {
 		return password;
 	}
@@ -39,17 +51,17 @@ public class User {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	
+
 	public void setUserName(String userName) {
 		this.userName = userName;
 	}
 	public String getUserName() {
 		return userName;
 	}
-	
+
 	public String toString() {
-		return    "{\"UserName\":\"" + getUserName()+ "\", \"FirstName\":\"" + getFirstName() + "\"}"; 
+		return    "{\"UserName\":\"" + getUserName()+ "\", \"FirstName\":\"" + getFirstName() + "\"}";
 	}
-	
-	
+
+
 }

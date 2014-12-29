@@ -36,12 +36,12 @@ public class Hello {
 
 	private final String USER_AGENT = "Mozilla/5.0";
 
-	
-	
+
+
 	private String getProductList() {
 		String url = "https://affiliate-api.flipkart.net/affiliate/api/mywishlis.json";
 		StringBuffer response = new StringBuffer();
-		
+
 		URL obj;
 		try {
 			obj = new URL(url);
@@ -61,7 +61,7 @@ public class Hello {
 			BufferedReader in = new BufferedReader(new InputStreamReader(con
 					.getInputStream()));
 			String inputLine;
-			
+
 
 			while ((inputLine = in.readLine()) != null) {
 				response.append(inputLine);
@@ -84,5 +84,13 @@ public class Hello {
 	public String sayHtmlHello() {
 		return getProductList();
 	}
+
+	@GET
+	  @Produces(MediaType.TEXT_XML)
+	  public String sayXMLHello() {
+	    return "<?xml version=\"1.0\"?>" + "<hello> Hello Jersey" + "</hello>";
+	  }
+
+
 
 }

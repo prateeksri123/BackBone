@@ -3,7 +3,7 @@
  */
 
 UserDetail = Backbone.Model.extend({
-	    url : "http://localhost:8080/JavaRESTExample/rest/user",
+	    url : "./rest/user",
 		defaults : {
 	        userName : null,
 	        password : null,
@@ -18,7 +18,7 @@ UserDetail = Backbone.Model.extend({
 UserDetailsCollection = Backbone.Collection.extend({
 		model : UserDetail,
 		//localStorage : new Backbone.LocalStorage("store-name"),
-		url : "http://localhost:8080/JavaRESTExample/rest/user",
+		url : "./rest/user",
 		initialize : function() {
 			// Initialized Model Collection
 		}

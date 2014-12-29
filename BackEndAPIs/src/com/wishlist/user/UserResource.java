@@ -9,36 +9,36 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 
+import com.sun.jersey.api.core.InjectParam;
 import com.test.database.DataBaseConnection;
 import com.wishlist.model.User;
 
 @Path("/user")
 public class UserResource {
-	
+
 	private String userString;
-	
-	@Produces(MediaType.APPLICATION_JSON)
+
 	@GET
-	public User getUser(@QueryParam("userName") String userName,
-			              @QueryParam("pwd") String pwd) {
-		System.out.println("check user Get method 2");
-		User user = getUserDetails(userName, pwd);
+	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
+	public User getUser(@InjectParam User userInpt) {
+		System.out.println("check user Get method 222");
+		User user = getUserDetails(userInpt.getUserName(), userInpt.getPassword());
 		return user;
 	}
-	
+
 	@POST
 	@Consumes({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
 	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 	public User create(User user) {
 		//this.userString = userString;
 		System.out.println("register user post method 3");
-		
+
 			manageUser(user);
-		
-        
+
+
 		return user;
 	}
-	
+
 	private User getUserDetails(String userName, String passWord){
 		User user = new User();
        DataBaseConnection dao = new DataBaseConnection();
@@ -50,7 +50,7 @@ public class UserResource {
 		}
 		return user;
 	}
-	
+
 	private User manageUser(User user) {
 		 DataBaseConnection dao = new DataBaseConnection();
 		    try {
@@ -59,7 +59,7 @@ public class UserResource {
 		    	} else {
 		    		user = dao.updateUser(user);
 		    	}
-				
+
 			} catch (Exception e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();

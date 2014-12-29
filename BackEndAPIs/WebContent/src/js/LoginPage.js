@@ -17,7 +17,7 @@
 			var that = this;
 		},
 		render: function() {
-			
+
 		},
 
 
@@ -31,7 +31,7 @@
 			    lastName : $("#txtLastName").val(),
 			    email : $("#txtEmail").val()
 			});
-			
+
 			if (tmpUser.isNew()) {
 				var self = this;
 				listeClients.create(tmpUser, {
@@ -46,18 +46,27 @@
 				//listeClients.create(tmpClient);
                 // $("#listeClient").html("<font size=5 color=green>User " +  tmpClient.get("name") + " is Successfully Registered, Now you can Login</font>");
 			//}
-			
-           
+
+
 		},
 		login : function() {
 			console.log("Login Button clicked");
-			
+               var tmpLogin = new UserDetail();
+                  tmpLogin.set({
+            	   userName : $("#txtIdClient").val(),
+       			   password : $("#txtNomClient").val(),
+       			   firstName : "",
+    			   lastName : "",
+    			   email : ""
+               });
+
 			var userName = $("#txtIdClient").val();
-			var pwd  = $("#txtNomClient").val();
-			$.get("http://localhost:8080/JavaRESTExample/rest/user?userName=" + userName + "&pwd=" + pwd, function (data) {
+			  var pwd = $("#txtNomClient").val();
+
+			$.get("./rest/user?userName=" + userName + "&password=" + pwd, function (data) {
 				console.log("Login Response" +data);
 				if (data != undefined) {
-					
+
 					var tmplogin = new UserDetail();
 					window.loggedInUser = data;
 					//$("#pageDiv").html("<font size=4 color=blue>Login sucessfull, Welcome " + window.loggedInUser.firstName + " " + window.loggedInUser.lastName + "!!</font>");
@@ -79,9 +88,9 @@
 					 $('#loadingBar').modal('hide');
 				}
 			});
-			
-			
-			/*tmplogin.fetch({
+
+
+                 /* tmpLogin.fetch({
 				success : function (collection, response) {
 				console.log("Login Response" +response);
 				if (response != undefined) {
@@ -114,13 +123,13 @@
 			},"json");
 			console.log(tmplogin.get('name'));
 			//var ls = new Backbone.LocalStorage("store-name");
-			
-			//result = ls.findByNameAndPassword(tmplogin);
-			
 
-    
-            
-			 listeClients.fetch({
+			//result = ls.findByNameAndPassword(tmplogin);
+
+
+
+
+			 /*listeClients.fetch({
 				success : function (collection, response) {
 					console.log("Login Response" +response);
 					if (response != undefined) {
@@ -150,13 +159,13 @@
 					 $('#loadingBar').modal('hide');
 				}
 			});*/
-		
+
 		},
 		addClientToList : function(model) {
 			console.log('addClientToList');
 			reg_name = model.get('name');
 			reg_pass = model.get('pwd');
-			
+
 		},
 		updateUser: function(updatedUser) {
 			var tmpUserUpdation = new UserDetail();
@@ -176,4 +185,4 @@
 	});
 
 	Backbone.history.start();
-})(jQuery); 
+})(jQuery);
