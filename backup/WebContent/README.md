@@ -1,1 +1,0 @@
-This is a test project made by me to learn BackBone, Bootstrap and other HTML technology.
