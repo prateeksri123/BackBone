@@ -1,0 +1,36 @@
+<div class="container-fluid" style="height: 100%;overflow:auto;">
+
+	<% _.each(collection, function(model) { %>
+    <% if(model.inStock) { %>
+	<div  style="height: 270px; max-height: 270px;float: left; width: 280px">
+		<div id="thumbnail" class="thumbnail" style="height: 100%">
+			<img id="productImage" src="<%= model.imageUrls['100x100'] %>"  onerrorupdate="imgError(this)"/>
+			<div class="caption pull-down">
+				<h3> <%= model.productTitle.trim() %></h3>
+				<h1> <%= model.sellingPrice %></h1>
+				<p>
+					<a href="<%= model.productUrl %>" class="btn btn-primary" role="button" target="_">Buy Now!</a>
+					<% if (!displayingWishList) { %>
+					<a id="addWishList" href="#" class="btn btn-default" role="button" data-productId="<%= model.id %>"> <span class="glyphicon glyphicon-heart" aria-hidden="true"></span>Add To Wishlist </a>
+					<% } else { %>
+					<a id="removeWishList" href="#" class="btn btn-default" role="button" data-productId="<%= model.id %>">
+						Remove from Wishlist
+						</a>
+					<% } %>
+
+				</p>
+			</div>
+		</div>
+	</div>
+    <% } %>
+	<% }); %>
+
+	<script>
+		function imgError(image) {
+			alert("test");
+			image.onerror = "";
+			image.src = "/images/noimage.gif";
+			return true;
+		}
+	</script>
+</div>
