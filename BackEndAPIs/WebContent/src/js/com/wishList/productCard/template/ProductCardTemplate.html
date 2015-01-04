@@ -1,13 +1,13 @@
-<div class="container-fluid" style="height: 100%;overflow:auto;">
+<div class="container-fluid" style="height: 100%;overflow:auto;padding-bottom: 5px;padding-left: 5px;padding-right: 5px;padding-top: 5px">
 
 	<% _.each(collection, function(model) { %>
     <% if(model.inStock) { %>
 	<div  style="height: 270px; max-height: 270px;float: left; width: 280px">
 		<div id="thumbnail" class="thumbnail" style="height: 100%">
-			<img id="productImage" src="<%= model.imageUrls['100x100'] %>"  onerrorupdate="imgError(this)"/>
-			<div class="caption pull-down">
+			<img id="productImage" src="<%= model.imageUrls['75x75'] %>"  onerrorupdate="imgError(this)"/>
+			<div class="caption pull-down" style="overflow:auto">
 				<h3> <%= model.productTitle.trim() %></h3>
-				<h1> <%= model.sellingPrice %></h1>
+				<h1> Rs. <%= model.sellingPrice %></h1>
 				<p>
 					<a href="<%= model.productUrl %>" class="btn btn-primary" role="button" target="_">Buy Now!</a>
 					<% if (!displayingWishList) { %>
