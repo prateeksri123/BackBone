@@ -1,0 +1,4 @@
+*.class
+BackEndAPIs/build/classes/com/test/database/DataBaseConnection.class
+BackEndAPIs/build/classes/com/wishlist/model/ProductCategory.class
+BackEndAPIs/build/classes/org/vogella/jersey/first/Hello.class
