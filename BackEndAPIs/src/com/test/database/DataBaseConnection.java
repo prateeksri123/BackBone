@@ -12,7 +12,7 @@ import java.sql.*;
 import com.wishlist.model.User;
 
 public class DataBaseConnection {
-  private Connection connect = null;
+  public Connection connect = null;
   private Statement statement = null;
   private PreparedStatement preparedStatement = null;
   private ResultSet resultSet = null;
@@ -182,7 +182,7 @@ public class DataBaseConnection {
   }
 
   // you need to close all three to make sure
-  private void close() {
+  public void close() {
     close(resultSet);
     close(statement);
     close(connect);

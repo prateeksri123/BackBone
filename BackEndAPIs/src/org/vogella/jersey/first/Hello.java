@@ -5,6 +5,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.sql.Driver;
+import java.util.List;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -12,6 +13,9 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 import com.test.database.DataBaseConnection;
+import com.test.database.PopulateDatabase;
+import com.test.database.XMLDataParser;
+import com.wishlist.model.ProductCategory;
 
 // Plain old Java Object it does not extend as class or implements
 // an interface
@@ -44,6 +48,9 @@ public class Hello {
 
 		URL obj;
 		try {
+			PopulateDatabase pdb = new PopulateDatabase();
+			pdb.populateCategory();
+			
 			obj = new URL(url);
 
 			HttpURLConnection con = (HttpURLConnection) obj.openConnection();
