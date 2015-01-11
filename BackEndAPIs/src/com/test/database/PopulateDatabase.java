@@ -17,22 +17,22 @@ public class PopulateDatabase {
 	@SuppressWarnings("finally")
 	public void populateCategory() throws Exception {
 		try {
-			XMLDataParser xmlDataParser = new XMLDataParser("mywishlis",
+			JSONDataParser jsonDataParser = new JSONDataParser("mywishlis",
 					"22ba4f9fe89f4007ab51f45a777d4c7a");
-			List<ProductCategory> pcList = xmlDataParser
+			List<ProductCategory> pcList = jsonDataParser
 					.initializeProductDirectory();
 			for (ProductCategory pc : pcList) {
 
 				try {
-					preparedStatement = dao.connect
-							/*
-							 * VARCHAR(255) NOT NULL, `Password` VARCHAR(45) NOT
-							 * NULL, `userId` INTEGER UNSIGNED NOT NULL
-							 * AUTO_INCREMENT, `FirstName` VARCHAR(255) NOT
-							 * NULL, `LastName` VARCHAR(255) NOT NULL, `email`
-							 * VARCHAR(255) NOT NULL,
-							 */
-							.prepareStatement("insert into  WishList.product_category(category_name,id,category_url) values (?,?,?)");
+					if (isCategoryExisting(pc.getId())) {
+						System.out.println("insert");
+						preparedStatement = dao.connect
+								.prepareStatement("insert into  WishList.product_category(category_name,id,category_url) values (?,?,?)");
+					} else {
+						preparedStatement = dao.connect
+								.prepareStatement("update WishList.product_category set category_name=?,category_url=? where id=?");
+						System.out.println("update");
+					}
 
 					preparedStatement.setString(1, pc.getProductCategory());
 					preparedStatement.setString(2, pc.getId());
@@ -56,6 +56,26 @@ public class PopulateDatabase {
 			throw e;
 		} finally {
 			dao.close();
+		}
+	}
+
+	private Boolean isCategoryExisting(String productId) throws Exception {
+		try {
+			// statements allow to issue SQL queries to the database
+			statement = dao.connect.createStatement();
+			// resultSet gets the result of the SQL query
+			resultSet = statement
+					.executeQuery("select * from WishList.product_category where id='"
+							+ productId + "'");
+			resultSet.last();
+			System.out.println(resultSet.getRow());
+			return (resultSet.getRow() == 0);
+
+		} catch (Exception e) {
+			throw e;
+		} finally {
+			dao.close();
+
 		}
 	}
 

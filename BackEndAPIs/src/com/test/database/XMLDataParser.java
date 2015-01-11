@@ -38,7 +38,7 @@ public class XMLDataParser extends DataParser {
     public XMLDataParser(String affiliateId, String affiliateToken) {
        this.affiliateId = affiliateId;
        this.affiliateToken = affiliateToken;
-       this.affiliateBaseUrl = "https://affiliate-api.flipkart.net/affiliate/api/mywishlis.xml";
+       this.affiliateBaseUrl = "https://affiliate-api.flipkart.net/affiliate/api/mywishlis.json";
        productDirectory = new HashMap<String, String>();
     }
 

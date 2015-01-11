@@ -15,6 +15,7 @@ import javax.ws.rs.core.MediaType;
 import com.test.database.DataBaseConnection;
 import com.test.database.PopulateDatabase;
 import com.test.database.XMLDataParser;
+import com.test.database.category.ProductCategoryService;
 import com.wishlist.model.ProductCategory;
 
 // Plain old Java Object it does not extend as class or implements
@@ -45,13 +46,15 @@ public class Hello {
 	private String getProductList() {
 		String url = "https://affiliate-api.flipkart.net/affiliate/api/mywishlis.json";
 		StringBuffer response = new StringBuffer();
-
-		URL obj;
+        URL obj;
+		String result = "";
 		try {
 			PopulateDatabase pdb = new PopulateDatabase();
 			pdb.populateCategory();
-			
-			obj = new URL(url);
+			ProductCategoryService pcs = new ProductCategoryService();
+			result = pcs.getProductList();
+			System.out.println(result);
+			/*obj = new URL(url);
 
 			HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 
@@ -76,12 +79,12 @@ public class Hello {
 			in.close();
 
 			// print result
-			System.out.println(response.toString());
+			System.out.println(response.toString());*/
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return response.toString();
+		return result;
 
 	}
 

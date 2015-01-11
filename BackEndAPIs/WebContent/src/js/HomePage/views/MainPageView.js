@@ -85,15 +85,15 @@ MainPageView = Backbone.View.extend({
          	//console.log(data);
             data = JSON.parse(data);
             var catergoryArray = [];
-            categorysArray = data.apiGroups.affiliate.apiListings;
+            categorysArray = data;
          	$.each(categorysArray, function(i, item) {
                  //console.log(item.availableVariants['v0.1.0'].get);
                  //console.log(item.apiName);
-                 var res = item.apiName.replace("_", " ");
+                 //var res = item.apiName.replace("_", " ");
                  var tmpCategory = new ProductCategory({
-				   category_name : res,
-				   url: item.availableVariants['v0.1.0'].get,
-				   id : item.apiName
+				   category_name : item.category_name,
+				   url: item.url,
+				   id : item.id
 			      });
                  if(productCategoryList == undefined) {
                 	 productCategoryList = new ProductCategorysCollection();
