@@ -26,6 +26,7 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
+import com.wishlist.model.Product;
 import com.wishlist.model.ProductCategory;
 
 
@@ -104,9 +105,9 @@ public class XMLDataParser extends DataParser {
      * @return list of products for the given categery from the API service.
      * @throws AffiliateAPIException
      */
-    public List<ProductCategory> getProductList(String category) throws Exception {
+    public List<Product> getProductList(String category) throws Exception {
 
-        List<ProductCategory> plist = new ArrayList<ProductCategory>();
+        List<Product> plist = new ArrayList<Product>();
         try {
             String queryUrl = getProductDirectory().get(category);
 
@@ -122,10 +123,10 @@ public class XMLDataParser extends DataParser {
                 Node products = doc.getElementsByTagName("products").item(0);
 
                 for(Node productInfoList = products.getFirstChild(); productInfoList != null; productInfoList = productInfoList.getNextSibling()) {
-                	ProductCategory pinfo = new ProductCategory();
+                	Product pinfo = new Product();
 
                     pinfo.setId(productInfoList.getFirstChild().getNextSibling().getFirstChild().getLastChild().getTextContent());
-                    pinfo.setTitle(productInfoList.getFirstChild().getNextSibling().getLastChild().getLastChild().getTextContent());
+                    //pinfo.setTitle(productInfoList.getFirstChild().getNextSibling().getLastChild().getLastChild().getTextContent());
 
                     Element productAttributes = (Element) productInfoList.getFirstChild().getNextSibling().getLastChild();
                     if(productAttributes.getElementsByTagName("productDescription").getLength() > 0) {

@@ -17,6 +17,8 @@ import javax.ws.rs.core.MediaType;
 
 import org.codehaus.jettison.json.JSONObject;
 
+import com.test.database.category.ProductCategoryService;
+
 // Plain old Java Object it does not extend as class or implements
 // an interface
 
@@ -41,7 +43,7 @@ public class Hello1 {
     return getProductList(url);
   }
 
-  
+
   private final String USER_AGENT = "Mozilla/5.0";
   private String getProductList(String productUrl) {
 		String url = productUrl.replaceAll("~~", "&");
@@ -52,30 +54,32 @@ public class Hello1 {
 		URL obj;
 		try {
 			obj = new URL(url);
-
-
-			HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-
-			// optional default is GET
-			//HttpURLConnection con = (HttpURLConnection) url.openConnection();
-            con.setRequestMethod("GET");
-            con.setRequestProperty("User-Agent", USER_AGENT);
-            con.setRequestProperty("Fk-Affiliate-Token","22ba4f9fe89f4007ab51f45a777d4c7a" );
-            con.setRequestProperty("Fk-Affiliate-Id", "mywishlis");
-
-			int responseCode = con.getResponseCode();
-			System.out.println("\nSending 'GET' request to URL : " + url);
-			System.out.println("Response Code : " + responseCode);
-
-			BufferedReader in = new BufferedReader(new InputStreamReader(con
-					.getInputStream()));
-			String inputLine;
-
-
-			while ((inputLine = in.readLine()) != null) {
-				response.append(inputLine);
-			}
-			in.close();
+			ProductCategoryService pcs = new ProductCategoryService();
+			response = pcs.get();
+//
+//
+//			HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+//
+//			// optional default is GET
+//			//HttpURLConnection con = (HttpURLConnection) url.openConnection();
+//            con.setRequestMethod("GET");
+//            con.setRequestProperty("User-Agent", USER_AGENT);
+//            con.setRequestProperty("Fk-Affiliate-Token","22ba4f9fe89f4007ab51f45a777d4c7a" );
+//            con.setRequestProperty("Fk-Affiliate-Id", "mywishlis");
+//
+//			int responseCode = con.getResponseCode();
+//			System.out.println("\nSending 'GET' request to URL : " + url);
+//			System.out.println("Response Code : " + responseCode);
+//
+//			BufferedReader in = new BufferedReader(new InputStreamReader(con
+//					.getInputStream()));
+//			String inputLine;
+//
+//
+//			while ((inputLine = in.readLine()) != null) {
+//				response.append(inputLine);
+//			}
+//			in.close();
 
 			// print result
 			System.out.println(response.toString());

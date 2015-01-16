@@ -1,0 +1,10 @@
+CREATE TABLE `wishlist`.`Users` (
+  `UserName` VARCHAR(255) NOT NULL,
+  `Password` VARCHAR(45) NOT NULL,
+  `userId` INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
+  `FirstName` VARCHAR(255) NOT NULL,
+  `LastName` VARCHAR(255) NOT NULL,
+  `email` VARCHAR(255) NOT NULL,
+  PRIMARY KEY (`userId`)
+)
+ENGINE = InnoDB;

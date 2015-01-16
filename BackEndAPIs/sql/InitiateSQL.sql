@@ -25,7 +25,6 @@ CREATE TABLE `wishlist`.`product` (
   `emi_available` BOOLEAN NOT NULL,
   PRIMARY KEY (`id`)
 )
-ALTER TABLE `wishlist`.`product_category` MODIFY COLUMN `id` VARCHAR(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL AUTO_INCREMENT;
-ALTER TABLE `wishlist`.`product_category` ADD COLUMN `category_url` VARCHAR() NOT NULL AFTER `id`;
+ALTER TABLE `wishlist`.`product_category` ADD COLUMN `category_url` VARCHAR(255) NOT NULL AFTER `id`;
 ALTER TABLE `wishlist`.`product_category` MODIFY COLUMN `category_url` TEXT NOT NULL;
 ALTER TABLE `wishlist`.`product_category` MODIFY COLUMN `id` VARCHAR(255) NOT NULL;

@@ -27,7 +27,7 @@ public class PopulateDatabase {
 					if (isCategoryExisting(pc.getId())) {
 						System.out.println("insert");
 						preparedStatement = dao.connect
-								.prepareStatement("insert into  WishList.product_category(category_name,id,category_url) values (?,?,?)");
+								.prepareStatement("insert into  WishList.product_category(category_name,category_url,id) values (?,?,?)");
 					} else {
 						preparedStatement = dao.connect
 								.prepareStatement("update WishList.product_category set category_name=?,category_url=? where id=?");
@@ -35,8 +35,8 @@ public class PopulateDatabase {
 					}
 
 					preparedStatement.setString(1, pc.getProductCategory());
-					preparedStatement.setString(2, pc.getId());
-					preparedStatement.setString(3, pc.getUrl());
+					preparedStatement.setString(2, pc.getUrl());
+					preparedStatement.setString(3, pc.getId());
 					preparedStatement.executeUpdate();
 				}
 

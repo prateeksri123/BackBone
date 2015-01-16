@@ -1,7 +1,7 @@
 package com.wishlist.model;
 
 public class Product {
-	private int id;
+	private String id;
 	private String productTitle;
 	private String productDescription;
 	private String imageUrls;
@@ -11,11 +11,11 @@ public class Product {
 	private Boolean inStock;
 	private Boolean codAvailable;
 	private Boolean emiAvailable;
-	
-	public int getId() {
+
+	public String getId() {
 		return id;
 	}
-	public void setId(int id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 	public String getProductTitle() {

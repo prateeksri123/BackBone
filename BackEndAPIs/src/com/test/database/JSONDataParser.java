@@ -19,6 +19,7 @@ import org.codehaus.jettison.json.JSONArray;
 import org.codehaus.jettison.json.JSONException;
 import org.codehaus.jettison.json.JSONObject;
 
+import com.wishlist.model.Product;
 import com.wishlist.model.ProductCategory;
 
 public class JSONDataParser extends DataParser {
@@ -51,11 +52,12 @@ public class JSONDataParser extends DataParser {
             JSONObject obj = new JSONObject(jsonData);
             JSONObject listing = obj.getJSONObject("apiGroups").getJSONObject("affiliate").getJSONObject("apiListings");
             Iterator keys = listing.keys();
-            
+
             while(keys.hasNext()) {
             	ProductCategory pc = new ProductCategory();
                 String category_name = (String)keys.next();
-                pc.setProductCategory(category_name.replaceAll("_", " "));
+                String catName = convertCategoryInCaps(category_name);
+                pc.setProductCategory(catName);
                 pc.setId(category_name);
                 JSONObject variants = listing.getJSONObject(category_name).getJSONObject("availableVariants");
 
@@ -80,6 +82,21 @@ public class JSONDataParser extends DataParser {
         return pclist;
     }
 
+    private String convertCategoryInCaps(String catName) {
+
+    String resultString = Character.toUpperCase(catName.charAt(0)) + catName.substring(1);
+    catName = resultString;
+    while(catName.indexOf("_") != -1) {
+      	int index = catName.indexOf('_');
+      	char c = catName.charAt(index + 1);
+      	resultString = catName.substring(0, index);
+      	resultString = resultString + " " + Character.toUpperCase(c) + catName.substring(index + 2);
+      	catName = resultString;
+
+    }
+    return resultString;
+    }
+
     /***
      *
      * @return the locally stored product directory information (A list of categories and the corresponding URLs).
@@ -95,12 +112,12 @@ public class JSONDataParser extends DataParser {
      * @return list of products for the given categery from the API service.
      * @throws Exception
      */
-    public List<ProductCategory> getProductList(String category) throws Exception {
+    public List<Product> getProductList(String url) throws Exception {
 
-        List<ProductCategory> plist = new ArrayList<ProductCategory>();
+        List<Product> plist = new ArrayList<Product>();
 
         try {
-            String queryUrl = getProductDirectory().get(category);
+            String queryUrl = url;
 
             while(queryUrl != null && !queryUrl.isEmpty()) {
                 String jsonData = queryService(queryUrl);
@@ -110,18 +127,18 @@ public class JSONDataParser extends DataParser {
 
                 for(int i =0; i < productArray.length(); i++) {
 
-                    ProductCategory pinfo = new ProductCategory();
+                    Product pinfo = new Product();
                     JSONObject inner_obj = productArray.getJSONObject(i).getJSONObject("productBaseInfo");
                     pinfo.setId(inner_obj.getJSONObject("productIdentifier").getString("productId"));
 
                     JSONObject attributes = inner_obj.getJSONObject("productAttributes");
-                    //pinfo.setTitle(attributes.getString("title"));
-                    //pinfo.setDescription(attributes.optString("productDescription", ""));
-                    //pinfo.setMrp(attributes.getJSONObject("maximumRetailPrice").getDouble("amount"));
+                    pinfo.setProductTitle(attributes.getString("title"));
+                    pinfo.setProductDescription(attributes.optString("productDescription", ""));
+                    pinfo.setMaximumRetailRrice(attributes.getJSONObject("maximumRetailPrice").getDouble("amount"));
                     //pinfo.setSellingPrice(attributes.getJSONObject("sellingPrice").getDouble("amount"));
-                    //pinfo.setProductUrl(attributes.getString("productUrl"));
-                    //pinfo.setInStock(attributes.getBoolean("inStock"));
-                    //pinfo.setEmiAvailable(attributes.getBoolean("emiAvailable"));
+                    pinfo.setProductUrl(attributes.getString("productUrl"));
+                    pinfo.setInStock(attributes.getBoolean("inStock"));
+                    pinfo.setEmiAvailable(attributes.getBoolean("emiAvailable"));
 
                     plist.add(pinfo);
                 }

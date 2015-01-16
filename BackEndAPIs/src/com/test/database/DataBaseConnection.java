@@ -16,7 +16,7 @@ public class DataBaseConnection {
   private Statement statement = null;
   private PreparedStatement preparedStatement = null;
   private ResultSet resultSet = null;
-  
+
   public DataBaseConnection() {
 	  try {
 	      // this will load the MySQL driver, each DB has its own driver
@@ -25,13 +25,13 @@ public class DataBaseConnection {
 	      // setup the connection with the DB.
 	      connect = DriverManager
 	          .getConnection("jdbc:mysql://localhost/WishList?"
-	              + "user=root");
+	              + "user=root&password=fbs125");
 	  }catch (Exception e) {
 		// TODO: handle exception
 	}
 
   }
-  
+
   public User getUserDetails(String userName,String passWord) throws Exception{
 	  try{
 	      // statements allow to issue SQL queries to the database
@@ -39,14 +39,14 @@ public class DataBaseConnection {
 	      // resultSet gets the result of the SQL query
 	      resultSet = statement
 	          .executeQuery("select * from WishList.users where UserName='" + userName + "' and Password='" + passWord + "'");
-	      return writeUserData(resultSet);	      
+	      return writeUserData(resultSet);
 	    } catch (Exception e) {
 	      throw e;
 	    } finally {
 	      close();
-	    }	  
+	    }
   }
-  
+
   public User updateUser(User user) throws Exception {
 	  preparedStatement = connect
 	  /* VARCHAR(255) NOT NULL,
@@ -57,16 +57,16 @@ public class DataBaseConnection {
 	  `email` VARCHAR(255) NOT NULL,*/
       .prepareStatement("update WishList.users set FirstName=?,LastName=?,email=? where userId=?");
 
-         
+
          preparedStatement.setString(1,user.getFirstName());
          preparedStatement.setString(2,user.getLastName());
          preparedStatement.setString(3,user.getEmail());
          preparedStatement.setInt(4,user.getUserId());
          preparedStatement.executeUpdate();
-         
+
          return user;
   }
-  
+
   public User createUser(User user) throws Exception {
 	  preparedStatement = connect
 	  /* VARCHAR(255) NOT NULL,
@@ -83,7 +83,7 @@ public class DataBaseConnection {
          preparedStatement.setString(4,user.getLastName());
          preparedStatement.setString(5,user.getEmail());
          preparedStatement.executeUpdate();
-	  
+
 	  return user;
   }
 
@@ -119,11 +119,11 @@ public class DataBaseConnection {
       .prepareStatement("delete from FEEDBACK.COMMENTS where myuser= ? ; ");
       preparedStatement.setString(1, "Test");
       preparedStatement.executeUpdate();
-      
+
       resultSet = statement
       .executeQuery("select * from FEEDBACK.COMMENTS");
       writeMetaData(resultSet);
-      
+
     } catch (Exception e) {
       throw e;
     } finally {
@@ -140,10 +140,10 @@ public class DataBaseConnection {
       System.out.println("Column " +i  + " "+ resultSet.getMetaData().getColumnName(i));
     }
   }
-  
+
   private User writeUserData(ResultSet resultSet) throws SQLException {
 	    // resultSet is initialised before the first data set
-	  User user = null; 
+	  User user = null;
 	    while (resultSet.next()) {
 	      // it is possible to get the columns via name
 	      // also possible to get the columns via the column number
@@ -156,7 +156,7 @@ public class DataBaseConnection {
 	      user.setLastName(resultSet.getString("LastName"));
 	      user.setEmail(resultSet.getString("email"));
 	      System.out.println("User: " + user.toString());
-	     
+
 	    }
 	    return user;
 	  }
@@ -189,12 +189,12 @@ public class DataBaseConnection {
   }
   private void close(Connection connect2) {
 	// TODO Auto-generated method stub
-	
+
 }
 
 private void close(Statement statement2) {
 	// TODO Auto-generated method stub
-	
+
 }
 
 private void close(ResultSet resultSet2) {
@@ -206,4 +206,4 @@ private void close(ResultSet resultSet2) {
     // don't throw now as it might leave following closables in undefined state
     }
   }
-} 
+}

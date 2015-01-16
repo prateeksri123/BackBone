@@ -13,6 +13,7 @@ import java.util.List;
 import java.net.*;
 import java.io.*;
 
+import com.wishlist.model.Product;
 import com.wishlist.model.ProductCategory;
 
 abstract class DataParser {
@@ -96,7 +97,7 @@ abstract class DataParser {
      * @return list of products for the given categery from the API service.
      * @throws AffiliateAPIException
      */
-    abstract List<ProductCategory> getProductList(String category) throws Exception;
+    abstract List<Product> getProductList(String category) throws Exception;
 
     // Affiliate related information.
     abstract String getAffiliateId();
