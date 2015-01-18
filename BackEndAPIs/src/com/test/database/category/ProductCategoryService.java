@@ -10,6 +10,8 @@ import org.codehaus.jettison.json.JSONObject;
 
 import java.sql.*;
 import com.test.database.DataBaseConnection;
+import com.test.database.JSONDataParser;
+import com.wishlist.model.Product;
 import com.wishlist.model.ProductCategory;
 
 public class ProductCategoryService extends DataBaseConnection {
@@ -74,6 +76,12 @@ public class ProductCategoryService extends DataBaseConnection {
 		     
 		    }
 		return result;
+	}
+	
+	public List<Product> getProductListByUrl(String url) throws Exception {
+		JSONDataParser jsonDataParser = new JSONDataParser("mywishlis",
+		"22ba4f9fe89f4007ab51f45a777d4c7a");
+		return jsonDataParser.getProductList(url);
 	}
 
 }

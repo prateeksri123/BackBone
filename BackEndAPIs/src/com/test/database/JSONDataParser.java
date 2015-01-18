@@ -15,6 +15,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import org.codehaus.jackson.annotate.JsonAnyGetter;
 import org.codehaus.jettison.json.JSONArray;
 import org.codehaus.jettison.json.JSONException;
 import org.codehaus.jettison.json.JSONObject;
@@ -29,7 +30,7 @@ public class JSONDataParser extends DataParser {
     private String affiliateBaseUrl;
     private Map<String, String> productDirectory;
 
-    JSONDataParser(String affiliateId, String affiliateToken) {
+    public JSONDataParser(String affiliateId, String affiliateToken) {
         this.affiliateId = affiliateId;
         this.affiliateToken = affiliateToken;
         this.affiliateBaseUrl = "https://affiliate-api.flipkart.net/affiliate/api/" + affiliateId + ".json";
@@ -123,8 +124,7 @@ public class JSONDataParser extends DataParser {
                 String jsonData = queryService(queryUrl);
 
                 JSONObject obj = new JSONObject(jsonData);
-                JSONArray productArray = obj.getJSONArray("ProductCategoryList");
-
+                JSONArray productArray = obj.getJSONArray("productInfoList");
                 for(int i =0; i < productArray.length(); i++) {
 
                     Product pinfo = new Product();
@@ -132,8 +132,11 @@ public class JSONDataParser extends DataParser {
                     pinfo.setId(inner_obj.getJSONObject("productIdentifier").getString("productId"));
 
                     JSONObject attributes = inner_obj.getJSONObject("productAttributes");
+                    JSONObject imageUrls = attributes.getJSONObject("imageUrls");
                     pinfo.setProductTitle(attributes.getString("title"));
                     pinfo.setProductDescription(attributes.optString("productDescription", ""));
+                    pinfo.setImageUrls(imageUrls.getString("200x200"));
+                    System.out.println(imageUrls.getString("400x400"));
                     pinfo.setMaximumRetailRrice(attributes.getJSONObject("maximumRetailPrice").getDouble("amount"));
                     //pinfo.setSellingPrice(attributes.getJSONObject("sellingPrice").getDouble("amount"));
                     pinfo.setProductUrl(attributes.getString("productUrl"));

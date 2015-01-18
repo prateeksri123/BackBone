@@ -7,6 +7,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.GET;
@@ -15,9 +16,12 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 
+import org.codehaus.jettison.json.JSONArray;
 import org.codehaus.jettison.json.JSONObject;
 
 import com.test.database.category.ProductCategoryService;
+import com.wishlist.model.Product;
+import com.wishlist.model.ProductCategory;
 
 // Plain old Java Object it does not extend as class or implements
 // an interface
@@ -50,44 +54,35 @@ public class Hello1 {
 		/*headers : {
       	   'Fk-Affiliate-Id': 'mywishlis',
             'Fk-Affiliate-Token': '22ba4f9fe89f4007ab51f45a777d4c7a',*/
-		StringBuffer response = new StringBuffer();
-		URL obj;
+		JSONObject responseDetailsJson = new JSONObject();
+	    JSONArray jsonArray = new JSONArray();
 		try {
-			obj = new URL(url);
 			ProductCategoryService pcs = new ProductCategoryService();
-			response = pcs.get();
-//
-//
-//			HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-//
-//			// optional default is GET
-//			//HttpURLConnection con = (HttpURLConnection) url.openConnection();
-//            con.setRequestMethod("GET");
-//            con.setRequestProperty("User-Agent", USER_AGENT);
-//            con.setRequestProperty("Fk-Affiliate-Token","22ba4f9fe89f4007ab51f45a777d4c7a" );
-//            con.setRequestProperty("Fk-Affiliate-Id", "mywishlis");
-//
-//			int responseCode = con.getResponseCode();
-//			System.out.println("\nSending 'GET' request to URL : " + url);
-//			System.out.println("Response Code : " + responseCode);
-//
-//			BufferedReader in = new BufferedReader(new InputStreamReader(con
-//					.getInputStream()));
-//			String inputLine;
-//
-//
-//			while ((inputLine = in.readLine()) != null) {
-//				response.append(inputLine);
-//			}
-//			in.close();
-
-			// print result
-			System.out.println(response.toString());
-		} catch (Exception e) {
+			List<Product> productList= pcs.getProductListByUrl(url);
+			
+		    for(Product p : productList) {
+		        //cartList.add(p);
+		        JSONObject formDetailsJson = new JSONObject();
+		   
+		        formDetailsJson.put("id", p.getId());
+		        formDetailsJson.put("productTitle", p.getProductTitle());
+		        formDetailsJson.put("productDescription", p.getProductDescription());
+		        formDetailsJson.put("imageUrls", p.getImageUrls());
+		        formDetailsJson.put("maximumRetailPrice", p.getMaximumRetailRrice());
+		        formDetailsJson.put("sellingPrice", p.getSellingPrice());
+		        formDetailsJson.put("productUrl", p.getProductUrl());
+		        formDetailsJson.put("inStock", p.getInStock());
+		        //formDetailsJson.put("productUrl", p.getProductUrl());
+				
+		       jsonArray.put(formDetailsJson);
+		    }
+		    responseDetailsJson.put("forms", jsonArray);
+		    System.out.println(jsonArray.toString());
+			} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return response.toString();
+		return jsonArray.toString();
 
 	}
 

@@ -25,7 +25,7 @@ public class DataBaseConnection {
 	      // setup the connection with the DB.
 	      connect = DriverManager
 	          .getConnection("jdbc:mysql://localhost/WishList?"
-	              + "user=root&password=fbs125");
+	              + "user=root");
 	  }catch (Exception e) {
 		// TODO: handle exception
 	}

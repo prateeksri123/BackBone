@@ -190,16 +190,16 @@ MainPageView = Backbone.View.extend({
              productList.comparator =function(productList) {
             	  return -productList.get('sellingPrice'); // Note the minus!
              }; ;
-         	$.each(eval(data.productInfoList), function(i, item) {
+         	$.each((data), function(i, item) {
 
          		var tmpProduct = new Product({
-				   id : item.productBaseInfo.productIdentifier.productId,
-				   productTitle : item.productBaseInfo.productAttributes.title,
-				   productDescription : item.productBaseInfo.productAttributes.productDescription,
-				   imageUrls : item.productBaseInfo.productAttributes.imageUrls,
-				   productUrl : item.productBaseInfo.productAttributes.productUrl,
-				   inStock : item.productBaseInfo.productAttributes.inStock,
-				   sellingPrice : item.productBaseInfo.productAttributes.sellingPrice.amount
+				   id : item.id,
+				   productTitle : item.productTitle,
+				   productDescription : item.productDescription,
+				   imageUrls : item.imageUrls,
+				   productUrl : item.productUrl,
+				   inStock : item.inStock,
+				   sellingPrice : item.maximumRetailPrice
 			      });
 
 		         productList.add(tmpProduct);

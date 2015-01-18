@@ -4,7 +4,8 @@
     <% if(model.inStock) { %>
 	<div  style="height: 270px; max-height: 270px;float: left; width: 280px">
 		<div id="thumbnail" class="thumbnail" style="height: 100%">
-			<img id="productImage" src="<%= model.imageUrls['75x75'] %>"  onerrorupdate="imgError(this)"/>
+
+			<img id="productImage" src="<%= model.imageUrls %>"  onerrorupdate="imgError(this)"/>
 			<div class="caption pull-down" style="overflow:auto">
 				<h3> <%= model.productTitle.trim() %></h3>
 				<h1> Rs. <%= model.sellingPrice %></h1>
