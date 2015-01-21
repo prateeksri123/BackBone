@@ -23,7 +23,7 @@ public class ProductCategoryService extends DataBaseConnection {
 		JSONObject responseDetailsJson = new JSONObject();
 	    JSONArray jsonArray = new JSONArray();
 	    try {
-	    List<ProductCategory> productList = getProductListFromDB();
+	    List<ProductCategory> productList = getProductCategoryListFromDB();
 	    for(ProductCategory p : productList) {
 	        //cartList.add(p);
 	        JSONObject formDetailsJson = new JSONObject();
@@ -41,7 +41,7 @@ public class ProductCategoryService extends DataBaseConnection {
 	    return jsonArray.toString();
 	}
 	
-	private List<ProductCategory> getProductListFromDB() throws Exception {
+	private List<ProductCategory> getProductCategoryListFromDB() throws Exception {
 		//List<ProductCategory> result = new ArrayList<ProductCategory>();
 		 try{
 		      // statements allow to issue SQL queries to the database
@@ -78,10 +78,5 @@ public class ProductCategoryService extends DataBaseConnection {
 		return result;
 	}
 	
-	public List<Product> getProductListByUrl(String url) throws Exception {
-		JSONDataParser jsonDataParser = new JSONDataParser("mywishlis",
-		"22ba4f9fe89f4007ab51f45a777d4c7a");
-		return jsonDataParser.getProductList(url);
-	}
 
 }

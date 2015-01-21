@@ -113,7 +113,7 @@ public class JSONDataParser extends DataParser {
      * @return list of products for the given categery from the API service.
      * @throws Exception
      */
-    public List<Product> getProductList(String url) throws Exception {
+    public List<Product> getProductList(String url,String category_id) throws Exception {
 
         List<Product> plist = new ArrayList<Product>();
 
@@ -135,14 +135,14 @@ public class JSONDataParser extends DataParser {
                     JSONObject imageUrls = attributes.getJSONObject("imageUrls");
                     pinfo.setProductTitle(attributes.getString("title"));
                     pinfo.setProductDescription(attributes.optString("productDescription", ""));
-                    pinfo.setImageUrls(imageUrls.getString("200x200"));
+                    pinfo.setImageUrls(imageUrls.getString("100x100"));
                     System.out.println(imageUrls.getString("400x400"));
                     pinfo.setMaximumRetailRrice(attributes.getJSONObject("maximumRetailPrice").getDouble("amount"));
                     //pinfo.setSellingPrice(attributes.getJSONObject("sellingPrice").getDouble("amount"));
                     pinfo.setProductUrl(attributes.getString("productUrl"));
                     pinfo.setInStock(attributes.getBoolean("inStock"));
                     pinfo.setEmiAvailable(attributes.getBoolean("emiAvailable"));
-
+                    pinfo.setCategoryId(category_id);
                     plist.add(pinfo);
                 }
 

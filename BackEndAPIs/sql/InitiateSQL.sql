@@ -12,19 +12,21 @@ CREATE TABLE `wishlist`.`Product_Category` (
   `id` INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (`id`)
 )
-CREATE TABLE `wishlist`.`product` (
-  `id` INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
-  `product_title` VARCHAR(255) NOT NULL,
-  `product_description` LONGTEXT,
-  `image_urls` VARCHAR(255) NOT NULL,
-  `maximum_retail_price` NUMERIC NOT NULL,
-  `selling_price` NUMERIC NOT NULL,
-  `product_url` VARCHAR(255) NOT NULL,
-  `in_stock` BOOLEAN NOT NULL,
-  `cod_available` BOOLEAN NOT NULL,
-  `emi_available` BOOLEAN NOT NULL,
+DROP TABLE IF EXISTS `wishlist`.`product`;
+CREATE TABLE  `wishlist`.`product` (
+  `id` varchar(255) NOT NULL,
+  `product_title` varchar(255) NOT NULL,
+  `product_description` longtext,
+  `image_urls` varchar(255) NOT NULL,
+  `maximum_retail_price` decimal(10,0) NOT NULL,
+  `selling_price` decimal(10,0) NOT NULL,
+  `product_url` varchar(255) NOT NULL,
+  `in_stock` tinyint(1) NOT NULL,
+  `cod_available` tinyint(1) NOT NULL,
+  `emi_available` tinyint(1) NOT NULL,
+  `category_id` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 ALTER TABLE `wishlist`.`product_category` ADD COLUMN `category_url` VARCHAR(255) NOT NULL AFTER `id`;
 ALTER TABLE `wishlist`.`product_category` MODIFY COLUMN `category_url` TEXT NOT NULL;
 ALTER TABLE `wishlist`.`product_category` MODIFY COLUMN `id` VARCHAR(255) NOT NULL;

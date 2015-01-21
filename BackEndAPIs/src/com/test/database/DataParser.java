@@ -97,7 +97,7 @@ abstract class DataParser {
      * @return list of products for the given categery from the API service.
      * @throws AffiliateAPIException
      */
-    abstract List<Product> getProductList(String category) throws Exception;
+    abstract List<Product> getProductList(String url,String category) throws Exception;
 
     // Affiliate related information.
     abstract String getAffiliateId();

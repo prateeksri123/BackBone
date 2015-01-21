@@ -3,14 +3,15 @@ package com.wishlist.model;
 public class Product {
 	private String id;
 	private String productTitle;
-	private String productDescription;
+	private String productDescription = "";
 	private String imageUrls;
-	private Number maximumRetailRrice;
-	private Number sellingPrice;
+	private Number maximumRetailRrice = 0;
+	private Number sellingPrice = 0;
 	private String productUrl;
-	private Boolean inStock;
-	private Boolean codAvailable;
-	private Boolean emiAvailable;
+	private Boolean inStock = true;
+	private Boolean codAvailable = false;
+	private Boolean emiAvailable = false;
+	private String categoryId = "";
 
 	public String getId() {
 		return id;
@@ -43,6 +44,9 @@ public class Product {
 		this.maximumRetailRrice = maximumRetailRrice;
 	}
 	public Number getSellingPrice() {
+		if(sellingPrice.equals(0)) {
+			sellingPrice = getMaximumRetailRrice();
+		}
 		return sellingPrice;
 	}
 	public void setSellingPrice(Number sellingPrice) {
@@ -71,5 +75,11 @@ public class Product {
 	}
 	public void setEmiAvailable(Boolean emiAvailable) {
 		this.emiAvailable = emiAvailable;
+	}
+	public String getCategoryId() {
+		return categoryId;
+	}
+	public void setCategoryId(String categoryId) {
+		this.categoryId = categoryId;
 	}
 }

@@ -19,7 +19,9 @@ import javax.ws.rs.core.MediaType;
 import org.codehaus.jettison.json.JSONArray;
 import org.codehaus.jettison.json.JSONObject;
 
+import com.test.database.PopulateDatabase;
 import com.test.database.category.ProductCategoryService;
+import com.test.database.product.ProductService;
 import com.wishlist.model.Product;
 import com.wishlist.model.ProductCategory;
 
@@ -44,47 +46,18 @@ public class Hello1 {
   @Produces(MediaType.TEXT_PLAIN)
   public String sayPlainTextHello(@QueryParam("url") String url) {
 	System.out.println(url);
-    return getProductList(url);
+	ProductService productService = new ProductService();
+	String result = "";
+    try {
+		result = productService.getProductList(url);
+	} catch (Exception e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	return result;
   }
 
 
-  private final String USER_AGENT = "Mozilla/5.0";
-  private String getProductList(String productUrl) {
-		String url = productUrl.replaceAll("~~", "&");
-		/*headers : {
-      	   'Fk-Affiliate-Id': 'mywishlis',
-            'Fk-Affiliate-Token': '22ba4f9fe89f4007ab51f45a777d4c7a',*/
-		JSONObject responseDetailsJson = new JSONObject();
-	    JSONArray jsonArray = new JSONArray();
-		try {
-			ProductCategoryService pcs = new ProductCategoryService();
-			List<Product> productList= pcs.getProductListByUrl(url);
-			
-		    for(Product p : productList) {
-		        //cartList.add(p);
-		        JSONObject formDetailsJson = new JSONObject();
-		   
-		        formDetailsJson.put("id", p.getId());
-		        formDetailsJson.put("productTitle", p.getProductTitle());
-		        formDetailsJson.put("productDescription", p.getProductDescription());
-		        formDetailsJson.put("imageUrls", p.getImageUrls());
-		        formDetailsJson.put("maximumRetailPrice", p.getMaximumRetailRrice());
-		        formDetailsJson.put("sellingPrice", p.getSellingPrice());
-		        formDetailsJson.put("productUrl", p.getProductUrl());
-		        formDetailsJson.put("inStock", p.getInStock());
-		        //formDetailsJson.put("productUrl", p.getProductUrl());
-				
-		       jsonArray.put(formDetailsJson);
-		    }
-		    responseDetailsJson.put("forms", jsonArray);
-		    System.out.println(jsonArray.toString());
-			} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return jsonArray.toString();
-
-	}
-
+ 
 
 }
