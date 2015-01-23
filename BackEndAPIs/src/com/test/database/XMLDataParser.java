@@ -105,7 +105,7 @@ public class XMLDataParser extends DataParser {
      * @return list of products for the given categery from the API service.
      * @throws AffiliateAPIException
      */
-    public List<Product> getProductList(String category) throws Exception {
+    public List<Product> getProductList(String url, String category) throws Exception {
 
         List<Product> plist = new ArrayList<Product>();
         try {

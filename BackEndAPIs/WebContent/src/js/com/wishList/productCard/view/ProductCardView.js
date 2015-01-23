@@ -18,7 +18,7 @@ ProductCardView = Backbone.View.extend({
 	},
 
 	registerCustomEvents : function() {
-		$('#addWishList').click(productCardView.addToWishList);
+		//$('#addWishList').click(productCardView.addToWishList);
 		$("#thumbnail").on("click", ".addWishList", function (e) {
          alert("a");
          });
@@ -49,7 +49,7 @@ ProductCardView = Backbone.View.extend({
 
 	addToWishList: function(e) {
 		alert(' added 1');
-		alert($(e.currentTarget).data('url'));
+		alert($(e.currentTarget).dataset('productId'));
 	}
 });
 var productCardView = new ProductCardView();

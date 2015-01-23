@@ -32,10 +32,7 @@ public class UserResource {
 	public User create(User user) {
 		//this.userString = userString;
 		System.out.println("register user post method 3");
-
-			manageUser(user);
-
-
+		manageUser(user);
 		return user;
 	}
 

@@ -69,6 +69,18 @@ CREATE TABLE `users` (
   `email` varchar(255) NOT NULL,
   PRIMARY KEY (`userId`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+
+DROP TABLE IF EXISTS `wishlist`.`wishlist`;
+CREATE TABLE  `wishlist`.`wishlist` (
+  `userId` int(10) unsigned NOT NULL,
+  `productId` varchar(255) NOT NULL,
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  PRIMARY KEY (`id`) USING BTREE,
+  KEY `FK_wishlist_1` (`userId`),
+  KEY `FK_wishlist_2` (`productId`),
+  CONSTRAINT `FK_wishlist_1` FOREIGN KEY (`userId`) REFERENCES `users` (`userId`),
+  CONSTRAINT `FK_wishlist_2` FOREIGN KEY (`productId`) REFERENCES `product` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 

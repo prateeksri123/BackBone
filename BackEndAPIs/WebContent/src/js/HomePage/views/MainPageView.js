@@ -26,7 +26,7 @@ MainPageView = Backbone.View.extend({
 
 		var wishListItem = new WishListItem({
 				   productId : $(e.currentTarget).data('productid'),
-			       userId : window.loggedInUser.id
+			       userId : window.loggedInUser.userId
 			      });
 	    if(wishListCollection == undefined) {
 	    	wishListCollection = new WishList();
