@@ -29,7 +29,7 @@ ProductCardView = Backbone.View.extend({
 		$.get("src/js/com/wishList/productCard/template/ProductCardTemplate.html", function(template) {
 
 			html = _.template(template, {
-				'collection' : collection.toJSON(),
+				'collection' : collection,
 				'i' : 1,
 				'displayingWishList' : displayingWishList
 			});

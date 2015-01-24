@@ -153,19 +153,11 @@ MainPageView = Backbone.View.extend({
     },
 
     getUserWishList: function() {
-		var ls = new Backbone.LocalStorage("store-WishList");
-		var lsProduct = new Backbone.LocalStorage("store-product");
-	    tmpWishListCollection = ls.findAll();
-	    var tmpProductList = new Array();
-	    $.each(eval(tmpWishListCollection), function(i, item) {
-	    	if(window.loggedInUser.id == item.userId){
-	    		console.log(item);
-	    		var product = lsProduct.findById(item.productId);
-	    		tmpProductList.push(product);
-	    	}
-
-	    });
-	    mainPage.loadProductList(tmpProductList,true);
+    	$.get("./rest/wishlist?userId=" + window.loggedInUser.userId, function (data) {
+    		mainPage.loadProductList(data,true);
+    	});
+	    
+	    
 
 	},
 
@@ -206,7 +198,7 @@ MainPageView = Backbone.View.extend({
                  //console.log(i);
          		});
          	    productList.sort();
-         		mainPage.loadProductList(productList,false);
+         		mainPage.loadProductList(data,false);
         });
          		//var lsProduct = new Backbone.LocalStorage("store-product");
 			    //productList = lsProduct.findAll();

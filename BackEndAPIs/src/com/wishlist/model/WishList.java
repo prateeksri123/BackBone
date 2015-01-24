@@ -1,8 +1,15 @@
 package com.wishlist.model;
 
+import javax.ws.rs.QueryParam;
+
 public class WishList {
+	@QueryParam("userId")
 	private int userId;
+	
+	@QueryParam("productId")
 	private String productId;
+	
+	@QueryParam("wishListId")
 	private int id;
 
 	public int getId() {

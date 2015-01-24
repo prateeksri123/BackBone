@@ -21,7 +21,7 @@ public class UserResource {
 	@GET
 	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 	public User getUser(@InjectParam User userInpt) {
-		System.out.println("check user Get method 222");
+		System.out.println("check user");
 		User user = getUserDetails(userInpt.getUserName(), userInpt.getPassword());
 		return user;
 	}
@@ -31,7 +31,7 @@ public class UserResource {
 	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 	public User create(User user) {
 		//this.userString = userString;
-		System.out.println("register user post method 3");
+		System.out.println("register user");
 		manageUser(user);
 		return user;
 	}

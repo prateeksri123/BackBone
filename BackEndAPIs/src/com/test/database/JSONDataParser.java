@@ -136,7 +136,6 @@ public class JSONDataParser extends DataParser {
                     pinfo.setProductTitle(attributes.getString("title"));
                     pinfo.setProductDescription(attributes.optString("productDescription", ""));
                     pinfo.setImageUrls(imageUrls.getString("100x100"));
-                    System.out.println(imageUrls.getString("400x400"));
                     pinfo.setMaximumRetailRrice(attributes.getJSONObject("maximumRetailPrice").getDouble("amount"));
                     //pinfo.setSellingPrice(attributes.getJSONObject("sellingPrice").getDouble("amount"));
                     pinfo.setProductUrl(attributes.getString("productUrl"));

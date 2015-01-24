@@ -27,13 +27,13 @@ public class PopulateDatabase {
 
 				try {
 					if (isCategoryExisting(pc.getId())) {
-						System.out.println("insert");
+					
 						preparedStatement = dao.connect
 								.prepareStatement("insert into  WishList.product_category(category_name,category_url,id) values (?,?,?)");
 					} else {
 						preparedStatement = dao.connect
 								.prepareStatement("update WishList.product_category set category_name=?,category_url=? where id=?");
-						System.out.println("update");
+						
 					}
 
 					preparedStatement.setString(1, pc.getProductCategory()); 
@@ -70,7 +70,7 @@ public class PopulateDatabase {
 					.executeQuery("select * from WishList.product_category where id='"
 							+ productId + "'");
 			resultSet.last();
-			System.out.println(resultSet.getRow());
+			
 			return (resultSet.getRow() == 0);
 
 		} catch (Exception e) {
@@ -90,7 +90,7 @@ public class PopulateDatabase {
 					.executeQuery("select * from WishList.product where id='"
 							+ productId + "'");
 			resultSet.last();
-			System.out.println(resultSet.getRow());
+			
 			return (resultSet.getRow() == 0);
 
 		} catch (Exception e) {
@@ -110,7 +110,7 @@ public class PopulateDatabase {
 
 				try {
 					if (isProductExisting(product.getId())) {
-						System.out.println("insert product");
+						
 						preparedStatement = dao.connect
 								.prepareStatement("insert into  WishList.product(product_title," +
 										"product_description," +
@@ -132,7 +132,6 @@ public class PopulateDatabase {
 										"in_stock=?," +
 										"cod_available=?,category_id=?," +
 										"emi_available=? where id=?");
-						System.out.println("update product");
 					}
 
 					preparedStatement.setString(1, product.getProductTitle());

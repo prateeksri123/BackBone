@@ -35,7 +35,7 @@ public class Hello {
 	@GET
 	@Produces(MediaType.TEXT_PLAIN)
 	public String sayPlainTextHello() {
-		System.out.println("Get Product list");
+		
 		return getProductList();
 	}
 

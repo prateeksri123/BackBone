@@ -1,6 +1,7 @@
 package com.test.database.product;
 
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
@@ -122,6 +123,50 @@ public class ProductService extends DataBaseConnection {
 			     
 			    }
 			return result;
+		}
+		
+		public Product getProductById(String productId) throws Exception {
+			Product product = new Product();
+			try{
+			      
+			      statement = connect.createStatement();
+			      
+			      resultSet = statement
+			          .executeQuery("select * from WishList.product where id='" + productId + "'");
+			    	
+			      
+			      product =  writeProductData();
+			      
+			    } catch (Exception e) {
+			      throw e;
+			    } finally {
+			      close();
+			    }
+			return product;
+		}
+		
+		private Product writeProductData() throws Exception{
+			Product product = null;
+			try {
+				while (resultSet.next()) {
+					product = new Product();
+					product.setId(resultSet.getString("id"));
+					product.setProductTitle(resultSet.getString("product_title"));
+					product.setProductDescription(resultSet.getString("product_description"));
+					product.setImageUrls(resultSet.getString("image_urls"));
+					product.setMaximumRetailRrice(resultSet.getInt("maximum_retail_price"));
+					product.setSellingPrice(resultSet.getInt("selling_price"));
+					product.setProductUrl(resultSet.getString("product_url"));
+					product.setInStock(resultSet.getBoolean("in_stock"));
+					product.setCodAvailable(resultSet.getBoolean("cod_available"));
+					product.setEmiAvailable(resultSet.getBoolean("emi_available"));
+					      
+				}
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				throw e;
+			}
+			return product;
 		}
 		
 
