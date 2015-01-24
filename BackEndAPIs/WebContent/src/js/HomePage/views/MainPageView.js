@@ -77,19 +77,11 @@ MainPageView = Backbone.View.extend({
 
     getProductCategoryList : function() {
     	   var headerObject = {};
-    	  // var ls = new Backbone.LocalStorage("store-product-Category");
-
-			//productCategoryList = ls.findAll();
-			//mainPage.loadRightSideMenuBar();
-    	    $.get("./rest/hello", function (data) {
-         	//console.log(data);
+    	    $.get("./rest/hello", function (data) {		
             data = JSON.parse(data);
             var catergoryArray = [];
             categorysArray = data;
          	$.each(categorysArray, function(i, item) {
-                 //console.log(item.availableVariants['v0.1.0'].get);
-                 //console.log(item.apiName);
-                 //var res = item.apiName.replace("_", " ");
                  var tmpCategory = new ProductCategory({
 				   category_name : item.category_name,
 				   url: item.url,
@@ -103,21 +95,6 @@ MainPageView = Backbone.View.extend({
                });
                mainPage.loadRightSideMenuBar();
 	         });
-    	  /*var request = $.ajax({
-             type: 'GET',
-             url: 'https://affiliate-api.flipkart.net/affiliate/api/mywishlis.json',
-             dataType: "json",
-             headers : {
-             	   'Fk-Affiliate-Id': 'mywishlis',
-                   'Fk-Affiliate-Token': '22ba4f9fe89f4007ab51f45a777d4c7a',
-                   'Access-Control-Allow-Origin' :  '*',
-                   "Access-Control-Allow-Headers" : "Origin, X-Requested-With, Content-Type, Accept"
-
-             },
-             success: function(data){
-              console.log(data);
-                }});*/
-
     },
 
     registerCustomEvents : function() {
@@ -125,7 +102,6 @@ MainPageView = Backbone.View.extend({
     	$('#viewAccount').click(mainPage.displayUser);
     	$('#editAccount').click(mainPage.editUser);
     	$('#addWishListItemBtn').click(mainPage.displayWishList);
-
     	$('#signOut').click(mainPage.logoutUser);
     	$('#hideSuccessMessage').click(mainPage.removeAlertMessage);
         $('label.tree-toggler').click(function () {
@@ -175,7 +151,6 @@ MainPageView = Backbone.View.extend({
     	url = url.replace("&", "~~");
     	 $('#loadingBar').modal('show');
     	$.get("./rest/hello1?url="+url, function (data) {
-             console.log('xxxxxxxxxxxxxx');
              data  = $.parseJSON(data);
              productList = new ProductsCollection();
 
@@ -198,7 +173,7 @@ MainPageView = Backbone.View.extend({
                  //console.log(i);
          		});
          	    productList.sort();
-         		mainPage.loadProductList(data,false);
+         		mainPage.loadProductList(productList.toJSON(),false);
         });
          		//var lsProduct = new Backbone.LocalStorage("store-product");
 			    //productList = lsProduct.findAll();
