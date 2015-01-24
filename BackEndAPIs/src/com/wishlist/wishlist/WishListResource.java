@@ -29,7 +29,7 @@ public class WishListResource {
 	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 	public WishList create(WishList wishList) {
 		//this.userString = userString;
-		System.out.println("add wishlist");
+		System.out.println("add wishlist" + wishList.getMyExpectedPrice());
 		manageWishList(wishList);
 		return wishList;
 	}
@@ -37,7 +37,7 @@ public class WishListResource {
 	@GET
 	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 	public List<Product> getUser(@InjectParam WishList wishList) throws Exception {
-		System.out.println("get Wishlist Item " + wishList.getUserId());
+		System.out.println("get Wishlist Item " + wishList.getMyExpectedPrice());
 		List<Product> wishListItem = new ArrayList<Product>();
 		
 		wishListItem = wishListService.getProductListFromUserId(wishList.getUserId());

@@ -7,7 +7,7 @@ MainPageView = Backbone.View.extend({
 
     events : {
         "click a#category" : "handleRouting",
-        "click a#addWishList" : "addToWishList",
+        "click #addWishList" : "addToWishList",
         "click a#removeWishList" : "removeFromToWishList"
     },
 
@@ -23,15 +23,17 @@ MainPageView = Backbone.View.extend({
 
     addToWishList: function(e) {
 		console.log($(e.currentTarget).data('productid'));
-
+       console.log($("#myPrice").val());
 		var wishListItem = new WishListItem({
 				   productId : $(e.currentTarget).data('productid'),
-			       userId : window.loggedInUser.userId
+			       userId : window.loggedInUser.userId,
+			       myExpectedPrice : $("#myPrice").val()
 			      });
 	    if(wishListCollection == undefined) {
 	    	wishListCollection = new WishList();
 	    }
 		wishListCollection.create(wishListItem);
+		$('#myModal').hide();
 		$('#successMessage').show();
 	},
 

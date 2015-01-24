@@ -33,6 +33,15 @@
 			image.src = "/images/noimage.gif";
 			return true;
 		}
+
+		var specialKeys = new Array();
+        specialKeys.push(8); //Backspace
+        function IsNumeric(e) {
+            var keyCode = e.which ? e.which : e.keyCode
+            var ret = ((keyCode >= 48 && keyCode <= 57) || specialKeys.indexOf(keyCode) != -1);
+            document.getElementById("error").style.display = ret ? "none" : "inline";
+            return ret;
+        }
 	</script>
 </div>
 <div class="modal fade bs-example-modal-sm" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -43,14 +52,15 @@
         <h4 class="modal-title" id="myModalLabel">Add to the Wishlist</h4>
       </div>
       <div class="modal-body">
-        <form>
+        <form class="form-horizontal" role="form">
           <div class="form-group">
-            <label id="product" for="recipient-name" class="control-label">Recipient:</label>
-            <input id="product1" name="product1" type="text" class="form-control" readonly>
+            <label id="product" for="recipient-name" class="control-label col-sm-4"  >Item:</label>
+            <input id="product" name="product" type="text" class="col-sm-3" readonly>
           </div>
           <div class="form-group">
-            <label for="message-text" class="control-label">Message:</label>
-            <textarea class="form-control" id="message-text"></textarea>
+            <label for="message-text" class="control-label col-sm-4" >My Price:</label>
+            <input id="myPrice" type="text" class="col-sm-3" onkeypress="return IsNumeric(event);">
+            <span id="error" style="color: Red; display: none">* Input digits (0 - 9)</span>
           </div>
         </form>
       </div>

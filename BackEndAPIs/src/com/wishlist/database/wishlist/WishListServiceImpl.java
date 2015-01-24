@@ -25,10 +25,11 @@ public class WishListServiceImpl extends DataBaseConnection implements WishListS
 		  /* `userId` int(10) unsigned NOT NULL,
              `productId` varchar(255) NOT NULL,
              `id` int(10) unsigned NOT NULL AUTO_INCREMENT,*/
-	      .prepareStatement("insert into  WishList.WishList(userId,productId) values (?, ?)");
+	      .prepareStatement("insert into  WishList.WishList(userId,productId,expectedPrice) values (?, ?, ?)");
 
 	         preparedStatement.setInt(1, wishList.getUserId());
 	         preparedStatement.setString(2, wishList.getProductId());
+	         preparedStatement.setInt(3, wishList.getMyExpectedPrice());
 	        
 	         preparedStatement.executeUpdate();
 

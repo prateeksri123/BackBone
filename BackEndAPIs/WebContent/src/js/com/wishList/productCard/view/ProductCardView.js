@@ -24,12 +24,14 @@ ProductCardView = Backbone.View.extend({
          });
 		$('#myModal').on('show.bs.modal', function (event) {
 			  var button = $(event.currentTarget) // Button that triggered the modal
-			  var recipient = $(event.relatedTarget).data('productid') // Extract info from data-* attributes
+			  var recipient = $(event.relatedTarget).data('productid'); // Extract info from data-* attributes
 			  // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
 			  // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
 			  var modal = $(this)
-			  modal.find('.modal-title').text('Add ' + $(event.relatedTarget).data('producttitle') + ' to the Wishlist ')
-			  modal.find('.modal-body #product1').val(recipient)
+			  modal.find('.modal-title').text('Add to the Wishlist ');
+			  modal.find('.modal-body #product').val($(event.relatedTarget).data('producttitle'));
+			  document.getElementById('addWishList').dataset.productid = recipient;
+			  
 			})
 	},
 

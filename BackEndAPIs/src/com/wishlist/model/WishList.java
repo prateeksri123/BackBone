@@ -11,6 +11,9 @@ public class WishList {
 	
 	@QueryParam("wishListId")
 	private int id;
+	
+	@QueryParam("myExpectedPrice")
+	private int myExpectedPrice;
 
 	public int getId() {
 		return id;
@@ -34,6 +37,14 @@ public class WishList {
 
 	public void setProductId(String productId) {
 		this.productId = productId;
+	}
+
+	public int getMyExpectedPrice() {
+		return myExpectedPrice;
+	}
+
+	public void setMyExpectedPrice(int myExpectedPrice) {
+		this.myExpectedPrice = myExpectedPrice;
 	}
 
 }

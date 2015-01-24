@@ -113,7 +113,8 @@ public class JSONDataParser extends DataParser {
      * @return list of products for the given categery from the API service.
      * @throws Exception
      */
-    public List<Product> getProductList(String url,String category_id) throws Exception {
+    @SuppressWarnings("unchecked")
+	public List<Product> getProductList(String url,String category_id) throws Exception {
 
         List<Product> plist = new ArrayList<Product>();
 
@@ -122,9 +123,12 @@ public class JSONDataParser extends DataParser {
 
             while(queryUrl != null && !queryUrl.isEmpty()) {
                 String jsonData = queryService(queryUrl);
-
+                if(jsonData != "") {
+                	
+              
                 JSONObject obj = new JSONObject(jsonData);
                 JSONArray productArray = obj.getJSONArray("productInfoList");
+                System.out.println(productArray.length());
                 for(int i =0; i < productArray.length(); i++) {
 
                     Product pinfo = new Product();
@@ -135,7 +139,17 @@ public class JSONDataParser extends DataParser {
                     JSONObject imageUrls = attributes.getJSONObject("imageUrls");
                     pinfo.setProductTitle(attributes.getString("title"));
                     pinfo.setProductDescription(attributes.optString("productDescription", ""));
-                    pinfo.setImageUrls(imageUrls.getString("100x100"));
+                    if(imageUrls.has("100x100")) {
+                    	 pinfo.setImageUrls(imageUrls.getString("100x100"));
+                    } else  {
+                    	Iterator keys = imageUrls.keys();
+                        while(keys.hasNext()) {
+                            String currentDynamicKey = (String)keys.next();
+                            pinfo.setImageUrls(imageUrls.getString(currentDynamicKey));
+                            break;
+                        }
+                    }
+                   
                     pinfo.setMaximumRetailRrice(attributes.getJSONObject("maximumRetailPrice").getDouble("amount"));
                     //pinfo.setSellingPrice(attributes.getJSONObject("sellingPrice").getDouble("amount"));
                     pinfo.setProductUrl(attributes.getString("productUrl"));
@@ -148,10 +162,14 @@ public class JSONDataParser extends DataParser {
                 // Fetch the products from the next URL. Here we set the limit to 500 products.
                 queryUrl = obj.optString("nextUrl", "");
                 if(queryUrl != null && !queryUrl.isEmpty() && plist.size() > 500) { queryUrl = ""; }
+            } else {
+            	queryUrl = "";
+               
+            }
             }
         }
         catch(JSONException je) {
-
+            je.printStackTrace();
         }
         return plist;
     }
