@@ -4,8 +4,7 @@
     <% if(model.inStock) { %>
 	<div  style="height: 270px; max-height: 270px;float: left; width: 280px">
 		<div id="thumbnail" class="thumbnail" style="height: 100%">
-
-			<img id="productImage" src="<%= model.imageUrls %>"  onerrorupdate="imgError(this)"/>
+			<img id="productImage" class="loading" src="<%= model.imageUrls %>" />
 			<div class="caption pull-down" style="overflow:auto">
 				<h3> <%= model.productTitle.trim() %></h3>
 				<h1> Rs. <%= model.sellingPrice %></h1>
@@ -27,12 +26,7 @@
 	<% }); %>
 
 	<script>
-		function imgError(image) {
-			alert("test");
-			image.onerror = "";
-			image.src = "/images/noimage.gif";
-			return true;
-		}
+		
 
 		var specialKeys = new Array();
         specialKeys.push(8); //Backspace

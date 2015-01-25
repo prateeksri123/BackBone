@@ -31,7 +31,7 @@ public class ProductService extends DataBaseConnection {
 			try {
 				//Call to update database should go in scheduler
 				PopulateDatabase pdb = new PopulateDatabase();
-				pdb.populateProduct(url,categoryId);
+				//pdb.populateProduct(url,categoryId);
 				
 				List<Product> productList =  getProductListFromDB(categoryId);
 				

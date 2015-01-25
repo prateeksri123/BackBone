@@ -33,6 +33,10 @@ footer {
 	padding: 20px;
 }
 
+img.loading {
+  background: url('loaderImage.gif') no-repeat scroll center center;
+}
+
 
 /* --------------------------------------
    Typography

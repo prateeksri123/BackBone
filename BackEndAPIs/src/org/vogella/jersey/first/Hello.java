@@ -50,7 +50,7 @@ public class Hello {
 		String result = "";
 		try {
 			PopulateDatabase pdb = new PopulateDatabase();
-			pdb.populateCategory();
+			//pdb.populateCategory();
 			ProductCategoryService pcs = new ProductCategoryService();
 			result = pcs.getProductList();
 			System.out.println(result);
