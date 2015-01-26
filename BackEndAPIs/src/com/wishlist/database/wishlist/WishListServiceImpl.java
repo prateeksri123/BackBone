@@ -111,7 +111,7 @@ public class WishListServiceImpl extends DataBaseConnection implements WishListS
 		return wishListItem;
 	}
 
-	public void checkWishListItem() {
+	public void checkWishListItem() throws Exception {
 		try{
 		      // statements allow to issue SQL queries to the database
 		      statement = connect.createStatement();
