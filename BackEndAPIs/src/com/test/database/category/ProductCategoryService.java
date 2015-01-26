@@ -78,5 +78,36 @@ public class ProductCategoryService extends DataBaseConnection {
 		return result;
 	}
 	
+	public List<String> getProductCategoryIds() throws Exception{
+		 try{
+		      // statements allow to issue SQL queries to the database
+		      statement = connect.createStatement();
+		      // resultSet gets the result of the SQL query
+		      resultSet = statement
+		          .executeQuery("select id from WishList.product_category");
+		     // return writeUserData(resultSet);	
+		     return writeProductCategory(resultSet);
+		    } catch (Exception e) {
+		      throw e;
+		    } finally {
+		      close();
+		    }	  
+		
+	}
+	
+	private List<String> writeProductCategory(ResultSet resultSet) throws Exception {
+		List<String> result = new ArrayList<String>();
+		
+		 while (resultSet.next()) {
+		     
+		    String categoryId = resultSet.getString("id");
+		    
+		      result.add(categoryId);
+		     
+		    }
+		return result;
+	}
+	
+	
 
 }

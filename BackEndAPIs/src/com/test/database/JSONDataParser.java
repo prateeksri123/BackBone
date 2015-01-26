@@ -128,7 +128,7 @@ public class JSONDataParser extends DataParser {
               
                 JSONObject obj = new JSONObject(jsonData);
                 JSONArray productArray = obj.getJSONArray("productInfoList");
-                System.out.println(productArray.length());
+                System.out.println("Category=" + category_id + " Total Product count=" + productArray.length());
                 for(int i =0; i < productArray.length(); i++) {
 
                     Product pinfo = new Product();

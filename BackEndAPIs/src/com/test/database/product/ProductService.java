@@ -22,16 +22,14 @@ public class ProductService extends DataBaseConnection {
 	private Statement statement;
 	private ResultSet resultSet;
 	  public String getProductList(String categoryId) throws Exception {
-			String url = getCategoryURL(categoryId);
+			
 			/*headers : {
 	      	   'Fk-Affiliate-Id': 'mywishlis',
 	            'Fk-Affiliate-Token': '22ba4f9fe89f4007ab51f45a777d4c7a',*/
 			JSONObject responseDetailsJson = new JSONObject();
 		    JSONArray jsonArray = new JSONArray();
 			try {
-				//Call to update database should go in scheduler
-				PopulateDatabase pdb = new PopulateDatabase();
-				//pdb.populateProduct(url,categoryId);
+
 				
 				List<Product> productList =  getProductListFromDB(categoryId);
 				
@@ -60,6 +58,13 @@ public class ProductService extends DataBaseConnection {
 			return jsonArray.toString();
 
 		}
+	  
+	    public void populateProducts(String categoryId) throws Exception{
+	    	String url = getCategoryURL(categoryId);
+			//Call to update database should go in scheduler
+			PopulateDatabase pdb = new PopulateDatabase();
+			pdb.populateProduct(url,categoryId);
+	    }
 	  
 		private List<Product> getProductListFromDB(String categoryId) throws Exception {
 			//List<ProductCategory> result = new ArrayList<ProductCategory>();

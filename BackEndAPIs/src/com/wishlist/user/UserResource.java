@@ -12,6 +12,7 @@ import javax.ws.rs.core.MediaType;
 import com.sun.jersey.api.core.InjectParam;
 import com.test.database.DataBaseConnection;
 import com.wishlist.model.User;
+import com.wishlist.schedular.BaseSchedular;
 
 @Path("/user")
 public class UserResource {
@@ -22,6 +23,8 @@ public class UserResource {
 	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 	public User getUser(@InjectParam User userInpt) {
 		System.out.println("check user");
+		BaseSchedular bs = new BaseSchedular();
+		bs.beepForAnHour();
 		User user = getUserDetails(userInpt.getUserName(), userInpt.getPassword());
 		return user;
 	}

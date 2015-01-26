@@ -39,6 +39,7 @@ public class PopulateDatabase {
 					preparedStatement.setString(1, pc.getProductCategory()); 
 					preparedStatement.setString(2, pc.getUrl());
 					preparedStatement.setString(3, pc.getId());
+					System.out.println("Database excess");
 					preparedStatement.executeUpdate();
 				}
 
@@ -59,6 +60,7 @@ public class PopulateDatabase {
 		} finally {
 			dao.close();
 		}
+		System.out.println("Populate complete");
 	}
 
 	private Boolean isCategoryExisting(String productId) throws Exception {
