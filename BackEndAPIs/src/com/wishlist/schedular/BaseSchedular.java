@@ -13,8 +13,8 @@ public class BaseSchedular {
    public void beepForAnHour() {
        final Runnable beeper = new Runnable() {
                public void run() { System.out.println("----->>>> Start Updation");
-                                   UpdateCategorySchedular ucs = new UpdateCategorySchedular();
-                                   UpdateProductSchedular ups = new UpdateProductSchedular();
+                                   //UpdateCategorySchedular ucs = new UpdateCategorySchedular();
+                                   //UpdateProductSchedular ups = new UpdateProductSchedular();
                                    System.out.println("----->>>> End Updation");}
            };
        final ScheduledFuture<?> beeperHandle =

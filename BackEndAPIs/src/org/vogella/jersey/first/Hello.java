@@ -35,27 +35,21 @@ public class Hello {
 	@GET
 	@Produces(MediaType.TEXT_PLAIN)
 	public String sayPlainTextHello() {
-		
+
 		return getProductList();
 	}
 
 	private final String USER_AGENT = "Mozilla/5.0";
 
-
-
 	private String getProductList() {
-		String url = "https://affiliate-api.flipkart.net/affiliate/api/mywishlis.json";
-		StringBuffer response = new StringBuffer();
-        URL obj;
 		String result = "";
 		try {
-			PopulateDatabase pdb = new PopulateDatabase();
-			//pdb.populateCategory();
+
 			ProductCategoryService pcs = new ProductCategoryService();
 			result = pcs.getProductList();
 			System.out.println(result);
-					} catch (Exception e) {
-			// TODO Auto-generated catch block
+		} catch (Exception e) {
+
 			e.printStackTrace();
 		}
 		return result;
@@ -70,11 +64,9 @@ public class Hello {
 	}
 
 	@GET
-	  @Produces(MediaType.TEXT_XML)
-	  public String sayXMLHello() {
-	    return "<?xml version=\"1.0\"?>" + "<hello> Hello Jersey" + "</hello>";
-	  }
-
-
+	@Produces(MediaType.TEXT_XML)
+	public String sayXMLHello() {
+		return "<?xml version=\"1.0\"?>" + "<hello> Hello Jersey" + "</hello>";
+	}
 
 }

@@ -32,7 +32,8 @@ ProductCardView = Backbone.View.extend({
 			  modal.find('.modal-body #product').val($(event.relatedTarget).data('producttitle'));
 			  document.getElementById('addWishList').dataset.productid = recipient;
 			  
-			})
+			});
+			
 	},
 
 	render : function(collection,displayingWishList) {

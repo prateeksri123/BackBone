@@ -18,6 +18,7 @@ import com.wishlist.database.wishlist.WishListServiceImpl;
 import com.wishlist.model.Product;
 import com.wishlist.model.User;
 import com.wishlist.model.WishList;
+import com.wishlist.model.WishListItem;
 
 @Path("/wishlist")
 public class WishListResource {
@@ -36,9 +37,9 @@ public class WishListResource {
 	
 	@GET
 	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
-	public List<Product> getUser(@InjectParam WishList wishList) throws Exception {
+	public List<WishListItem> getWishListItems(@InjectParam WishList wishList) throws Exception {
 		System.out.println("get Wishlist Item " + wishList.getMyExpectedPrice());
-		List<Product> wishListItem = new ArrayList<Product>();
+		List<WishListItem> wishListItem = new ArrayList<WishListItem>();
 		
 		wishListItem = wishListService.getProductListFromUserId(wishList.getUserId());
 		//User user = getUserDetails(userInpt.getUserName(), userInpt.getPassword());

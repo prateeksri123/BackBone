@@ -10,6 +10,7 @@ import com.test.database.DataBaseConnection;
 import com.test.database.product.ProductService;
 import com.wishlist.model.Product;
 import com.wishlist.model.WishList;
+import com.wishlist.model.WishListItem;
 
 public class WishListServiceImpl extends DataBaseConnection implements WishListService{
 
@@ -53,19 +54,19 @@ public class WishListServiceImpl extends DataBaseConnection implements WishListS
 		
 	}
 
-	public List<Product> getProductListFromUserId(int userId) throws Exception {
+	public List<WishListItem> getProductListFromUserId(int userId) throws Exception {
 
 		return getProductList(userId);
 	}
 	
-	private List<Product> getProductList(int userId) throws Exception {
+	private List<WishListItem> getProductList(int userId) throws Exception {
 		try{
 		      // statements allow to issue SQL queries to the database
 		      statement = connect.createStatement();
 		      // resultSet gets the result of the SQL query
 		      resultSet = statement
 		          .executeQuery("select * from WishList.WishList where userId='" + userId + "'");
-		      return writeUserData();
+		      return writeWishListItem();
 		    } catch (Exception e) {
 		      throw e;
 		    } finally {
@@ -73,13 +74,17 @@ public class WishListServiceImpl extends DataBaseConnection implements WishListS
 		    }
 	}
 	
-	private List<Product> writeUserData() {
-		List<Product> productList= new ArrayList<Product>();
+	private List<WishListItem> writeWishListItem() {
+		List<WishListItem> productList= new ArrayList<WishListItem>();
 	    try {
 			while (resultSet.next()) {
                 String productId = "";
 				productId = resultSet.getString("productId");
-				productList.add(productService.getProductById(productId));
+				WishListItem wishListItem = new WishListItem();
+				wishListItem = getWishListItemOfProduct(productService.getProductById(productId));
+				wishListItem.setDesiredPrice(resultSet.getInt("expectedPrice"));
+				wishListItem.setWishListId(resultSet.getInt("id"));
+				productList.add(wishListItem);
 
 			}
 		} catch (Exception e) {
@@ -87,6 +92,38 @@ public class WishListServiceImpl extends DataBaseConnection implements WishListS
 			e.printStackTrace();
 		}
 		return productList;
+	}
+	
+	private WishListItem getWishListItemOfProduct(Product product) {
+		WishListItem wishListItem = new WishListItem();
+		wishListItem.setCodAvailable(product.getCodAvailable());
+		wishListItem.setEmiAvailable(product.getEmiAvailable());
+		wishListItem.setImageUrls(product.getImageUrls());
+		wishListItem.setInStock(product.getInStock());
+		wishListItem.setMaximumRetailRrice(product.getMaximumRetailRrice());
+		wishListItem.setProductDescription(product.getProductDescription());
+		wishListItem.setProductTitle(product.getProductTitle());
+		wishListItem.setProductUrl(product.getProductUrl());
+		wishListItem.setSellingPrice(product.getSellingPrice());
+		wishListItem.setCategoryId(product.getCategoryId());
+		
+		
+		return wishListItem;
+	}
+
+	public void checkWishListItem() {
+		try{
+		      // statements allow to issue SQL queries to the database
+		      statement = connect.createStatement();
+		      // resultSet gets the result of the SQL query
+		      resultSet = statement
+		          .executeQuery("select * from WishList.WishList");
+		    } catch (Exception e) {
+		      throw e;
+		    } finally {
+		      close();
+		    }
+		
 	}
 
 
