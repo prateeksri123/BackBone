@@ -33,7 +33,7 @@ import com.wishlist.model.ProductCategory;
 // text, XML and HTML.
 
 // The browser requests per default the HTML MIME type.
-
+// Create pages in wireframe similar to http://www.epagecity.com/web-development/website-plugins/product-catalog
 //Sets the path to base URL + /hello1
 // http://www.vogella.com/tutorials/REST/article.html
 
@@ -58,6 +58,6 @@ public class Hello1 {
   }
 
 
- 
+
 
 }
