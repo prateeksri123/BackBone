@@ -7,14 +7,14 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 public class BaseSchedular {
-   private final ScheduledExecutorService scheduler =
+   private final ScheduledExecutorService scheduler = 
       Executors.newScheduledThreadPool(1);
 
    public void beepForAnHour() {
        final Runnable beeper = new Runnable() {
                public void run() { System.out.println("----->>>> Start Updation");
-                                   //UpdateCategorySchedular ucs = new UpdateCategorySchedular();
-                                   //UpdateProductSchedular ups = new UpdateProductSchedular();
+                                   UpdateCategorySchedular ucs = new UpdateCategorySchedular();
+                                   UpdateProductSchedular ups = new UpdateProductSchedular();
                                    System.out.println("----->>>> End Updation");}
            };
        final ScheduledFuture<?> beeperHandle =
