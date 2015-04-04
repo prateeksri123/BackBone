@@ -3,7 +3,7 @@
 	<% _.each(collection, function(model) { %>
     <% if(model.inStock) { %>
 	<div  style="height: 270px; max-height: 270px;float: left; width: 280px">
-		<div id="thumbnail" class="thumbnail" style="height: 100%">
+		<div id="thumbnail" data-target="#thumbnail" class="thumbnail" style="height: 100%">
 			<img id="productImage" class="loading" src="<%= model.imageUrls %>" />
 			<div class="caption pull-down" style="overflow:auto">
 				<h3> <%= model.productTitle.trim() %></h3>

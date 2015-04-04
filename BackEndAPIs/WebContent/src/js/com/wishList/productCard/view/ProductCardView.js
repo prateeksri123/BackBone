@@ -19,7 +19,7 @@ ProductCardView = Backbone.View.extend({
 
 	registerCustomEvents : function() {
 		//$('#addWishList').click(productCardView.addToWishList);
-		$("#thumbnail").on("click", ".addWishList", function (e) {
+		$("#thumbnail").on('click',function (e) {
          alert("a");
          });
 		$('#myModal').on('show.bs.modal', function (event) {

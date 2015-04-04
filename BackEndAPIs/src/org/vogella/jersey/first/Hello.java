@@ -66,7 +66,7 @@ public class Hello {
 	@GET
 	@Produces(MediaType.TEXT_XML)
 	public String sayXMLHello() {
-		return "<?xml version=\"1.0\"?>" + "<hello> Hello Jersey" + "</hello>";
+		return getProductList();
 	}
 
 }
